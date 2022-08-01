@@ -1,0 +1,40 @@
+<!-- Modal Header -->
+<div class="modal-header text-center">
+    <h2 class="modal-title"><i class="glyphicon glyphicon-calendar"></i> Select {{sel_date}}</h2>
+</div>
+<!-- END Modal Header -->
+
+<!-- Modal Body -->
+<div class="modal-body" >
+    <div  class="form-horizontal form-bordered">
+        <div class="form-group">
+            <label class="col-md-1 control-label">Year:</label>
+            <div class="col-md-2">
+                <select ng-model="year_sel" class="form-control" ng-options="x for x in yearlist" ng-change="updateDate()">
+                </select>
+            </div>
+            <label class="col-md-1 control-label">Month:</label>
+            <div class="col-md-2">
+                <select ng-disabled = "selectNum>2" ng-model="month_sel" class="form-control" ng-options="x for x in monthlist" ng-change="updateDate()">
+                </select>
+            </div>
+            <label class="col-md-1 control-label">Week:</label>
+            <div class="col-md-2">
+                <select ng-disabled = "selectNum!=1" ng-model="week_sel" class="form-control" ng-options="x for x in weeklist" ng-change="updateDate()">
+                </select>
+            </div>
+            <label class="col-md-1 control-label">Day:</label>
+            <div class="col-md-2">
+                <select ng-disabled = "selectNum!=0" ng-model="day_sel" class="form-control" ng-options="x for x in daylist" ng-change="updateDate()">
+                </select>
+            </div>
+        </div>
+        <div class="form-group form-actions">
+            <div class="col-xs-12 text-right">
+                <button ng-click="cancel();" type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+                <button type="button" ng-click="select();" class="btn btn-sm btn-primary">Select</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Modal Body -->

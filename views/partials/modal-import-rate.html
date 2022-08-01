@@ -1,0 +1,30 @@
+
+                    <!-- Modal Header -->
+                    <div class="modal-header text-center">
+                        <h2 class="modal-title"><i class="fa fa-times"></i> Price Table Import</h2>
+                    </div>
+                    <!-- END Modal Header -->
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <form  class="form-horizontal form-bordered">
+                            <fieldset>
+                                 <h4 class="col-md-10 col-md-offset-1 form-control-static">Are you sure you wish to import this file ?, it will override current Price Table</h4>
+                                 
+                                <div class="form-group" >
+                                    <div class="col-md-6 col-md-offset-3">
+                                                 <input type="file" ngf-select ngf-pattern="'.csv'" ng-model="filecsv" name="file"  required ngf-model-invalid="errorFile">
+                                    </div>
+                                    
+                                </div>
+                            </fieldset>
+                           
+                            <div class="form-group form-actions">
+                                <div class="col-xs-12 text-right">
+                                    <button ng-click="cancel();" type="button" class="btn btn-sm btn-default" data-dismiss="modal">{{"false"|translate}}</button>
+                                    <button type="button" ng-click="importOK(filecsv)"  class="btn btn-sm btn-danger">{{"true"|translate}}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END Modal Body -->

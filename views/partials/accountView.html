@@ -1,0 +1,1609 @@
+<div id="page-content" style="min-height:1036px">
+    <!-- Blank Header -->
+    <div ng-if="profile.account_type =='user'">
+        <div class="content-header">
+            <div class="header-section">
+                <h1>
+                    <i class="fa fa-user"></i>{{"MYACC_TITLE" | translate}}<br>
+                    <small>{{"MYACC_SUBTITLE" | translate}}</small>
+                </h1>
+            </div>
+        </div>
+        <ul class="breadcrumb breadcrumb-top">
+            <li><a ui-sref="app">{{"HOME" | translate}}</a></li>
+            <li ng-if="profile.main_account == account._id">{{"MY_ACCOUNT"|translate}}</li>
+        </ul>
+    </div>
+    <div ng-if="profile.account_type !=='agent'">
+        <div class="content-header">
+            <div class="header-section">
+                <h1 ng-if="profile.main_account !== account._id">
+                    <i class="fa fa-user"></i>{{"ACCOUNTS_TITLE" | translate}}<br>
+                    <small>{{"ACCOUNTS_SUBTITLE" | translate}}</small>
+                </h1>
+                <h1 ng-if="profile.main_account == account._id">
+                    <i class="fa fa-user"></i>{{"MYACC_TITLE" | translate}}<br>
+                    <small>{{"MYACC_SUBTITLE" | translate}}</small>
+                </h1>
+            </div>
+        </div>
+        <ul class="breadcrumb breadcrumb-top">
+            <li><a ui-sref="app">{{"HOME" | translate}}</a></li>
+            <li><a ui-sref="accountList">{{"ACCOUNT_LIST" | translate}}</a></li>
+            <li ng-if="profile.main_account == account._id">{{"MY_ACCOUNT"|translate}}</li>
+            <li ng-if="profile.main_account !== account._id">{{"ACCOUNT"|translate}} : {{account.account_name}}</li>
+        </ul>
+    </div>
+
+    <!-- END Blank Header -->
+    <div class="row">
+        <div class="block">
+            <uib-tabset active="active">
+                <uib-tab index="0" heading="{{'basicinfo'|translate}}" select="getMainTab();">
+                    <div class="block">
+                        <!-- Example Title -->
+                        <div class="block-title">
+                            <h2>{{"ACCOUNT" | translate}} : {{account.account_name}} #{{account.numeric_id}} </h2>
+                        </div>
+                        <!-- END Example Title -->
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-10 col-xs-12"
+                                 ng-if="profile.main_account !== account._id">
+                                 <div class="row">
+                                        <div class="col-md-10">
+                                           <p>{{account.account_name}}'s Wallets : </p>
+                                           
+                                           <div ng-repeat="w in account.wallets">
+                                               <div ng-if="w.primary === true">
+                                                   <span class="pull-right"><strong>{{w.balance | currency : '' : 2}} {{w.currency}}</strong></span>
+           
+                                                   <div class="currency-flag currency-flag-sm currency-flag-{{w.currency|lowercase}}"></div>
+                                                   
+                                                   <strong>{{w.wallet_name}}</strong> <br>
+                                                   <span class="small text-muted"><em><strong>({{w.wallet_id}})</strong> - Primary Wallet</em></span>
+                                               </div>
+                                               <div ng-if="w.primary === false">
+                                                   <span class="pull-right">{{w.balance | currency : '' : 2}} {{w.currency}}</span>
+           
+                                                   <div class="currency-flag currency-flag-sm currency-flag-{{w.currency|lowercase}}"></div>
+                                                   {{w.wallet_name}} <br>
+                                                   <span class="small text-muted"><em>({{w.wallet_id}})</em></span>
+                                               </div>
+                                               
+                                           </div>
+                                        </div>
+                                       <div class="col-md-2">
+                                           <div class="btn-group btn-group-xs " style="text-align: center;">
+                                               <a href="javascript:void(0)" ng-click="transferFundsID(account._id)" class="btn btn-success"><i
+                                                       class="fa fa-usd"></i></a>
+                                           </div>
+                                       </div>
+                                    </div>
+                                    <div class="row" ng-if="account.virtual_wallets.length > 0">
+                                        <div class="col-md-10">
+                                           <p>{{account.account_name}}'s Virtual Wallets : </p>
+                                           
+                                           <div ng-repeat="w in account.virtual_wallets">
+                                               <div >
+                                                   <span class="pull-right">[{{w.type}}] {{w.balance | currency : '' : 2}} {{w.currency}}</span>
+           
+                                                   <div class="currency-flag currency-flag-sm currency-flag-{{w.currency|lowercase}}"></div>
+                                                   {{w.wallet_name}} <br>
+                                                   <span class="small text-muted"><em>({{w.wallet_id}})</em></span>
+                                               </div>
+                                               
+                                           </div>
+                                        </div>
+                                       <div class="col-md-2">
+                                           <div class="btn-group btn-group-xs " style="text-align: center;">
+                                               <a href="javascript:void(0)" ng-click="transferVFundsID(account._id)" class="btn btn-warning"><i
+                                                       class="fa fa-usd"></i></a>
+                                           </div>
+                                       </div>
+                                    </div>
+                            </div>
+                            <div class="col-md-8 col-md-offset-2 col-xs-12">
+                                <form action="page_forms_general.html" metdod="post" enctype="multipart/form-data"
+                                      class="form-horizontal" onsubmit="return false;">
+                                    <fieldset>
+                                        <legend>{{"GENPROPS" |translate}}</legend>
+                                        </legend>
+                                        <div class="form-group" ng-if="profile.main_account !== account._id">
+                                            <label class="col-md-3 control-label" for="example-text-input">{{"ACCOUNT_NAME"
+                                                |translate}}</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.account_name" class="form-control"
+                                                       placeholder="{{'ACCOUNT_NAME' | translate}}">
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="profile.main_account == account._id">
+                                            <label class="col-md-3 control-label" for="example-text-input">{{"ACCOUNT_NAME"
+                                                |translate}}</label>
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">{{account.account_name}}</p>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">{{"type"
+                                                |translate}}</label>
+                                            <div class="col-md-9">
+                                                <p class="form-control-static capitalize"> {{account.type}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Parent</label>
+                                            <div class="col-md-9">
+                                                <p class="form-control-static capitalize"> {{account.parent_name}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="profile.account_type !== 'agent'">
+                                            <label class="col-md-3 control-label" for="example-text-input">{{"legal_type"
+                                                |translate}}</label>
+                                            <div class="col-md-9">
+                                                <select ng-model="account.legal_type" class="form-control">
+                                                    <option value="company">{{"company" | translate }}</option>
+                                                    <option value="individual">{{"individual" | translate}}</option>
+                                                </select>
+                                                <span class="help-block">Type of legal body (company or individual)</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">{{"phone"
+                                                |translate}}</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.phone" class="form-control"
+                                                       placeholder="{{'phone' | translate}}">
+                                                <span class="help-block">Primary contact phone number</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="account.type == 'wholesaler'">
+                                            <label class="col-md-3 control-label" for="example-text-input">DSTV UI Mode</label>
+                                            <div class="col-md-9">
+                                                <select ng-model="account.dstv_mode" class="form-control">
+                                                    <option value="legacy">Capricorn</option>
+                                                    <option value="new">PayU</option>
+                                                </select>
+                                                <span class="help-block">Web UI will Use that API</span>
+                                            </div>
+                                        </div>
+					<div class="form-group" ng-if="profile.account_type !== 'agent'">
+                                            <label class="col-md-3 control-label" for="example-text-input">SMS Provider</label>
+                                            <div class="col-md-9">
+                                                <select ng-model="account.sms_provider" class="form-control">
+                                                    <option value="twilio">Twilio</option>
+                                                    <option value="infobip">InfoBip</option>
+                                                        <option value="smpp">SMPP (Legacy)</option>
+                                                </select>
+                                                <span class="help-block">SMS Gateway to use</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">SMS Sender
+                                                ID</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.sms_sender" class="form-control"
+                                                       placeholder="SMS Sender" maxlength="11">
+                                                <span class="help-block">Sender ID for SMS (This sender ID will be shown to SMS recipient, Alphanumeric maximum 11 characters)</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group"
+                                             ng-if="(profile.account_type !== 'agent') && (account.type == 'agent')">
+                                            <label class="col-md-3 control-label" for="example-text-input">SMS Cost (in
+                                                Primary wallet currency)</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.sms_cost" class="form-control"
+                                                       placeholder="SMS Cost" maxlength="11">
+                                                <span class="help-block">Set Cost per SMS in account's primary wallet currency</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">{{"email"
+                                                |translate}}</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.email" class="form-control"
+                                                       placeholder="{{'email' | translate}}">
+                                                <span class="help-block">Main contact email address</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">{{"regid"
+                                                |translate}}</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.reg_id" class="form-control"
+                                                       placeholder="{{'regid' | translate}}">
+                                                <span class="help-block">Chamber of Commerce / Companies House registration number</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">{{"taxid"
+                                                |translate}}</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.tax_id" class="form-control"
+                                                       placeholder="{{'taxid' | translate}}">
+                                                <span class="help-block">VAT / Tax / EIN Number</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="account.type == 'wholesaler'">
+                                            <label class="col-md-3 control-label">Permitted Api's : </label>
+                                            <div class="col-md-9">
+                                                <p class="form-control-static" ng-repeat="a in account.permitted_apis">
+                                                    {{a}}
+                                                    <small><a href="javascript:void(0)" ng-click="removePA(a)">x</a>
+                                                    </small>
+                                                </p>
+                                                <p class="form-control-static"><a href="javascript:void(0);"
+                                                                                  ng-click="newPA();">Add</a></p>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group" ng-if=" (account.type == 'agent')">
+                                            <label class="col-md-3 control-label">Test Mode ?</label>
+                                            <div class="col-md-9">
+                                                <div class="checkbox">
+                                                    <label class="switch switch-primary">
+                                                        <input type="checkbox" ng-model="account.test_mode"
+                                                               value="true">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="profile.account_type !== 'agent'">
+                                            <label class="col-md-3 control-label">{{"isactive" | translate}}</label>
+                                            <div class="col-md-9">
+                                                <div class="checkbox">
+                                                    <label class="switch switch-primary">
+                                                        <input type="checkbox" ng-model="account.active" value="true"
+                                                               checked>
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="profile.account_type !== 'agent'">
+                                            <label class="col-md-3 control-label">Can Edit his own ACL ?</label>
+                                            <div class="col-md-9">
+                                                <div class="checkbox">
+                                                    <label class="switch switch-primary">
+                                                        <input type="checkbox" ng-model="account.canEditOwnAcl"
+                                                               value="true" checked>
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="account.type == 'wholesaler'">
+                                            <label class="col-md-3 control-label">Can Edit his own Profits ?</label>
+                                            <div class="col-md-9">
+                                                <div class="checkbox">
+                                                    <label class="switch switch-primary">
+                                                        <input type="checkbox" ng-model="account.canEditOwnProfit"
+                                                               value="true" checked>
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+					 <div class="form-group" ng-if="account.type == 'wholesaler'">
+                                            <label class="col-md-3 control-label">Use TWLO for DATA lookups ?</label>
+                                            <div class="col-md-9">
+                                                <div class="checkbox">
+                                                    <label class="switch switch-primary">
+                                                        <input type="checkbox" ng-model="account.dataLookupTWLO"
+                                                               value="true" checked>
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ng-if="account.type == 'wholesaler'">
+                                            <label class="col-md-3 control-label">ePins Enabled ?</label>
+                                            <div class="col-md-9">
+                                                <div class="checkbox">
+                                                    <label class="switch switch-primary">
+                                                        <input type="checkbox" ng-model="account.epin_enabled"
+                                                               value="true">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="account.type == 'wholesaler'">
+                                            <label class="col-md-3 control-label">Send SMS for UK Bliss ?</label>
+                                            <div class="col-md-9">
+                                                <div class="checkbox">
+                                                    <label class="switch switch-primary">
+                                                        <input type="checkbox" ng-model="account.send_pin_sms"
+                                                               value="true">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="account.type == 'wholesaler'">
+                                            <label class="col-md-3 control-label">Display Tag Balances</label>
+                                            <div class="col-md-9">
+                                                <div class="checkbox">
+                                                    <label class="switch switch-primary">
+                                                        <input type="checkbox" ng-model="account.show_tag_balance"
+                                                               value="true">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group" ng-if="account.show_tag_balance">
+                                            <label class="col-md-3 control-label" for="example-text-input">Tag To Display</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.show_tag" class="form-control"
+                                                       placeholder="">
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="account.show_tag_balance">
+                                            <label class="col-md-3 control-label" for="example-text-input">Display Mode</label>
+                                            <div class="col-md-9">
+                                                <select ng-model="account.balance_type" class="form-control">
+                                                    <option value="compact">Compact</option>
+                                                    <option value="verbose">Verbose</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="account.type == 'wholesaler'">
+                                            <label class="col-md-3 control-label">Send Reports ?</label>
+                                            <div class="col-md-9">
+                                                <div class="checkbox">
+                                                    <label class="switch switch-primary">
+                                                        <input type="checkbox" ng-model="account.wrep_enable"
+                                                               value="true">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="(account.type == 'wholesaler') && (account.wrep_enable == true)">
+                                            <label class="col-md-3 control-label" for="example-text-input">Report Destination</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.wrep_dest" class="form-control"
+                                                       placeholder="email">
+                                                <span class="help-block">Emails separated by ","</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="(account.type == 'wholesaler') && (account.wrep_enable == true)">
+                                            <label class="col-md-3 control-label" for="example-text-input">Report BCC</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.wrep_bcc" class="form-control"
+                                                       placeholder="email">
+                                                <span class="help-block">Emails separated by ","</span>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <legend>{{"ADDRFLDST" | translate}}</legend>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">{{"street1"
+                                                |translate}}</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.address.line1" class="form-control"
+                                                       placeholder="{{'street1' | translate}}">
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">{{"street2"
+                                                |translate}}</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.address.line2" class="form-control"
+                                                       placeholder="{{'street2' | translate}}">
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">{{"city"
+                                                |translate}}</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.address.city" class="form-control"
+                                                       placeholder="{{'city' | translate}}">
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">{{"county"
+                                                |translate}}</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.address.county"
+                                                       class="form-control" placeholder="{{'county' | translate}}">
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">{{"postcode"
+                                                |translate}}</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.address.postcode"
+                                                       class="form-control" placeholder="{{'postcode' | translate}}">
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">{{"country"
+                                                |translate}}</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.address.country"
+                                                       class="form-control" placeholder="{{'country' | translate}}">
+
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <legend>Application Firewall</legend>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Enable Application Firewall ?</label>
+                                            <div class="col-md-9">
+                                                <div class="checkbox">
+                                                    <label class="switch switch-primary">
+                                                        <input type="checkbox" ng-model="account.appfw_enabled"
+                                                               value="true" checked>
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Whitelisted IP's : </label>
+                                            <div class="col-md-9">
+                                                <p class="form-control-static" ng-repeat="a in account.appfw_whitelist">
+                                                    {{a}}
+                                                    <small><a href="javascript:void(0)" ng-click="removeIP(a)">x</a>
+                                                    </small>
+                                                </p>
+                                                <p class="form-control-static"><a href="javascript:void(0);"
+                                                                                  ng-click="newIP();">Add</a></p>
+                                                    <span class="help-block" ng-if="account.appfw_enabled">Warning, you have enabled Application Firewall, only Whitelisted IP's will be able to execute queries. </span>
+                                                                                </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset ng-if="account.type == 'wholesaler'">
+                                        <legend>Whitelabel Settings</legend>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Portal
+                                                Name</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.whitelabel_opts.portal_name"
+                                                       class="form-control" placeholder="Portal Name">
+                                                <span class="help-block">This Name will show up in the titlebar (ex : Wholesale Co)</span>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Portal
+                                                Hostname</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.whitelabel_opts.portal_url"
+                                                       class="form-control" placeholder="Portal Hostname">
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">IVR
+                                                Number</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.whitelabel_opts.ivr_did"
+                                                       class="form-control" placeholder="18005550120"/>
+                                                <span class="help-block">Your personalized IVR number (should be in format like 18005550120) this number should be routed to  SIP {{account.whitelabel_opts.ivr_did}}@sip.primeairtime.com:5070</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Background
+                                                colour</label>
+                                            <div class="col-md-9">
+                                                <input colorpicker type="text" ng-model="account.whitelabel_opts.color1"
+                                                       class="form-control"/>
+                                                <span class="help-block">Colour of the portal background</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Font
+                                                colour</label>
+                                            <div class="col-md-9">
+                                                <input colorpicker type="text" ng-model="account.whitelabel_opts.color2"
+                                                       class="form-control"/>
+                                                <span class="help-block">Colour of the portal main font</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Sidebar
+                                                (menu) background colour</label>
+                                            <div class="col-md-9">
+                                                <input colorpicker type="text" ng-model="account.whitelabel_opts.color3"
+                                                       class="form-control"/>
+                                                <span class="help-block">Colour of the portal sidebar (background)</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Sidebar
+                                                (menu) Link/Font colour</label>
+                                            <div class="col-md-9">
+                                                <input colorpicker type="text" ng-model="account.whitelabel_opts.color5"
+                                                       class="form-control"/>
+                                                <span class="help-block">Colour of the portal sidebar (Font)</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Active link
+                                                element accent colour</label>
+                                            <div class="col-md-9">
+                                                <input colorpicker type="text" ng-model="account.whitelabel_opts.color4"
+                                                       class="form-control"/>
+                                                <span class="help-block">Colour of the vertical accent bar next to active sidebar element</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Transparency
+                                                level (0.1 - 1)</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.whitelabel_opts.tlevel"
+                                                       class="form-control"/>
+                                                <span class="help-block">Transparency level of Login-box background (0 - fully transparent, 1 - fully opaque, you can use any decimal number in between of 0 and 1)</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="account.type !== 'agent'">
+                                            <label class="col-md-3 control-label" for="example-file-input">Logo (600x400
+                                                pixels)</label>
+                                            <div class="col-md-9">
+                                                <button class="btn btn-primary" type="file" ng-disabled="!account.active"
+                                                        ng-model="account.invoice_logo" name="example-file-input"
+                                                        ngf-select="uploadLogo($file, $invalidFiles)"
+                                                        accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">Upload
+                                                </button>
+                                                <span class="help-block">Logo should be 600 by 400 pixels, ideally with transparent background (PNG)</span><br/><br/>
+                                                <div ng-show="f.progress >= 0" class="progress-bar progress-bar-info"
+                                                     role="progressbar" aria-valuenow="{{f.progress}}" aria-valuemin="0"
+                                                     aria-valuemax="100" style="width: {{f.progress}}%">{{f.progress}}%
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group" ng-if="account.type !== 'agent'">
+                                            <label class="col-md-3 control-label" for="example-file-input">Favicon (30x30
+                                                pixels)</label>
+                                            <div class="col-md-9">
+                                                <button class="btn btn-primary" type="file" ng-disabled="!account.active"
+                                                         name="example-file-input"
+                                                        ngf-select="uploadFavicon($file, $invalidFiles)"
+                                                        accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">Upload
+                                                </button>
+                                                <span class="help-block">Favicon should be 30 by 30 pixels, ideally with transparent background (ico)</span><br/><br/>
+                                                <div ng-show="faviconF.progress >= 0" class="progress-bar progress-bar-info"
+                                                     role="progressbar" aria-valuenow="{{faviconF.progress}}" aria-valuemin="0"
+                                                     aria-valuemax="100" style="width: {{faviconF.progress}}%">{{faviconF.progress}}%
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </fieldset>
+                                    <fieldset ng-if="account.type == 'wholesaler'">
+                                        <legend>Whitelabel PIN Portal Settings</legend>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">PIN Portal
+                                                Name</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.whitelabel_opts.pin_portal_name"
+                                                       class="form-control" placeholder="Portal Name">
+                                                <span class="help-block">This Name will show up in the titlebar (ex : Wholesale Co)</span>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">PIN Portal
+                                                Hostname</label>
+                                            <div class="col-md-9">
+                                                <p class="form-control-static">
+                                                    https://{{account.whitelabel_opts.portal_url}}/pin</p>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Background
+                                                colour (top navbar)</label>
+                                            <div class="col-md-9">
+                                                <input colorpicker type="text"
+                                                       ng-model="account.whitelabel_opts.pin_portal_color0"
+                                                       class="form-control"/>
+                                                <span class="help-block">Colour of the PIN portal (top navigation bar) background</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Background
+                                                colour</label>
+                                            <div class="col-md-9">
+                                                <input colorpicker type="text"
+                                                       ng-model="account.whitelabel_opts.pin_portal_color1"
+                                                       class="form-control"/>
+                                                <span class="help-block">Colour of the PIN portal background</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Background
+                                                colour (middle)</label>
+                                            <div class="col-md-9">
+                                                <input colorpicker type="text"
+                                                       ng-model="account.whitelabel_opts.pin_portal_color2"
+                                                       class="form-control"/>
+                                                <span class="help-block">Colour of the PIN portal middle background</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Background
+                                                colour (footer)</label>
+                                            <div class="col-md-9">
+                                                <input colorpicker type="text"
+                                                       ng-model="account.whitelabel_opts.pin_portal_color3"
+                                                       class="form-control"/>
+                                                <span class="help-block">Colour of the PIN portal footer background</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Carousel
+                                                Progressbar colour</label>
+                                            <div class="col-md-9">
+                                                <input colorpicker type="text"
+                                                       ng-model="account.whitelabel_opts.pin_portal_olor4"
+                                                       class="form-control"/>
+                                                <span class="help-block">Colour of the PIN portal text</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Text
+                                                colour</label>
+                                            <div class="col-md-9">
+                                                <input colorpicker type="text"
+                                                       ng-model="account.whitelabel_opts.pin_portal_color5"
+                                                       class="form-control"/>
+                                                <span class="help-block">Colour of the PIN portal text</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Heading Text
+                                                colour</label>
+                                            <div class="col-md-9">
+                                                <input colorpicker type="text"
+                                                       ng-model="account.whitelabel_opts.pin_portal_color6"
+                                                       class="form-control"/>
+                                                <span class="help-block">Colour of the PIN portal heading text</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Footer Text
+                                                colour</label>
+                                            <div class="col-md-9">
+                                                <input colorpicker type="text"
+                                                       ng-model="account.whitelabel_opts.pin_portal_color7"
+                                                       class="form-control"/>
+                                                <span class="help-block">Colour of the PIN portal footer text</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">PIN Copyright
+                                                Text</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.whitelabel_opts.pin_copyright"
+                                                       class="form-control"/>
+                                                <span class="help-block">This text will be shown in the footer copyright area</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Facebook
+                                                Link</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.whitelabel_opts.pin_fblink"
+                                                       class="form-control"/>
+                                                <span class="help-block">Link to your Facebook page</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">Twitter
+                                                Link</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.whitelabel_opts.pin_twlink"
+                                                       class="form-control"/>
+                                                <span class="help-block">Link to your Twitter page</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="example-text-input">LinkedIn
+                                                Link</label>
+                                            <div class="col-md-9">
+                                                <input type="text" ng-model="account.whitelabel_opts.pin_lilink"
+                                                       class="form-control"/>
+                                                <span class="help-block">Link to your LinkedIn page</span>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <div class="form-group form-actions">
+                                        <div class="col-md-9 col-md-offset-3">
+                                            <!--
+                                            <button ng-disabled="!account.active" ng-click="updateAccount();" class="btn btn-sm btn-primary"><i
+                                                    class="fa fa-angle-right"></i> {{"savechanges"|translate}}
+                                            -->
+                                            <button ng-click="updateAccount();" class="btn btn-sm btn-primary"><i
+                                                class="fa fa-angle-right"></i> {{"savechanges"|translate}}
+                                            </button>
+                                            <button class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i>
+                                                {{"reset"|translate}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- END Example Content -->
+                    </div>
+
+                </uib-tab>
+                <uib-tab index="1" heading="{{'USERS'|translate}}" select="userViewTab();">
+                    <div class="block">
+                        <div class="block-title">
+                            <h2>{{"USERS"|translate}}</h2>
+                        </div>
+                        <div class="table-options clearfix">
+                            <br/>
+                            <input class="form-control" ng-model="userfilter" type="text"
+                                   placeholder="{{'FILTER' |translate}}">
+                        </div>
+                        <div class="table-responsive">
+                            <table id="general-table" class="table table-striped table-vcenter">
+                                <thead>
+                                <tr>
+                                    <td>Username (e-mail)</td>
+                                    <td>{{"FIRSTNAME"|translate}}</td>
+                                    <td>{{"LASTNAME"|translate}}</td>
+                                    <!--  <td>{{"ACCESS"|translate}}</td> -->
+                                    <td>{{"isactive"|translate}}</td>
+                                <!--    <td>POS Lockdown</td>  -->
+                                    <td>{{"ACTIONS"|translate}}</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="u in users |filter : userfilter">
+                                    <td>{{u.username}}</td>
+                                    <td>{{u.first_name}}</td>
+                                    <td>{{u.last_name}}</td>
+                                    <!-- <td>{{u.access | translate}}</td> -->
+                                    <td>{{u.active | translate}}</td>
+                                <!--    <td>{{u.limited_pos | translate}}</td>  -->
+                                    <td>
+                                        <div class="btn-group btn-group-xs">
+                                            <a ng-click="editUser(u._id)" class="btn btn-default"
+                                               data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                            <a ng-click="deleteUser(u._id)" class="btn btn-danger"
+                                               data-original-title="Delete"><i class="fa fa-times"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td>
+                                        <button ng-click="newuser(this);" class="btn btn-primary btn-sm">
+                                            {{"newuser"|translate}}
+                                        </button>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </uib-tab>
+                <!-- BEGIN ACL MANAGER -->
+                <uib-tab index="2" heading="Access List Management" select="resetAcl();">
+                    <div class="block">
+                        <div class="block-title">
+                            <h2>Access List</h2>
+                            <h5 ng-if="account.acl" class="pull-right">ACL Type : {{AccessList.type |translate}} /
+                                Active : {{AccessList.active | translate}}</h5>
+                        </div>
+
+
+                        <div class="block">
+                            <div class="block-title">
+                                <h5>Block Entries</h5>
+                            </div>
+                            <div class="table-responsive">
+                                <table id="general-table" class="table table-striped table-vcenter">
+                                    <thead>
+                                    <tr>
+                                        <td>Code</td>
+                                        <td><a href="" ng-init="orderByField='country'; reverseSort = false"
+                                               ng-click="orderByField='country'; reverseSort = !reverseSort">Country</a>
+                                        </td>
+                                        <td><a href="" ng-click="orderByField='operator'; reverseSort = !reverseSort">Operator</a>
+                                        </td>
+                                        <td>Active ?</td>
+                                        <td>Actions</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="u in AccessList.block | filter: searchKeyword | orderBy:orderByField:reverseSort">
+                                        <td>{{u.code}}</td>
+                                        <td>{{u.country}}</td>
+                                        <td>{{u.operator}}</td>
+                                        <td>{{u.active | translate}}</td>
+                                        <td>
+                                            <div class="btn-group btn-group-xs">
+                                                <a ng-click="editAclEntry('block',u)" class="btn btn-default"
+                                                   data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                                <a ng-click="deleteAclEntry('block', u.code)" class="btn btn-danger"
+                                                   data-original-title="Delete"><i class="fa fa-times"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td>
+                                            <button ng-click="newentry('block');" class="btn btn-primary btn-sm">New
+                                                Entry
+                                            </button>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="block">
+                            <div class="block-title">
+                                <h5>Allow Entries</h5>
+                            </div>
+                            <div class="table-responsive">
+                                <table id="general-table" class="table table-striped table-vcenter">
+                                    <thead>
+                                    <tr>
+                                        <td>Code</td>
+                                        <td><a href="" ng-init="orderByField1='country'; reverseSort1 = false"
+                                               ng-click="orderByField1='country'; reverseSort1 = !reverseSort1">Country</a>
+                                        </td>
+                                        <td><a href=""
+                                               ng-click="orderByField1='operator'; reverseSort1 = !reverseSort1">Operator</a>
+                                        </td>
+                                        <td>Active ?</td>
+                                        <td>Actions</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="u in AccessList.allow | filter: searchKeyword | orderBy:orderByField1:reverseSort1">
+                                        <td>{{u.code}}</td>
+                                        <td>{{u.country}}</td>
+                                        <td>{{u.operator}}</td>
+                                        <td>{{u.active | translate}}</td>
+                                        <td>
+                                            <div class="btn-group btn-group-xs">
+                                                <a ng-click="editAclEntry('allow',u)" class="btn btn-default"
+                                                   data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                                <a ng-click="deleteAclEntry('allow', u.code)" class="btn btn-danger"
+                                                   data-original-title="Delete"><i class="fa fa-times"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td>
+                                            <button ng-click="newentry('allow');" class="btn btn-primary btn-sm">New
+                                                Entry
+                                            </button>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-2 col-xs-12">
+                                <form class="form-horizontal">
+                                    <div class="col-xs-12">
+                                        <fieldset>
+                                            <legend>ACL Options</legend>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label" for="example-text-input">ACL
+                                                    Type</label>
+                                                <div class="col-md-9">
+                                                    <select ng-model="AccessList.type" class="form-control">
+                                                        <option value="permissive">Permissive</option>
+                                                        <option value="restrictive">Restrictive</option>
+                                                    </select>
+                                                    <span class="help-block">Restrictive: Blocks All countries/operators, allows only what's in 'Allow Entries'. </span>
+                                                    <span class="help-block">Permissive: Allows all countries/operators, only blocks countries/operators in 'Block Entries'.</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">{{"isactive" | translate}}</label>
+                                                <div class="col-md-9">
+                                                    <div class="checkbox">
+                                                        <label class="switch switch-primary">
+                                                            <input type="checkbox" ng-model="AccessList.active"
+                                                                   value="true" checked>
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <div class="form-group form-actions">
+                                            <div class="col-md-9 col-md-offset-3">
+                                                <button  ng-click="updateAcl();" class="btn btn-sm btn-primary"><i
+                                                        class="fa fa-angle-right"></i> Update ACL
+                                                </button>
+                                                <button ng-click="resetAclClick();" class="btn btn-sm btn-warning"><i
+                                                        class="fa fa-repeat"></i> {{"reset"|translate}}
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                &nbsp;&nbsp;
+                            </div>
+                        </div>
+
+
+                    </div>
+                </uib-tab>
+                <!-- END ACL MANAGER -->
+                <!-- START PROFIT MANAGER -->
+                <uib-tab index="3" heading="Profit Management"
+                         ng-if="(profile.account_type !== 'agent') && (account._id !== profile.main_account)" select="resetProfitMap();">
+                    <div class="block">
+                        <div class="block-title">
+                            <h2>Profit Map</h2>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="general-table" class="table table-striped table-vcenter">
+                                <thead>
+                                <tr>
+                                    <td>Code</td>
+                                    <td><a href="" ng-init="orderByField='country'; reverseSort = false"
+                                           ng-click="orderByField='country'; reverseSort = !reverseSort">Country</a>
+                                    </td>
+                                    <td><a href="" ng-click="orderByField='operator'; reverseSort = !reverseSort">Operator</a>
+                                    </td>
+                                    <td>Profit %</td>
+                                    <td>Rate</td>
+                                    <td>Active ?</td>
+                                    <td>Actions</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="u in ProfitMap.maps | filter: searchKeyword | orderBy:orderByField:reverseSort">
+                                    <td>{{u.code}}</td>
+                                    <td>{{u.country}}</td>
+                                    <td>{{u.operator}}</td>
+                                    <td>{{u.profit_pct}}</td>
+                                    <td>{{u.profit_rate}}</td>
+                                    <td>{{u.active | translate}}</td>
+                                    <td>
+                                        <div class="btn-group btn-group-xs">
+                                            <a ng-click="editProfitMapEntry(u)" class="btn btn-default"
+                                               data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                            <a ng-click="deleteProfitMapEntry(u.code)" class="btn btn-danger"
+                                               data-original-title="Delete"><i class="fa fa-times"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td>
+                                        <button ng-click="newPentry();" class="btn btn-primary btn-sm">New Entry
+                                        </button>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-2 col-xs-12">
+                                <form class="form-horizontal">
+                                    <div class="col-xs-12">
+                                        <fieldset>
+                                            <legend>Profit Map Options</legend>
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">{{"isactive" | translate}}</label>
+                                                <div class="col-md-9">
+                                                    <div class="checkbox">
+                                                        <label class="switch switch-primary">
+                                                            <input type="checkbox" ng-model="ProfitMap.active"
+                                                                   value="true" checked>
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <div class="form-group form-actions">
+                                            <div class="col-md-9 col-md-offset-3">
+                                                <button ng-disabled="!ProfitMap.active" ng-click="updateProfitMap();" class="btn btn-sm btn-primary"><i
+                                                        class="fa fa-angle-right"></i> Update Profits
+                                                </button>
+                                                <button ng-click="resetProfitMap();" class="btn btn-sm btn-warning"><i
+                                                        class="fa fa-repeat"></i> {{"reset"|translate}}
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                &nbsp;&nbsp;
+                            </div>
+                        </div>
+
+
+                    </div>
+                </uib-tab>
+                <!-- END PROFIT MANAGER -->
+                <uib-tab index="4" heading="Transactions" ng-if="profile.account_type !== 'agent'" select="getTransactionsTab();">
+                    <div class="block">
+                        <div class="block-title">
+                            <h2>Transactions</h2>
+                        </div>
+
+                        <div class="table-options clearfix">
+                            <br/>
+                            <a href="/api/accounts/{{account._id}}/transactions.csv?token={{profile.token}}"
+                               class="btn btn-primary">Download CSV</a><br/><br/>
+                            <input class="form-control" ng-model="invoicefilter" type="text" placeholder="Filter">
+                        </div>
+                        <div class="table-responsive">
+                            <table id="general-table" class="table table-striped table-vcenter">
+                                <thead>
+                                <tr>
+                                    <td>Transaction ID</td>
+                                    <td>Time</td>
+                                    <td>Type</td>
+                                    <td>Amount</td>
+                                    <td>Currency</td>
+                                    <td>Source</td>
+                                    <td>Description</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="i in transactions |filter : invoicefilter">
+                                    <td>{{i._id}}</td>
+                                    <td>{{i.time | date : 'MMM d, y HH:mm:ss' }}</td>
+                                    <td>{{i.type | uppercase}}</td>
+                                    <td>{{i.amount | currency : '' : 2}}</td>
+                                    <td>{{i.currency}}</td>
+                                    <td>{{i.source}}</td>
+                                    <td>{{i.description}}</td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+
+                            <ul uib-pagination total-items="count" items-per-page="limit" ng-model="page" ng-change="changePage(page)" max-size="10" class="pagination-sm" boundary-link-numbers="true" next-text="{{'nextPage'|translate}}" previous-text="{{'prevPage'|translate}}"></ul>
+                        </div>
+                    </div>
+
+                </uib-tab>
+                <uib-tab index="5" heading="Topup Logs" ng-if="profile.account_type !== 'agent'" select="topupLogTab();">
+                    <div class="block">
+                        <div class="block-title">
+                            <h2>Top-up Logs</h2>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table id="general-table" class="table table-striped table-vcenter">
+                                <thead>
+                                    <tr>
+                                        <td>System Reference</td>
+                                        <td>Customer Reference</td>
+                                        <td>Operator Reference</td>
+                                        <td>Vendor SIM</td>
+                                        <td>App Host</td>
+                                        <td>Time</td>
+                                        <td>Target</td>
+                                        <td>Product ID</td>
+                                        <td>Country</td>
+                                        <td>Operator Name</td>
+                                        <td>Amount</td>
+                                        <td>Currency</td>
+                                        <td>Successful ?</td>
+                                        <td>Response Code</td>
+                                        <td>Response Message</td>
+                                        <td>Completed In</td>
+                                        <td>Channel</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="i in data |filter : namefilter">
+                                        <td>
+                                            <!--<a href="javascript:void(0);" ng-click="showLog(i._id)">{{i.operator_reference}}</a>-->
+                                            {{i.operator_reference}}
+                                        </td>
+                                        <td>{{i.customer_reference.toString().split("#")[1]}}</td>
+                                        <td>{{i.api_transactionid}}</td>
+                                        <td>{{i.vnd_sim}}</td>
+                                        <td>{{i.app_host}}</td>
+                                        <td>{{i.time | date : 'MMM d, y HH:mm:ss' }}</td>
+                                        <td>{{i.target}}</td>
+                                        <td>{{i.product_id}}</td>
+                                        <td>{{i.country}}</td>
+                                        <td>{{i.operator_name}}</td>
+                                        <td>{{i.topup_amount | currency : '' : 2}}</td>
+                                        <td>
+                                            <div class="currency-flag currency-flag-sm currency-flag-{{i.topup_currency|lowercase}}"></div>
+                                            {{i.topup_currency}}
+                                        </td>
+                                        <td>{{i.success | translate}}</td>
+                                        <td>{{i.code}}</td>
+                                        <td>{{i.message}}</td>
+                                        <td>{{(i.completed_in || 0) / 1000}}s</td>
+                                        <td>{{i.channel |translate}}</td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+
+                            <ul uib-pagination total-items="count" items-per-page="limit" ng-model="page" ng-change="changePage(page)" max-size="10" class="pagination-sm" boundary-link-numbers="true" next-text="{{'nextPage'|translate}}" previous-text="{{'prevPage'|translate}}"></ul>
+                        </div>
+                    </div>
+
+                </uib-tab>
+                <uib-tab index="6" heading="Child Accounts" ng-if="account.type !== 'agent'" select="childAccountTab();">
+                    <div class="block">
+                        <div class="block-title">
+                            <h2>Child Accounts</h2>
+                        </div>
+                        <div class="table-options clearfix">
+                            <input class="form-control" ng-model="namefilter" type="text"
+                                   placeholder="{{'FILTER' |translate}}">
+                            <br/>
+                            <button ui-sref="newAgent({id : account._id})" class="btn btn-primary btn-sm">
+                                {{"newaccount"|translate}}
+                            </button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-condensed">
+                                <thead>
+                                <tr>
+                                    <td>{{"ACCOUNT_NAME"|translate}}</td>
+                                    <td>{{"legal_type"|translate}}</td>
+                                    <td>{{"type"|translate}}</td>
+                                    <td>{{"isactive"|translate}}</td>
+                                    <td>{{"ACTIONS"|translate}}</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="acc in children | filter : namefilter">
+                                    <td><a ui-sref="accountView({id : acc._id})"> {{acc.account_name}}</a></td>
+                                    <td>{{acc.legal_type | translate}}</td>
+                                    <td>{{acc.type | translate}}</td>
+                                    <td>{{acc.active|translate}}</td>
+                                    <td class="text-center">
+                                        <div class="btn-group btn-group-xs">
+                                            <a href="javascript:void(0)" ng-click="transferFundsID(acc._id)" class="btn btn-success"><i
+                                                    class="fa fa-usd"></i></a>
+                                            <a ui-sref="accountView({id : acc._id})" data-toggle="tooltip" title=""
+                                               class="btn btn-default" data-original-title="Edit"><i
+                                                    class="fa fa-pencil"></i></a>
+                                            <a ng-click="deleteAccount(acc)" data-toggle="tooltip" title=""
+                                               class="btn btn-danger" data-original-title="Delete"><i
+                                                    class="fa fa-times"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+
+                </uib-tab>
+                <uib-tab index="7" heading="Wallet Manager">
+                    <div class="block">
+                        <div class="block-title">
+                            <h2>Wallets</h2>
+                        </div>
+                        <div class="table-options clearfix">
+                            <br/>
+                            <button ng-click="newWallet()" class="btn btn-primary btn-sm">New Wallet</button>
+                            &nbsp;&nbsp;
+                            <button ng-click="transferFunds()" class="btn btn-primary btn-sm">Transfer Funds</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-condensed">
+                                <thead>
+                                <tr>
+                                    <td></td>
+                                    <td>Wallet Name</td>
+                                    <td>Wallet ID</td>
+                                    <td>Balance</td>
+                                    <td>Currency</td>
+                                    <td>Primary ?</td>
+                                    <td>{{"ACTIONS"|translate}}</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="w in account.wallets">
+                                    <td>
+                                        <div class="currency-flag currency-flag-{{w.currency |lowercase}}"></div>
+                                    </td>
+                                    <td>{{w.wallet_name}}</td>
+                                    <td>{{w.wallet_id}}</td>
+                                    <td>{{w.balance | currency : '' : 2}}</td>
+                                    <td>{{w.currency}} ( {{currencies[w.currency]}} )</td>
+                                    <td>{{w.primary | translate}}</td>
+                                    <td class="text-center">
+                                        <div class="btn-group btn-group-xs">
+                                            <a ng-click="editWallet(w._id)" data-toggle="tooltip" title="Edit Wallet"
+                                               class="btn btn-default" data-original-title="Edit"><i
+                                                    class="fa fa-pencil"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+
+                </uib-tab>
+                <uib-tab index="8" heading="Credentials" ng-if="account.type == 'wholesaler'" select="credentialsTab();">
+                    <div class="block">
+                        <div class="block-title">
+                            <h2>API Credentials</h2>
+                        </div>
+                        <div class="table-options clearfix">
+                            <br/>
+
+                        </div>
+                        <div class="table-responsive">
+                            <table id="general-table" class="table table-striped table-vcenter">
+                                <thead>
+                                <tr>
+                                    <td>API Name</td>
+                                    <td>API Code</td>
+                                    <td>Link</td>
+                                    <td>Username</td>
+                                    <td>Active ?</td>
+                                    <td>{{"ACTIONS"|translate}}</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="u in credentials |filter : userfilter">
+                                    <td>{{u.api_name}}</td>
+                                    <td>{{u.apicode}}</td>
+                                    <td>{{u.link}}</td>
+                                    <td>{{u.username}}</td>
+                                    <td>{{u.active| translate}}</td>
+                                    <td>
+                                        <div class="btn-group btn-group-xs">
+                                            <a ng-click="editCred(u._id)" class="btn btn-default"
+                                               data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                            <a ng-click="deleteCred(u._id)" class="btn btn-danger"
+                                               data-original-title="Delete"><i class="fa fa-times"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td>
+                                        <button ng-click="newCred(this);" class="btn btn-primary btn-sm">New
+                                            Credential
+                                        </button>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </uib-tab>
+                <uib-tab index="9" heading="DR/FR Configuration" ng-if="account.type == 'wholesaler'" select="dfrTab();">
+                    <div class="block" >
+                        <div class="block-title">
+                            <h2>DR Rules</h2>
+                        </div>
+                        <button ng-click="newDRule()" class="btn btn-primary btn-sm" type="button">New Rule</button>
+                        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <div class="table-options clearfix">
+        <br/>
+    </div>
+            <div class="table-responsive">
+                <table id="general-table" class="table table-striped table-vcenter">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>API Code</td>
+                                    <td>Active ?</td>
+                                    <td class="text-center">{{"ACTIONS"|translate}}</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr ng-repeat="r in drules">
+                                        <td>{{r.rule_name}}</td>
+                                        <td>{{r.apicode}}</td>
+                                        <td>{{r.active | translate}}</td>
+                                        <td class="text-center">
+                        <div class="btn-group btn-group-xs">
+                            <a ng-click="drEdit(r._id)" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                            <a ng-click="drDelete(r._id)" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="Edit"><i class="fa fa-times"></i></a>
+                        </div>
+                    </td>
+                                    </tr>
+                            </tbody>
+                            
+                        </table>
+                     </div>   
+            </div>
+        </div>
+                        
+                </div>
+                <div class="block" >
+                    <div class="block-title">
+                        <h2>FR Rules</h2>
+                    </div>
+                    <button ng-click="newFRule()" class="btn btn-primary btn-sm" type="button">New Rule</button>
+                    <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <div class="table-options clearfix">
+    <br/>
+</div>
+        <div class="table-responsive">
+            <table id="general-table" class="table table-striped table-vcenter">
+                        <thead>
+                            <tr>
+                                <td>Name</td>
+                                <td>API Code</td>
+                                <td>Active ?</td>
+                                <td class="text-center">{{"ACTIONS"|translate}}</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr ng-repeat="r in frules">
+                                    <td>{{r.rule_name}}</td>
+                                    <td>{{r.apicode}}</td>
+                                    <td>{{r.active | translate}}</td>
+                                    <td class="text-center">
+                    <div class="btn-group btn-group-xs">
+                        <a ng-click="frEdit(r._id)" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                        <a ng-click="frDelete(r._id)" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="Edit"><i class="fa fa-times"></i></a>
+                    </div>
+                </td>
+                                </tr>
+                        </tbody>
+                        
+                    </table>
+                 </div>   
+        </div>
+    </div>
+                    
+            </div>
+                </uib-tab>
+                <uib-tab index="10" heading="Fixed Fee/Profit Management"
+                 select="resetFixedProfitMap();">
+           <div class="block">
+               <div class="block-title">
+                   <h2>Fixed Fee/Profit Map</h2>
+               </div>
+               <div class="table-responsive">
+                   <table id="general-table" class="table table-striped table-vcenter">
+                       <thead>
+                       <tr>
+                           <td>Code</td>
+                           <td><a href="" ng-init="orderByField='country'; reverseSort = false"
+                                  ng-click="orderByField='country'; reverseSort = !reverseSort">Country</a>
+                           </td>
+                           <td><a href="" ng-click="orderByField='operator'; reverseSort = !reverseSort">Operator</a>
+                           </td>
+                           <td>Fee</td>
+                         
+                           <td>Actions</td>
+                       </tr>
+                       </thead>
+                       <tbody>
+                       <tr ng-repeat="u in FixedProfitMap.maps | filter: searchKeyword | orderBy:orderByField:reverseSort">
+                           <td>{{u.code}}</td>
+                           <td>{{u.country}}</td>
+                           <td>{{u.operator}}</td>
+                           <td>{{u.profit}} {{u.currency}}</td>
+                          
+                           <td>
+                               <div class="btn-group btn-group-xs">
+                                   <a ng-click="editFixedProfitMapEntry(u)" class="btn btn-default"
+                                      data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                   <a ng-click="deleteFixedProfitMapEntry(u.code)" class="btn btn-danger"
+                                      data-original-title="Delete"><i class="fa fa-times"></i></a>
+                               </div>
+                           </td>
+                       </tr>
+
+                       </tbody>
+                       <tfoot>
+                       <tr>
+                           <td>
+                               <button ng-click="newFPentry();" class="btn btn-primary btn-sm">New Entry
+                               </button>
+                           </td>
+                           <td></td>
+                           <td></td>
+                           <td></td>
+                           <td></td>
+                           <td></td>
+                       </tr>
+                       </tfoot>
+                   </table>
+               </div>
+
+
+               <div class="row">
+                   <div class="col-md-6 col-md-offset-2 col-xs-12">
+                       <form class="form-horizontal">
+                           <div class="col-xs-12">
+                               <fieldset>
+                                   <legend>Fixed Profit Map Options</legend>
+
+                                   <div class="form-group">
+                                       <label class="col-md-3 control-label">{{"isactive" | translate}}</label>
+                                       <div class="col-md-9">
+                                           <div class="checkbox">
+                                               <label class="switch switch-primary">
+                                                   <input type="checkbox" ng-model="FixedProfitMap.active"
+                                                          value="true" checked>
+                                                   <span></span>
+                                               </label>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </fieldset>
+                               <div class="form-group form-actions">
+                                   <div class="col-md-9 col-md-offset-3">
+                                       <button ng-disabled="!FixedProfitMap.active" ng-click="updateFixedProfitMap();" class="btn btn-sm btn-primary"><i
+                                               class="fa fa-angle-right"></i> Update Profits
+                                       </button>
+                                       <button ng-click="resetFixedProfitMap();" class="btn btn-sm btn-warning"><i
+                                               class="fa fa-repeat"></i> {{"reset"|translate}}
+                                       </button>
+                                   </div>
+
+                               </div>
+                           </div>
+                       </form>
+                   </div>
+               </div>
+               <div class="row">
+                   <div class="col-xs-12">
+                       &nbsp;&nbsp;
+                   </div>
+               </div>
+
+
+           </div>
+       </uib-tab>
+       <uib-tab index="11" heading="Promo Manager" select="updatePromoTab();" ng-if="account.type == 'agent'">
+        <div class="block">
+            <div class="block-title">
+                <h2>Promotions</h2>
+            </div>
+            <div class="table-options clearfix">
+                <br/>
+                <button ng-click="newPromo()" class="btn btn-primary btn-sm">New Promotion</button>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-condensed">
+                    <thead>
+                    <tr>
+                        <td>Promo Name</td>
+                        <td>Period</td>
+                        <td>Threshold</td>
+                        <td>Reward</td>
+                        <td>Reward Mode</td>
+                        <td>Active ?</td>
+                        <td>Reward Count</td>
+                        <td>Reward Payout Amount</td>
+                        <td>Total Topup Amount</td>
+                        <td>{{"ACTIONS"|translate}}</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="w in promos">
+                        <td>{{w.promo_name}}</td>
+                        <td>{{w.date_start |date : 'MMM d, y'}} - {{w.date_end | date : 'MMM d, y'}}</td>
+                        <td>{{w.threshold}} {{w.currency}}</td>
+                        <td>{{w.reward_amt}}</td>
+                        <td>{{w.reward_mode | translate}}</td>
+                        <td>{{w.active | translate}}</td>
+                        <td>{{w.reward_count}}</td>
+                        <td>{{w.reward_payout}} {{w.currency}}</td>
+                        <td>{{w.topup_total_amount}} {{w.currency}}</td>
+                        <td class="text-center">
+                            <div class="btn-group btn-group-xs">
+                                <a ng-if="w.active == true" ng-click="togglePower(w._id)" data-toggle="tooltip" title="Deactivate Promo"
+                                   class="btn btn-danger" data-original-title="Edit"><i
+                                        class="fa fa-power-off"></i></a>
+                                        <a ng-if="w.active == false" ng-click="togglePower(w._id)" data-toggle="tooltip" title="Activate Promo"
+                                   class="btn btn-success" data-original-title="Edit"><i
+                                        class="fa fa-power-off"></i></a>
+                                <a ng-click="editPromo(w._id)" data-toggle="tooltip" title="Edit Promo"
+                                   class="btn btn-default" data-original-title="Edit"><i
+                                        class="fa fa-pencil"></i></a>
+                                        <a ng-click="deletePromo(w._id)" data-toggle="tooltip" title="Delete Promo"
+                                   class="btn btn-danger" data-original-title="Delete"><i
+                                        class="fa fa-times"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+
+    </uib-tab>
+            </uib-tabset>
+
+        </div>
+    </div>
+
+
+</div>
+<!-- END Page Content -->
+<footer class="clearfix">
+    <div class="pull-left">
+        <span id="year-copy"></span> &copy; <a href="http://www.primeairtime.com/" target="_blank">Prime Airtime Ltd</a>
+    </div>
+</footer>

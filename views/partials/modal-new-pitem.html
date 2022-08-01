@@ -1,0 +1,43 @@
+
+                    <!-- Modal Header -->
+                    <div class="modal-header text-center">
+                        <h2 class="modal-title"><i class="fa fa-pencil"></i> {{"newpitem" | translate}}</h2>
+                    </div>
+                    <!-- END Modal Header -->
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <form  class="form-horizontal form-bordered" onsubmit="return false;">
+                            <div class="form-group">
+                                    <label class="col-md-4 control-label">{{"itemName"|translate}}</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.item_name" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">{{"itemType"|translate}}</label>
+                                    <div class="col-md-8">
+                                        <select ng-model="rec.item_type" class="form-control">
+                                            <option value="service">{{"service"|translate}}</option>
+                                            <option value="product">{{"product"|translate}}</option>
+                                            <option value="calls">{{"calls"|translate}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">{{"itemDescription"|translate}}</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.item_description" class="form-control">
+                                    </div>
+                                </div>
+                            
+                            
+                            <div class="form-group form-actions">
+                                <div class="col-xs-12 text-right">
+                                    <button ng-click="packageCancel();" type="button" class="btn btn-sm btn-default" data-dismiss="modal">{{"cancel"|translate}}</button>
+                                    <button type="button" ng-click="newpitemOK();" class="btn btn-sm btn-primary">{{"savechanges"|translate}}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END Modal Body -->

@@ -1,0 +1,104 @@
+
+                    <!-- Modal Header -->
+                    <div class="modal-header text-center">
+                        <h2 class="modal-title"><i class="fa fa-pencil"></i> New DR Rule</h2>
+                    </div>
+                    <!-- END Modal Header -->
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <form  class="form-horizontal form-bordered" onsubmit="return false;">
+                            <fieldset>
+                                <legend>General Information</legend>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Rule Name</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.rule_name" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">API Code</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.apicode" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="user-settings-notifications">Active ?</label>
+                                    <div class="col-md-8">
+                                        <label class="switch switch-primary">
+                                            <input type="checkbox" ng-model="rec.active">
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                              
+                                
+                            </fieldset>
+                            <fieldset>
+                                <legend>Rules</legend>
+                                <div class="table-responsive">
+                                    <table id="general-table" class="table table-striped table-vcenter">
+                                                <thead>
+                                                    <tr>
+                                                        <td>Tag</td>
+                                                        <td>Priority</td>
+                                                        <td>Active ?</td>
+                                                        <td class="text-center">{{"ACTIONS"|translate}}</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                        <tr ng-repeat="r in rec.rules">
+                                                            <td>{{r.tag}}</td>
+                                                            <td>{{r.priority}}</td>
+                                                            <td>{{r.active | translate}}</td>
+                                                            <td class="text-center">
+                                            <div class="btn-group btn-group-xs">
+                                                
+                                                <a ng-click="removeRule(r)" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="Edit"><i class="fa fa-times"></i></a>
+                                            </div>
+                                        </td>
+                                                        </tr>
+                                                </tbody>
+                                                
+                                            </table>
+                                         </div>   
+                                         <div class="form-group">
+                                            <label class="col-md-4 control-label">Tag</label>
+                                            <div class="col-md-8">
+                                                <input type="text" ng-model="nrule.tag" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Priority</label>
+                                            <div class="col-md-8">
+                                                <input type="text" ng-model="nrule.priority" class="form-control">
+                                                <span class="help-block">Priority 0-5, 5 highest, 0 never use (disabled)</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="user-settings-notifications">Active ?</label>
+                                            <div class="col-md-8">
+                                                <label class="switch switch-primary">
+                                                    <input type="checkbox" ng-model="nrule.active">
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label"></label>
+                                            <div class="col-md-8">
+                                                <button type="button" class="form-control btn btn-success btn-sm" ng-click="addRule()">Add Rule</button> 
+                                            </div>
+                                        </div>
+
+                            </fieldset>
+                            <div class="form-group form-actions">
+                                <div class="col-xs-12 text-right">
+                                    <button ng-click="newUserCancel();" type="button" class="btn btn-sm btn-default" data-dismiss="modal">{{"cancel"|translate}}</button>
+                                    <button type="button" ng-click="createDROK();" class="btn btn-sm btn-primary">{{"savechanges"|translate}}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END Modal Body -->

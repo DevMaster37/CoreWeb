@@ -1,0 +1,81 @@
+ <div id="page-content" style="min-height:1036px">
+                    <!-- Blank Header -->
+                   
+                    <div class="content-header">
+                        <div class="header-section">
+                            <h1>
+                                <i class="hi hi-phone_alt"></i>{{"CALLREC_TITLE" | translate}}<br><small>{{"CALLREC_SUBTITLE" | translate}}</small>
+                            </h1>
+                        </div>
+                    </div>
+                    <ul class="breadcrumb breadcrumb-top">
+                        <li><a ui-sref="accountView({id : profile.main_account})">{{"MY_ACCOUNT" | translate}}</a></li>
+                        <li><a ui-sref="accountList">{{"cdrs" | translate}}</a></li>
+                    </ul>
+                    <!-- END Blank Header -->
+
+                    <!-- Example Block -->
+                    <div class="block">
+                        <!-- Example Title -->
+                        <div class="block-title">
+                            <h2>{{"cdrs" | translate}}</h2>
+                        </div>
+                        <!-- END Example Title -->
+                        <div class="table-options clearfix">
+                            <input class="form-control" ng-model="namefilter" type="text" placeholder="{{'FILTER' |translate}}">
+                            <br>
+                            <br/>
+                            <ul uib-pagination total-items="pages" ng-model="page" ng-change="changePage()" max-size="5" class="pagination-sm" boundary-link-numbers="true" next-text="{{'nextPage'|translate}}" previous-text="{{'prevPage'|translate}}"></ul>
+                        </div>
+                        <!-- Example Content -->
+                       <table id="general-table" class="table table-striped table-vcenter">
+                                <thead>
+                                   
+                                    <tr>
+                                        <td>{{"ACCOUNT_ID"|translate}}</td>
+                                        <td>{{"cdrFrom"|translate}}</td>
+                                       <td>{{"cdrTo"|translate}}</td>
+                                        <td>{{"cdrBillsec"|translate}}</td>
+                                        <td>{{"cdrCallStart"|translate}}</td>
+                                        <td>{{"cdrCallEnd"|translate}}</td>
+                                        <td>{{"cdrDuration"|translate}}</td>
+                                        <td>{{"cdrCallCost"|translate}}</td>
+                                        <td ng-if="res">{{"cdrResellerCost"|translate}}</td>
+                                        <td ng-if="dis">{{"cdrDistributorCost"|translate}}</td>
+                                        <td ng-if="res">{{"resellprofit" | translate}}</td>
+                                        <td ng-if="dis">{{"distrprofit"|translate}}</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="rec in data | filter : namefilter">
+                                        <td>{{rec.account_id}}</td>
+                                        <td>{{rec.from}}</td>
+                                       <td>{{rec.to}}</td>
+                                        <td>{{rec.billsec}}</td>
+                                        <td>{{rec.start_date |date : 'd.M.yyyy hh:mm:ss'}}</td>
+                                        <td>{{rec.end_date |date : 'd.M.yyyy hh:mm:ss'}}</td>
+                                        <td>{{rec.duration}}</td>
+                                        <td>¥ {{rec.costUser |number:0}}</td>
+                                        <td ng-if="res">¥ {{rec.costReseller |number:0}}</td>
+                                        <td ng-if="dis">¥ {{rec.costDistributor |number:0}}</td>
+                                        <td ng-if="res">¥ {{rec.costUser - rec.costReseller|number:2}}</td>
+                                        <td ng-if="dis">¥ {{rec.costReseller - rec.costDistributor|number:2}}</td>
+                                    </tr>
+                                   
+                                </tbody>
+                               
+                            </table>
+                            <div class="table-options clearfix">
+                                <ul uib-pagination total-items="pages" ng-model="page" ng-change="changePage()" max-size="5" class="pagination-sm" boundary-link-numbers="true" next-text="{{'nextPage'|translate}}" previous-text="{{'prevPage'|translate}}"></ul>
+                            </div>
+                        <!-- END Example Content -->
+                    </div>
+                    <!-- END Example Block -->
+                </div>
+                <!-- END Page Content -->
+                      <footer class="clearfix">
+
+                    <div class="pull-left">
+                        <span id="year-copy"></span> &copy; <a href="http://www.aineo.com/" target="_blank">AiNEO Corporation</a>
+                    </div>
+                </footer>

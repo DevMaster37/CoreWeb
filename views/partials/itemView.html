@@ -1,0 +1,64 @@
+ <div id="page-content" style="min-height:1036px">
+                    <!-- Blank Header -->
+                    <div class="content-header">
+                        <div class="header-section">
+                            <h1>
+                                <i class="gi gi-brush"></i>{{"ITEMS_TITLE" | translate}}<br><small>{{"ITEMS_SUBTITLE" | translate}}</small>
+                            </h1>
+                        </div>
+                    </div>
+                    <ul class="breadcrumb breadcrumb-top">
+                        <li>{{"HOME" | translate}}</li>
+                        <li><a ui-sref="packageList({account : accid})">{{"ITEM_LIST" | translate}}</a></li>
+                    </ul>
+                    <!-- END Blank Header -->
+                    <div class="row">
+                        <div class="col-md-6 col-xs-12">
+                            <!-- Example Block -->
+                    <div class="block">
+                        <!-- Example Title -->
+                        <div class="block-title">
+                            <h2>{{"item" | translate}} : {{item.item_name}}</h2>
+                        </div>
+                        <!-- END Example Title -->
+                        <div class="table-options clearfix">
+                            <br/>
+                        </div>
+                        <!-- Example Content -->
+                       <form action="page_forms_general.html" metdod="post" enctype="multipart/form-data" class="form-horizontal" onsubmit="return false;">
+                       <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">{{"itemName" |translate}}</label>
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="item.item_name" class="form-control" placeholder="{{'itemName' | translate}}">
+                                            
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">{{"itemPrice" |translate}}</label>
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="item.item_price" class="form-control" placeholder="{{'itemPrice' | translate}}">
+                                            
+                                        </div>
+                           </div>
+                           <div class="form-group form-actions">
+                                        <div class="col-md-9 col-md-offset-3">
+                                            <button ng-click="updateItem();" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> {{"savechanges"|translate}}</button>
+                                            <button class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> {{"reset"|translate}}</button>
+                                        </div>
+                                    </div>
+                       </form>
+                        <!-- END Example Content -->
+                    </div>
+                    <!-- END Example Block -->
+                        </div>
+       
+                    </div>
+                    
+                </div>
+                <!-- END Page Content -->
+                      <footer class="clearfix">
+
+                    <div class="pull-left">
+                        <span id="year-copy"></span> &copy; <a href="http://www.aineo.com/" target="_blank">AiNEO Corporation</a>
+                    </div>
+                </footer>

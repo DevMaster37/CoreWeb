@@ -1,0 +1,33 @@
+
+<!-- Modal Header -->
+<div class="modal-header text-center">
+    <h2 class="modal-title"><i class="fa fa-pencil"></i> Edit ACL Entry</h2>
+</div>
+<!-- END Modal Header -->
+
+<!-- Modal Body -->
+<div class="modal-body">
+    <div  class="form-horizontal form-bordered">
+        <div class="form-group">
+            <label class="col-md-4 control-label">Country</label>
+            <div class="col-md-8">
+                <select ng-model="acl_country" class="form-control" ng-options="acl.country for acl in AclCountries" ng-change="updateeditableOperList()">
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label" >Operator</label>
+            <div class="col-md-8">
+                <select ng-model="acl_operator" class="form-control" ng-options="aclop.operator_name for aclop in AclOperators">
+                </select>
+            </div>
+        </div>
+        <div class="form-group form-actions">
+            <div class="col-xs-12 text-right">
+                <button ng-click="newUserCancel();" type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+                <button type="button" ng-disabled="!AccessList.active" ng-click="editAclEntryOK();" class="btn btn-sm btn-primary">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Modal Body -->

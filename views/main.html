@@ -1,0 +1,1034 @@
+<div id="page-content" style="min-height:1036px">
+
+    <!-- Dashboard Header -->
+    <!-- For an image header add the class 'content-header-media' and an image as in the following example -->
+    <div class="content-header content-header-media">
+        <div class="header-section">
+            <div class="row">
+                <!-- Main Title (hidden on small devices for the statistics to fit) -->
+                <div class="col-md-4 col-lg-6 hidden-xs hidden-sm">
+                    <h1>{{ "WELCOME" | translate}}
+                        <strong>{{profile.first_name}}</strong>
+                        <br>
+                        <small>{{ "TAGLINE" | translate}}</small>
+                    </h1>
+                </div>
+                <!-- END Main Title -->
+
+                <!-- Top Stats -->
+                <div class="col-md-8 col-lg-6" ng-if="profile.access_level=='master'">
+                    <div class="row text-center">
+                        <div class="col-xs-4 col-sm-3">
+                            <h2 class="animation-hatch">
+                                <strong>
+                                    <a href="javascript:void(0)" ui-sref="accountList({filter : 'wholesaler'})">{{dash_data.wholesalers |number:0}}</a>
+                                </strong>
+                                <br>
+                                <small>
+                                    <i class="fa fa-globe"></i> Wholesalers</small>
+                            </h2>
+                        </div>
+                        <div class="col-xs-4 col-sm-3">
+                            <h2 class="animation-hatch">
+                                <strong>
+                                    <a href="javascript:void(0)" ui-sref="accountList({filter : 'reseller'})">{{dash_data.resellers |number:0}}</a>
+                                </strong>
+                                <br>
+                                <small>
+                                    <i class="fa fa-building-o"></i> Resellers</small>
+                            </h2>
+                        </div>
+                        <div class="col-xs-4 col-sm-3">
+                            <h2 class="animation-hatch">
+                                <strong>
+                                    <a href="javascript:void(0)" ui-sref="accountList({filter : 'agent'})"> {{dash_data.agents |number:0}}</a>
+                                </strong>
+                                <br>
+                                <small>
+                                    <i class="fa fa-briefcase"></i> Agents </small>
+                            </h2>
+                        </div>
+                        <div class="col-xs-4 col-sm-3">
+                            <h2 class="animation-hatch">
+                                <strong>
+                                    <a href="javascript:void(0)" ui-sref="userList"> {{dash_data.users |number:0}}</a>
+                                </strong>
+                                <br>
+                                <small>
+                                    <i class="fa fa-users"></i> Users</small>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Top Stats -->
+            </div>
+        </div>
+        <!-- For best results use an image with a resolution of 2560x248 pixels (You can also use a blurred image with ratio 10:1 - eg: 1000x100 pixels - it will adjust and look great!) -->
+        <img src="images/placeholders/headers/profile_header.jpg" alt="header image" class="animation-pulseSlow">
+    </div>
+    <!-- END Dashboard Header -->
+
+    <!-- Mini Top Stats Row -->
+    <div class="row">
+        <!-- Buttons-->
+        <div class="col-sm-12" style="min-height:100px;">
+            <!--dragon added 2017_11_13 -->
+            <div class="btn-group btn-group-sm pull-left" data-toggle="buttons">
+
+                <ul class="btn-group" style="list-style: none; padding-left: 0">
+                    <li class="dropdown">
+                        <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Day</button>
+                        <ul class="dropdown-menu" style="min-width: 20px; left: -25px;">
+                            <li>
+                                <a ng-click="changeMode('today')" name="mode">
+                                    Today
+                                </a>
+                            </li>
+                            <li>
+                                <a ng-click="changeMode('daily')" name="mode">
+                                    Daily(Past 24 hours)
+                                </a>
+                            </li>
+                            <li>
+                                <a ng-click="changeMode('custom_day')" name="mode">
+                                    Custom
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="btn-group" style="list-style: none; padding-left: 0">
+                    <li class="dropdown">
+                        <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Week</button>
+                        <ul class="dropdown-menu" style="min-width: 20px; left: -25px;">
+                            <li>
+                                <a ng-click="changeMode('this_week')" name="mode">
+                                    This Week
+                                </a>
+                            </li>
+                            <li>
+                                <a ng-click="changeMode('weekly')" name="mode">
+                                    Weekly(Past 7 days)
+                                </a>
+                            </li>
+                            <li>
+                                <a ng-click="changeMode('custom_week')" name="mode">
+                                    Custom
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="btn-group" style="list-style: none; padding-left: 0">
+                    <li class="dropdown">
+                        <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Month
+                        </button>
+                        <ul class="dropdown-menu" style="min-width: 20px; left: -25px;">
+                            <li>
+                                <a ng-click="changeMode('this_month')" name="mode">
+                                    This Month
+                                </a>
+                            </li>
+                            <li>
+                                <a ng-click="changeMode('monthly')" name="mode">
+                                    Monthly(Past 30 days)
+                                </a>
+                            </li>
+                            <li>
+                                <a ng-click="changeMode('custom_month')" name="mode">
+                                    Custom
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="btn-group" style="list-style: none; padding-left: 0">
+                    <li class="dropdown">
+                        <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Year
+                        </button>
+                        <ul class="dropdown-menu" style="min-width: 20px; left: -25px;">
+                            <li>
+                                <a ng-click="changeMode('this_year')" name="mode">
+                                    This Year
+                                </a>
+                            </li>
+                            <li>
+                                <a ng-click="changeMode('yearly')" name="mode">
+                                    Yearly(Past 12 months)
+                                </a>
+                            </li>
+                            <li>
+                                <a ng-click="changeMode('custom_year')" name="mode">
+                                    Custom
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="btn-group" style="list-style: none; padding-left: 0">
+                    <li class="dropdown">
+                        <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Wallet
+                            <div class="currency-flag currency-flag-sm currency-flag-{{currency |lowercase}}"></div>
+                        </button>
+                        <ul class="dropdown-menu" style="min-width: 20px; left: -25px;">
+                            <li class="dropdown-header text-center">Your Wallets</li>
+                            <li>
+                                <a ng-click="changedCurrency(w)" ng-repeat="w in balances2" name="flag">
+                                    <div class="currency-flag currency-flag-sm currency-flag-{{w |lowercase}}"></div>
+                                    {{w}} Wallet
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="btn-group" style="list-style: none; padding-left: 0">
+                    <li class="dropdown">
+                        <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Top
+                        </button>
+                        <ul class="dropdown-menu" style="min-width: 20px; left: -25px;">
+                            <li>
+                                <a ng-click="changedTopCount(top)" ng-repeat="top in TopList" name="topcount">
+                                    {{top}}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="btn-group" style="list-style: none; padding-left: 0">
+                    <li class="dropdown">
+                        <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Country
+                        </button>
+                        <ul class="dropdown-menu" style="min-width: 20px; left: -25px;">
+                            <li>
+                                <a ng-click="changedCountry(val)" ng-repeat="val in countryList" name="countrylist">
+                                    {{val}}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="btn-group" style="list-style: none; padding-left: 0">
+                    <li class="dropdown">
+                        <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Destination
+                        </button>
+                        <ul class="dropdown-menu" style="min-width: 20px; left: -25px;">
+                            <li>
+                                <a ng-click="changedDestination(val)" ng-repeat="val in destinationList" name="destinationlist">
+                                    {{val}}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="btn-group" style="list-style: none; padding-left: 0">
+                    <li class="dropdown">
+                        <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Agent
+                        </button>
+                        <ul class="dropdown-menu" style="min-width: 20px; left: -25px;">
+                            <li>
+                                <a ng-click="changedAgent(val._id)" ng-repeat="val in accountList" name="accountlist">
+                                    {{val.name}}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="btn-group" style="list-style: none; padding-left: 0">
+                    <li class="dropdown">
+                        <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Provider
+                        </button>
+                        <ul class="dropdown-menu" style="min-width: 20px; left: -25px;">
+                            <li>
+                                <a ng-click="changedProvider(val)" ng-repeat="val in providerList" name="providerList">
+                                    {{val}}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="btn-group" style="list-style: none; padding-left: 0">
+                    <li class="dropdown">
+                        <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Product
+                        </button>
+                        <ul class="dropdown-menu" style="min-width: 20px; left: -25px;">
+                            <li>
+                                <a ng-click="changedProductType(key)" ng-repeat="(key, val) in productTypes" name="productType">
+                                    {{val}}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Transactions by All -->
+        <div class="col-sm-12 col-lg-6">
+            <div class="widget">
+                <div class="widget-advanced widget-advanced-alt">
+                    <!-- Widget Header -->
+                    <div class="block full" style="height:350px">
+                        <div class="block-title">
+                            <h2>
+                                <strong>Transactions</strong> by All
+                                <small>{{tex}}</small>
+                            </h2>
+                        </div>
+                        <table class="table table-borderless">
+                            <tr>
+                                <td>
+                                    <h5>
+                                        <strong>Value</strong>
+                                    </h5>
+                                </td>
+                                <td>
+                                    <h5>
+                                        <strong>Count</strong>
+                                    </h5>
+                                </td>
+                                <td class="text-right">
+                                    <h5>
+                                        <strong>%</strong>
+                                    </h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>
+                                        <div ng-repeat="currency in balances2" class="text-success">
+                                            <div class="text-success">
+                                                {{ov.suc.amount[currency]|currency : '' : 2}} {{currency}}
+                                            </div>
+                                        </div>
+                                        <small>
+                                            <em>Successful Transactions</em>
+                                        </small>
+                                    </h4>
+                                </td>
+                                <td>
+                                    <h4 class="text-success">
+                                        <div ng-repeat="currency in balances2">
+                                            <div>
+                                                {{ov.suc.count[currency]|number : fractionSize}}
+                                            </div>
+                                        </div>    
+                                    </h4>
+                                </td>
+                                <td class="text-right">
+                                    <h4 class="text-success">
+                                        <div ng-repeat="currency in balances2">
+                                            <div >{{ov.suc.perc[currency]}}%</div>
+                                        </div>
+                                    </h4>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>
+                                        <div ng-repeat="currency in balances2">
+                                            <div class="text-danger">{{ov.fail.amount[currency] |currency : '' : 2}} {{currency}}</div>
+                                        </div>
+                                        
+                                        <small>
+                                            <em>Failed Transactions</em>
+                                        </small>
+                                    </h4>
+                                </td>
+                                <td>
+                                    <h4 class="text-danger"> 
+                                        <div ng-repeat="currency in balances2">
+                                            <div >{{ov.fail.count[currency]|number : fractionSize}}</div>
+                                        </div>
+                                    </h4>
+                                </td>
+                                <td class="text-right">
+                                    <h4 class="text-danger">
+                                        <div ng-repeat="currency in balances2">
+                                            <div>{{ov.fail.perc[currency]}}%</div>
+                                        </div>
+                                    </h4>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- END Widget Header -->
+                    <!-- Widget Main -->
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-lg-6">
+            <div class="widget">
+                <div class="widget-advanced widget-advanced-alt">
+                    <!-- Widget Header -->
+                    <div class="block full" style="height:350px; overflow-y: auto;">
+                        <div class="block-title">
+                            <h2>
+                                <strong>Products Usage
+                                <small>{{tex}}</small>
+                            </h2>
+                        </div>
+                        <table class="table table-borderless">
+                            <tr>
+                                <td>
+                                    <h5>
+                                        <strong>Product Type</strong>
+                                    </h5>
+                                </td>
+                                <td>
+                                    <h5>
+                                        <strong>Paid Amount/Currency</strong>
+                                    </h5>
+                                </td>
+                                <td class="text-center">
+                                    <h5>
+                                        <strong>Count</strong>
+                                    </h5>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="value in ptc">
+                                    <td >
+                                        {{value.type.label}}
+                                    </td>
+                                    <td>
+                                        {{value.amount| currency: '' : 2}} {{value.currency}}
+                                    </td>
+                                    <td>
+                                        {{value.count | currency: '' : 0}}
+                                    </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- END Widget Header -->
+                    <!-- Widget Main -->
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Stock Level -->
+        <div class="col-sm-12 col-lg-6" ng-if="profile.access_level=='master'">
+            <div class="widget">
+                <div class="widget-advanced widget-advanced-alt">
+                    <div class="block full" style="height:350px" ng-style="{'overflow-y' : (providers.length>6) ? 'scroll' : 'hidden'}">
+                        <div class="block-title">
+                            <h2>
+                                <strong>Stock </strong> Levels
+                                <small>{{tex}}</small>
+                            </h2>
+                        </div>
+                        <table class="table table-borderless">
+                            <tr>
+                                <td>
+                                    <h5>
+                                        <strong>API Code</strong>
+                                    </h5>
+                                </td>
+                                <td>
+                                    <h5>
+                                        <strong>Subcode</strong>
+                                    </h5>
+                                </td>
+                                <td>
+                                    <h5>
+                                        <strong>Tag</strong>
+                                    </h5>
+                                </td>
+                                <td>
+                                    <h5>
+                                        <strong>Balance</strong>
+                                    </h5>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="bal in providers|orderBy:'code'">
+                                <td>
+                                    {{bal.code}}
+                                </td>
+                                <td>
+                                    {{bal.subcode}}
+                                </td>
+                                <td>
+                                    {{bal.tag}}
+                                </td>
+                                <td>
+                                    {{bal.balance | currency : '' : 2}} {{bal.currency}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Turnover by Provider-->
+        <div class="col-sm-12 col-lg-6" ng-if="profile.access_level=='master'">
+            <div class="widget">
+                <div class="widget-advanced widget-advanced-alt">
+                    <div class="block full" style="height:350px" ng-style="{'overflow-y' : (tcpCount>6) ? 'scroll' : 'hidden'}">
+                        <div class="block-title">
+                            <h2>
+                                <strong>Turnover </strong> by Provider
+                                <small>{{tex}}</small>
+                            </h2>
+                        </div>
+                        <table class="table table-borderless">
+                            <tr>
+                                <td>
+                                    <h5>
+                                        <strong>Tag</strong>
+                                    </h5>
+                                </td>
+                                <td>
+                                    <h5>
+                                        <strong>Country/Operator</strong>
+                                    </h5>
+                                </td>
+
+                                <td>
+                                    <h5>
+                                        <strong>Amount/Currency</strong>
+                                    </h5>
+                                </td>
+                                <td>
+                                    <h5>
+                                        <strong>Count</strong>
+                                    </h5>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="val in tcpItems|orderBy:'count':true| limitTo: tcpCount ">
+                                <td>
+                                    {{val.tag}}
+                                </td>
+                                <td>
+                                    {{val.country}}-{{val.operator}}
+                                </td>
+                                <td>
+                                    {{val.amount|currency : '' : 2}} {{val.currency}}
+                                </td>
+                                <td>
+                                    {{val.count|number : fractionSize}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Countries by Top-up Amount   dragon added 2017_11_13 -->
+        <div class="col-sm-12 col-lg-6" ng-if="profile.access_level=='master'">
+            <div class="widget">
+                <div class="widget-advanced widget-advanced-alt">
+                    <div class="block full" style="height:350px" ng-style="{'overflow-y' : (topupCountry.length>6) ? 'scroll' : 'hidden'}">
+                        <div class="block-title">
+                            <h2>
+                                <strong>TOP </strong> Countries by Top-up Amount
+                                <small>{{tex}}</small>
+                            </h2>
+                        </div>
+                        <table class="table table-borderless">
+                            <tr>
+                                <td>
+                                    <h5>
+                                        <strong>Country</strong>
+                                    </h5>
+                                </td>
+                                <td>
+                                    <h5>
+                                        <strong>Amount/Currency</strong>
+                                    </h5>
+                                </td>
+                                <td>
+                                    <h5>
+                                        <strong>Count</strong>
+                                    </h5>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="val in topupCountry|orderBy:'suc_count':true">
+                                <td>
+                                    {{val.country}}
+                                </td>
+                                <td>
+                                    {{val.suc_amount|currency : '' : 2}} {{val.cur}}
+                                </td>
+                                <td>
+                                    {{val.suc_count|number : fractionSize}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!--Account balances-->
+        <div class="col-sm-12 col-lg-6" ng-if="profile.access_level=='master'">
+            <div class="widget">
+                <div class="widget-advanced widget-advanced-alt">
+                    <div class="block full" style="height:350px" ng-style="{'overflow-y' : (paidAccounts.length>6) ? 'scroll' : 'hidden'}">
+                        <div class="block-title">
+                            <h2>
+                                <strong>Account </strong> Balances
+                                <small>{{tex}}</small>
+                            </h2>
+                        </div>
+                        <table class="table table-borderless">
+                            <tr>
+                                <td>
+                                    <h5>
+                                        <strong>Account Name</strong>
+                                    </h5>
+                                </td>
+                                <td>
+                                    <h5>
+                                        <strong>Parent</strong>
+                                    </h5>
+                                </td>
+                                <td>
+                                    <h5>
+                                        <strong>Balance</strong>
+                                    </h5>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="val in paidAccounts|orderBy:'suc_count':true">
+                                <td>
+                                    {{val.account_name}}
+                                </td>
+                                <td>
+                                    {{val.parent}}
+                                </td>
+                                <td>
+                                    <span ng-repeat="bal in accountWallets[val._id]">
+                                        {{bal.balance|currency : '' : 2}} {{bal.currency}}
+                                        <br>
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--turnover-->
+        <div class="col-sm-12 col-lg-6" ng-if="profile.access_level=='master'">
+            <div class="widget">
+                <div class="widget-advanced widget-advanced-alt">
+                    <div class="block full" style="height:350px" ng-style="{'overflow-y' : (paidAccounts.length>6) ? 'scroll' : 'hidden'}">
+                        <div class="block-title">
+                            <h2>
+                                <strong>Turnover </strong> by Accounts
+                                <small>{{tex}}</small>
+                            </h2>
+                        </div>
+                        <table class="table table-borderless">
+                            <tr>
+                                <td>
+                                    <h5>
+                                        <strong>Account Name</strong>
+                                    </h5>
+                                </td>
+                                <td>
+                                    <h5>
+                                        <strong>Wallet Turnover</strong>
+                                    </h5>
+                                </td>
+
+                                <td>
+                                    <h5>
+                                        <strong>Count</strong>
+                                    </h5>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="val in paidAccounts|orderBy:'suc_count':true" ng-if="val.suc_count > 0">
+                                <td>
+                                    {{val.account_name}}
+                                </td>
+                                <td>
+                                    {{val.suc_amount|currency : '' : 2}} {{val.cur}}
+                                </td>
+                                <td>
+                                    {{val.suc_count|number : fractionSize}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Top Destinations by Top-up Amount   dragon added 2017_11_13 -->
+        <div class="col-sm-12 col-lg-6" ng-if="profile.access_level=='master'">
+            <div class="widget">
+                <div class="widget-advanced widget-advanced-alt">
+                    <div class="block full" style="height:350px" ng-style="{'overflow-y' : (topupDestination_by_Amount.length>6) ? 'scroll' : 'hidden'}">
+                        <div class="block-title">
+                            <h2>
+                                <strong>TOP </strong> Destinations by Top-up Amount
+                                <small>{{tex}}</small>
+                            </h2>
+                        </div>
+                        <table class="table table-borderless">
+                            <tr>
+                                <td>
+                                    <h5>
+                                        <strong>Country/Operator</strong>
+                                    </h5>
+                                </td>
+                                <td>
+                                    <h5>
+                                        <strong>Amount/Currency</strong>
+                                    </h5>
+                                </td>
+                                <td>
+                                    <h5>
+                                        <strong>Count</strong>
+                                    </h5>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="val in topupDestination_by_Amount|orderBy:'suc_count':true">
+                                <td>
+                                    {{val.destination}}
+                                </td>
+                                <td>
+                                    {{val.suc_amount|currency : '' : 2}} {{val.cur}}
+                                </td>
+                                <td>
+                                    {{val.suc_count|number : fractionSize}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Top Currency Turnover by Agents-->
+        <div class="col-sm-12 col-lg-6" ng-if="profile.access_level=='master'">
+            <div class="widget">
+                <div class="widget-advanced widget-advanced-alt">
+                    <div class="block full" style="height:350px" ng-style="{'overflow-y' : (curTurnoverList.length>6) ? 'scroll' : 'hidden'}">
+                        <div class="block-title">
+                            <h2>
+                                <strong>TOP </strong> Currency Turnover by Agents
+                                <small>{{tex}}</small>
+                            </h2>
+                        </div>
+                        <table class="table table-borderless">
+                            <tr>
+                                <td>
+                                    <h5>
+                                        <strong>Currency</strong>
+                                    </h5>
+                                </td>
+                                <td>
+                                    <h5>
+                                        <strong>Count</strong>
+                                    </h5>
+                                </td>
+                                <td>
+                                    <h5>
+                                        <strong>Currency Value</strong>
+                                    </h5>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="val in curTurnoverList|orderBy:'count':true">
+                                <td>
+                                    {{val.cur}}
+                                </td>
+                                <td>
+                                    {{val.count|number : fractionSize}}
+                                </td>
+                                <td>
+                                    {{val.amount|currency : '' : 2}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Amount of Money in the system-->
+        <div class="col-sm-12 col-lg-6" ng-if="profile.access_level=='master'">
+            <div class="widget">
+                <div class="widget-advanced widget-advanced-alt">
+                    <div class="block full" style="height:350px" ng-style="{'overflow-y' : topStr=='Top5' ? 'hidden' : 'scroll'}">
+                        <div class="block-title">
+                            <h2>
+                                <strong>Total </strong> Amount of money in the system
+                                <small>{{tex}}</small>
+                            </h2>
+                        </div>
+                        <table class="table table-borderless">
+                            <tr>
+                                <td>
+                                    <h5>
+                                        <strong>Currency</strong>
+                                    </h5>
+                                </td>
+                                <td>
+                                    <h5>
+                                        <strong>Number of Wallets</strong>
+                                    </h5>
+                                </td>
+                                <td>
+                                    <h5>
+                                        <strong>Count</strong>
+                                    </h5>
+                                </td>
+                                <td>
+                                    <h5>
+                                        <strong>Current Value</strong>
+                                    </h5>
+                                </td>
+                            </tr>
+                            <tr ng-if="topStr=='Top5'" ng-repeat="val in balance|orderBy:'amount':true| limitTo: 5">
+                                <td>
+                                    {{val.currency}}
+                                </td>
+                                <td>
+                                    {{val.count|number : fractionSize}}
+                                </td>
+                                <td>
+                                    {{TransCountByCur[val.currency]|number : fractionSize}}
+                                </td>
+                                <td>
+                                    {{val.amount|currency : '' : 2}}
+                                </td>
+                            </tr>
+                            <tr ng-if="topStr=='Top10'" ng-repeat="val in balance|orderBy:'amount':true| limitTo: 10">
+                                <td>
+                                    {{val.currency}}
+                                </td>
+                                <td>
+                                    {{val.count|number : fractionSize}}
+                                </td>
+                                <td>
+                                    {{TransCountByCur[val.currency]|number : fractionSize}}
+                                </td>
+                                <td>
+                                    {{val.amount|currency : '' : 2}}
+                                </td>
+                            </tr>
+                            <tr ng-if="topStr=='All'" ng-repeat="val in balance|orderBy:'amount':true| limitTo: balance.length">
+                                <td>
+                                    {{val.currency}}
+                                </td>
+                                <td>
+                                    {{val.count|number : fractionSize}}
+                                </td>
+                                <td>
+                                    {{TransCountByCur[val.currency]|number : fractionSize}}
+                                </td>
+                                <td>
+                                    {{val.amount|currency : '' : 2}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Topup count by Provider -->
+        <div class="col-sm-12 col-lg-6" ng-if="profile.access_level=='master'">
+            <div class="widget">
+                <div class="widget-advanced widget-advanced-alt">
+                    <!-- Widget Header -->
+                    <div class="block full">
+                        <div class="block-title">
+                            <h2>
+                                <strong>Topup</strong> Count by Provider</h2>
+                            <h2>
+                                <small> ({{tex}})</small>
+                            </h2>
+                        </div>
+                        <canvas id="pie_top10_aa" class="chart chart-line" chart-data="tcpg.data" chart-labels="tcpg.labels" chart-options="tcpg.options"
+                            chart-series="tcpg.series"></canvas>
+                    </div>
+                    <!-- END Widget Header -->
+                    <!-- Widget Main -->
+
+                </div>
+            </div>
+        </div>
+
+        <!--TOP Accounts by Top-up Count dragon added 2017_11_13 -->
+        <div class="col-sm-12 col-lg-6" ng-if="profile.access_level=='master'">
+            <div class="widget">
+                <div class="widget-advanced widget-advanced-alt">
+                    <!-- Widget Header -->
+                    <div class="block full">
+                        <div class="block-title">
+                            <h2>
+                                <strong>TOP</strong> Accounts by Top-up Count</h2>
+                            <h2>
+                                <small> ({{tex}})</small>
+                            </h2>
+                        </div>
+                        <canvas id="pie_top10_aa" class="chart chart-line" chart-data="atc.data" chart-labels="atc.labels" chart-options="atc.options"
+                            chart-series="atc.series"></canvas>
+                    </div>
+                    <!-- END Widget Header -->
+                    <!-- Widget Main -->
+
+                </div>
+            </div>
+        </div>
+
+        <!--TOP  Countries by Top-up Count dragon added 2017_11_13-->
+        <div class="col-sm-12 col-lg-6" ng-if="profile.access_level=='master'">
+            <div class="widget">
+                <div class="widget-advanced widget-advanced-alt">
+                    <!-- Widget Header -->
+                    <div class="block full">
+                        <div class="block-title">
+                            <h2>
+                                <strong>TOP</strong> Countries by Top-up Count</h2>
+                            <h2>
+                                <small> ({{tex}})</small>
+                            </h2>
+                        </div>
+                        <canvas id="pie_top10_countriesC" class="chart chart-line" chart-data="ctc.data" chart-labels="ctc.labels" chart-options="ctc.options"
+                            chart-series="ctc.series"></canvas>
+
+                    </div>
+                    <!-- END Widget Header -->
+                    <!-- Widget Main -->
+
+                </div>
+            </div>
+        </div>
+
+        <!--TOP  Destinations by Top-up Count dragon added 2017_11_13-->
+        <div class="col-sm-12 col-lg-6" ng-if="profile.access_level=='master'">
+            <div class="widget">
+                <div class="widget-advanced widget-advanced-alt">
+                    <!-- Widget Header -->
+                    <div class="block full">
+                        <div class="block-title">
+                            <h2>
+                                <strong>TOP</strong> Destinations by Top-up Count</h2>
+                            <h2>
+                                <small> ({{tex}})</small>
+                            </h2>
+                        </div>
+                        <canvas id="pie_top10_destinationC" class="chart chart-line" chart-data="dtc.data" chart-labels="dtc.labels" chart-options="dtc.options"
+                            chart-series="dtc.series"></canvas>
+
+                    </div>
+                    <!-- END Widget Header -->
+                    <!-- Widget Main -->
+
+                </div>
+            </div>
+        </div>
+
+        <!--TOP  Count by Currency-->
+        <div class="col-sm-12 col-lg-6" ng-if="profile.access_level=='master'">
+            <div class="widget">
+                <div class="widget-advanced widget-advanced-alt">
+                    <!-- Widget Header -->
+                    <div class="block full">
+                        <div class="block-title">
+                            <h2>
+                                <strong>Topup Count by Currency</strong>
+                                <small> ({{tex}})</small>
+                            </h2>
+                        </div>
+                        <canvas id="pie_top10_tccC" class="chart chart-line" chart-data="tcc.data" chart-labels="tcc.labels" chart-options="tcc.options"
+                            chart-series="tcc.series"></canvas>
+
+                    </div>
+                    <!-- END Widget Header -->
+                    <!-- Widget Main -->
+
+                </div>
+            </div>
+        </div>
+
+        <!--Topup count by Channel-->
+        <div class="col-sm-12 col-lg-6" ng-if="profile.access_level=='master'">
+            <div class="widget">
+                <div class="widget-advanced widget-advanced-alt">
+                    <!-- Widget Header -->
+                    <div class="block full">
+                        <div class="block-title">
+                            <h2>Topup Count by Channel
+                                <small>{{tex}}</small>
+                            </h2>
+                        </div>
+                        <canvas id="pie_top5_ch" class="chart chart-line" chart-data="ch.data" chart-labels="ch.labels" chart-series="ch.series"
+                            chart-options="ch.options"></canvas>
+
+                    </div>
+                    <!-- END Widget Header -->
+                    <!-- Widget Main -->
+
+                </div>
+            </div>
+        </div>
+
+        <!--Successful vs. Failed Topups (count)-->
+        <div class="col-sm-12 col-lg-6" ng-if="profile.access_level=='master'">
+            <div class="widget">
+                <div class="widget-advanced widget-advanced-alt">
+                    <!-- Widget Header -->
+                    <div class="block full">
+                        <div class="block-title">
+                            <h2>Successful vs. Failed Topups (count)
+                                <small>{{tex}}</small>
+                            </h2>
+                        </div>
+                        <canvas id="pie_top5_sf" class="chart chart-line" chart-data="sf.data" chart-labels="sf.labels" chart-series="sf.series"
+                            chart-options="sf.options"></canvas>
+
+                    </div>
+                    <!-- END Widget Header -->
+                    <!-- Widget Main -->
+
+                </div>
+            </div>
+        </div>
+        <!-- Products (count)-->
+        <div class="col-sm-12 col-lg-6" ng-if="profile.access_level=='master'">
+            <div class="widget">
+                <div class="widget-advanced widget-advanced-alt">
+                    <!-- Widget Header -->
+                    <div class="block full">
+                        <div class="block-title">
+                            <h2>Products Usage (count)
+                                <small>{{tex}}</small>
+                            </h2>
+                        </div>
+                        <canvas id="pie_top5_sf" class="chart chart-line" chart-data="ptcg.data" chart-labels="ptcg.labels" chart-series="ptcg.series"
+                            chart-options="ptcg.options"></canvas>
+
+                    </div>
+                    <!-- END Widget Header -->
+                    <!-- Widget Main -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="clearfix">
+    <div class="pull-left">
+        <span id="year-copy"></span> &copy;
+        <a href="http://www.primeairtime.com/" target="_blank">Prime Airtime Ltd</a>
+    </div>
+</footer>
+<!-- END Footer -->

@@ -1,0 +1,50 @@
+<div class="block" ng-if="!dontshowchild">
+    <div class="block-title">
+        <h2>{{"CHILDACCTS"|translate}}</h2>
+    </div>
+    <div class="table-responsive">
+        <table id="general-table" class="table table-striped table-vcenter">
+            <thead>
+                <tr>
+                    <td>{{"ACCOUNT_ID"|translate}}</td>
+                    <td>{{"ACCOUNT_NAME"|translate}}</td>
+                    <td>{{"type"|translate}}</td>
+                    <td>{{"legal_type"|translate}}</td>
+                    <td>{{"isactive"|translate}}</td>
+                    <td>{{"ACTIONS"|translate}}</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="a in accounts">
+                    <td><a ui-sref="accountView({id : a._id})">{{a.account_id}}</a></td>
+                    <td><a ui-sref="accountView({id : a._id})">{{a.account_name}}</a></td>
+                    <td>{{a.type | translate}}</td>
+                    <td>{{a.legal_type | translate}}</td>
+                    <td>{{a.active | translate}}</td>
+                    <td>
+                        <div class="btn-group btn-group-xs">
+                            <a ng-click="editAccount(a._id)" class="btn btn-default" data-original-title="Edit">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                            <a ng-click="deletAccount(a._id)" class="btn btn-danger" data-original-title="Delete">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>
+                        <button class="btn btn-primary btn-sm">{{"newchildacct"|translate}}</button>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

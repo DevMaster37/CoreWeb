@@ -1,0 +1,44 @@
+
+                    <!-- Modal Header -->
+                    <div class="modal-header text-center">
+                        <h2 class="modal-title"><i class="fa fa-pencil"></i> New Cache Entry</h2>
+                    </div>
+                    <!-- END Modal Header -->
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <form  class="form-horizontal form-bordered" onsubmit="return false;">
+                            <fieldset>
+                                <legend>Mapping</legend>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">MSISDN</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.msisdn" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">ISO</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.iso" class="form-control">
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="col-md-4 control-label">Operator ID</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.acloperId" class="form-control">
+                                    </div>
+                                </div>
+                                
+                              
+                                
+                            </fieldset>
+                            
+                            <div class="form-group form-actions">
+                                <div class="col-xs-12 text-right">
+                                    <button ng-click="newUserCancel();" type="button" class="btn btn-sm btn-default" data-dismiss="modal">{{"cancel"|translate}}</button>
+                                    <button type="button" ng-click="createLinkOK();" class="btn btn-sm btn-primary">{{"savechanges"|translate}}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END Modal Body -->

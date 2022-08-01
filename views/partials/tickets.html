@@ -1,0 +1,162 @@
+  <div id="page-content" style="min-height:1036px">
+                    <!-- Inbox Header -->
+                    <div class="content-header">
+                        <div class="header-section">
+                            <h1><i class="gi gi-envelope"></i> Tickets<br><small>Your Support Center</small></h1>
+                        </div>
+                    </div>
+                    <ul class="breadcrumb breadcrumb-top">
+                        <li>Support</li>
+                        <li>Support Center</li>
+                        <li><a href="">Tickets</a></li>
+                    </ul>
+                    <!-- END Inbox Header -->
+
+                    <!-- Inbox Content -->
+                    <div class="row">
+                        <!-- Inbox Menu -->
+                        <div class="col-sm-3 col-lg-2">
+                            <!-- Menu Block -->
+                            <div class="block full">
+                                <!-- Menu Title -->
+                                <div class="block-title clearfix">
+                                    <div class="block-options pull-right">
+                                        <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Refresh"><i class="fa fa-refresh"></i></a>
+                                    </div>
+                                    <div class="block-options pull-left">
+                                       
+                                    </div>
+                                </div>
+                                <!-- END Menu Title -->
+
+                                <!-- Menu Content -->
+                                <ul class="nav nav-pills nav-stacked">
+                                    <li id="topen">
+                                        <a href="javascript:void(0)" ng-click="changeType('open')">
+                                            <span class="badge pull-right">{{tstats.open}}</span>
+                                            <i class="fa fa-angle-right fa-fw"></i> <strong>Open Tickets</strong>
+                                        </a>
+                                    </li>
+                                    <li id="tclosed">
+                                        <a href="javascript:void(0)" ng-click="changeType('closed')">
+                                            <span class="badge pull-right">{{tstats.closed}}</span>
+                                            <i class="fa fa-angle-right fa-fw"></i> <strong>Closed Tickets</strong>
+                                        </a>
+                                    </li>
+                                    <li id="tall">
+                                        <a href="javascript:void(0)" ng-click="changeType('all')">
+                                            <span class="badge pull-right">{{tstats.closed + tstats.open}}</span>
+                                            <i class="fa fa-angle-right fa-fw"></i> <strong>All Tickets</strong>
+                                        </a>
+                                    </li>
+                                   
+                                </ul>
+                                <!-- END Menu Content -->
+                            </div>
+                            <!-- END Menu Block -->
+
+                           
+
+                           
+
+                         
+                        </div>
+                        <!-- END Inbox Menu -->
+
+                        <!-- Messages List -->
+                        <div class="col-sm-9 col-lg-10" ng-if="mode == 'list'">
+                            <!-- Messages List Block -->
+                            <div class="block">
+                                <!-- Messages List Title -->
+                                <div class="block-title">
+                                    <div class="block-options pull-right">
+                                    </div>
+                                    <h2 ng-if="tType == 'open'">Open Tickets <strong>({{tstats.open}})</strong></h2>
+                                    <h2 ng-if="tType == 'closed'">Closed Tickets <strong>({{tstats.closed}})</strong></h2>
+                                    <h2 ng-if="tType == 'all'">All Tickets <strong>({{tstats.open + tstats.closed}})</strong></h2>
+                                </div>
+                                <!-- END Messages List Title -->
+
+                                <!-- Messages List Content -->
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-vcenter">
+                                        <thead>
+                                            <tr>
+                                                <td class="text-center">
+                                                </td>
+                                                <td colspan="3">
+                                                   
+                                                </td>
+                                                <td class="text-right" colspan="3">
+                                                    <strong>1-{{data.length}}</strong> from <strong>{{count}}</strong>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <a href="javascript:void(0)" class="btn btn-sm btn-default"><i class="fa fa-angle-left"></i></a>
+                                                        <a href="javascript:void(0)" class="btn btn-sm btn-default"><i class="fa fa-angle-right"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                             <tr >
+                                                <td class="text-center" style="width: 30px;">Ticket ID
+                                                </td>
+                                                <td class="text-center" style="width: 30px;">
+                                                    Status
+                                                </td>
+                                                <td class="text-center" style="width: 30px;">
+                                                   
+                                                </td>
+                                                <td style="width: 20%;">Author</td>
+                                                <td>
+                                                   
+                                                    <span class="text-muted">Subject</span>
+                                                </td>
+                                                <td class="text-center" style="width: 30px;">
+                                                    Message Count
+                                                </td>
+                                                <td class="text-right" style="width: 130px;"><em>Created On</em></td>
+                                            </tr>
+                                            <!-- Use the first row as a prototype for your column widths -->
+                                            <tr ng-repeat="t in data" ng-dblclick="openTicket(t._id)">
+                                                <td class="text-center"><a ui-sref="ticketView({id : t._id})">{{t.ticket_id}}</a>
+                                                </td>
+                                                <td class="text-center" >
+                                                    {{t.status |translate}}
+                                                </td>
+                                                <td class="text-center">
+                                                    <a ng-if="t.status == 'new'" href="javascript:void(0)" class="text-success msg-read-btn"><i class="fa fa-circle"></i></a>
+                                                </td>
+                                                <td style="width: 20%;">{{user_names[t.author]}}</td>
+                                                <td>
+                                                   
+                                                    <span class="text-muted"><a ui-sref="ticketView({id : t._id})">{{t.subject}}</a></span>
+                                                </td>
+                                                <td class="text-center" >
+                                                    {{t.msgcount}}
+                                                </td>
+                                                <td class="text-right"><em>{{t.time | date : 'MMM d, y HH:mm:ss' }}</em></td>
+                                            </tr>
+                                          
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- END Messages List Content -->
+                            </div>
+                            <!-- END Messages List Block -->
+                        </div>
+                        <!-- END Messages List -->
+                        <!-- Viewer goes here -->
+                
+                        <!-- Viewer goes here -->
+                    </div>
+                    <!-- END Inbox Content -->
+                </div>
+                <!-- END Page Content -->
+
+
+                <!-- END Page Content -->
+                      <footer class="clearfix">
+                    <div class="pull-left">
+                        <span id="year-copy"></span> &copy; <a href="http://www.primeairtime.com/" target="_blank">Prime Airtime Ltd</a>
+                    </div>
+                </footer>

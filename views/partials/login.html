@@ -1,0 +1,55 @@
+<div id="login-background">
+            <!-- For best results use an image with a resolution of 2560x400 pixels (prefer a blurred image for smaller file size) -->
+            <!--<img src="images/placeholders/headers/login_header.jpg" alt="Login Background" class="animation-pulseSlow">-->
+        </div>
+
+          <!-- Login Container -->
+        <div id="login-container" class="animation-fadeIn">
+            <!-- Login Title -->
+            <div class="login-title text-center">
+                <h1><p class="text-center"><img src="images/pax_logo.png" height="300px" class="text-center"></p><br><small>Please <strong>Login</strong></small></h1>
+            </div>
+            <!-- END Login Title -->
+
+            <!-- Login Block -->
+            <div class="block remove-margin">
+                <!-- Login Form -->
+                <form id="form-login" class="form-horizontal form-bordered form-control-borderless">
+                        <div class="form-group">
+                            <div ng-if="err" class="alert alert-danger">Error: You have entered incorrect login details, please try again!</div>
+                        </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="gi gi-envelope"></i></span>
+                                <input type="text" id="login-email" name="login-email" ng-model="user.username" class="form-control input-lg" placeholder="Email">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
+                                <input type="password" id="login-password" name="login-password" ng-model="user.password" class="form-control input-lg" placeholder="Password">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-actions">
+                        
+                        <div class="col-xs-8 text-right">
+                            <button type="button" ng-click="this.authenticate();" class="btn btn-sm btn-primary" ng-keypress="($event.charCode==13)?this.authenticate():return"><i class="fa fa-angle-right"></i> Login to Dashboard</button>
+                        </div>
+                    </div>
+                    
+                </form>
+                <!-- END Login Form -->
+
+               
+            </div>
+            <!-- END Login Block -->
+        </div>
+        <!-- END Login Container -->
+
+            <!-- Modal Terms -->
+      
+        <!-- END Modal Terms -->

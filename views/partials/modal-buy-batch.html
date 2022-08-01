@@ -1,0 +1,106 @@
+
+                    <!-- Modal Header -->
+                    <div class="modal-header text-center">
+                        <h2 class="modal-title"><i class="fa fa-pencil"></i> Buy Batch</h2>
+                    </div>
+                    <!-- END Modal Header -->
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <form  class="form-horizontal form-bordered" onsubmit="return false;">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Batch Name</label>
+                                    <div class="col-md-8">
+                                       <input type="text" ng-model="batch.name" class="form-control" placeholder="Batch Name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Batch Type</label>
+                                    <div class="col-md-8">
+                                       <select ng-model="batch.type" class="form-control">
+                                                <option value="flexi" selected>Flexi PIN &trade;</option>
+                                                <option value="fixed">Fixed</option>
+                                            </select>
+					<span class="help-block" ng-if="batch.type=='flexi'">Flexi PIN - allows user to redeem the PIN value in any destination currency.</span>
+					<span class="help-block" ng-if="batch.type=='fixed'">Fixed PIN - allows user to redeem the PIN value only in selected currency.</span>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-if="profile.account_type !== 'agent'">
+                                    <label class="col-md-4 control-label">Allocated To</label>
+                                    <div class="col-md-8">
+                                        <select ng-model="batch.allocated_to" class="form-control">
+                                            <option ng-repeat="o in accounts.accounts" value="{{o._id}}">{{o.account_name}}  / {{o.numeric_id}}</option>
+                                            </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">PIN Count</label>
+                                    <div class="col-md-8">
+                                       <input type="text" ng-model="batch.count" class="form-control" placeholder="PIN Count">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Denomination</label>
+                                    <div class="col-md-8">
+                                       <input type="text" ng-model="batch.value" class="form-control" placeholder="Denomination">
+                                    </div>
+                                </div>
+                            <div class="form-group">
+                                    <label class="col-md-4 control-label">Currency</label>
+                                    <div class="col-md-8">
+                                       <select ng-model="batch.currency" class="form-control" ng-change="updateCurrencies()">
+                                                <option ng-repeat="c in availcur" value="{{c}}">{{c}} ( {{currencies[c]}} ) </option>
+                                            </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Valid From</label>
+                                    <div class="col-md-8">
+                                       <p class="input-group">
+          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="batch.valid_from" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Valid To</label>
+                                    <div class="col-md-8">
+                                     <p class="input-group">
+          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="batch.valid_to" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="col-md-4 control-label">Description</label>
+                                    <div class="col-md-8">
+                                       <input type="text" ng-model="batch.description" class="form-control" placeholder="Description">
+                                    </div>
+                                </div>
+                            <div class="form-group" ng-if="raz">
+                                    <label class="col-md-4 control-label">Rate </label>
+                                    <div class="col-md-8">
+                                        <p class="form-control-static" ng-if="!raz.reverse">1 {{batch.currency}} == {{raz.myrate}} {{raz.currency}}</p>
+                                        <p class="form-control-static" ng-if="raz.reverse">1 {{batch.currency}} == {{(1 / raz.myrate).toFixed(3)}} {{raz.currency}}</p>
+                                    </div>
+                                </div>
+                                   <div class="form-group" ng-if="raz">
+                                    <label class="col-md-4 control-label">Amount in {{raz.currency}} </label>
+                                    <div class="col-md-8">
+                                        <p class="form-control-static" ng-if="!raz.reverse">{{batch.count * batch.value * raz.myrate| currency : '' : 2}} {{raz.currency}}</p>
+                                        <p class="form-control-static" ng-if="raz.reverse">{{ ( batch.count * batch.value)  / raz.myrate| currency : '' : 2}} {{raz.currency}}</p>
+                                    </div>
+                                </div>
+                            <div class="form-group form-actions">
+                                <div class="col-xs-12 text-right">
+                                    <button ng-click="cancel();" type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
+                                    <button type="button" ng-click="buyPinsOK();" class="btn btn-sm btn-primary">Buy</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END Modal Body -->

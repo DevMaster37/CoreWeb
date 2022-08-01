@@ -1,0 +1,7 @@
+.vscode
+.env
+*.tar
+*.gz
+*.zip
+*.rar
+node_modules

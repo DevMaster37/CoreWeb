@@ -1,0 +1,196 @@
+ <div id="page-content" style="min-height:1036px">
+                    <!-- Blank Header -->
+                    <div class="content-header">
+                        <div class="header-section">
+                            <h1>
+                                <i class="gi gi-brush"></i>{{"ACCOUNTS_TITLE" | translate}}<br><small>{{"ACCOUNTS_SUBTITLE" | translate}}</small>
+                            </h1>
+                        </div>
+                    </div>
+                    <ul class="breadcrumb breadcrumb-top">
+                        <li><a ui-sref="app">{{"HOME" | translate}}</a></li>
+                        <li><a ui-sref="accountList">{{"ACCOUNT_LIST" | translate}}</a></li>
+                        <li>{{"newaccount"|translate}}</li>
+                    </ul>
+                    <!-- END Blank Header -->
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <div class="block">
+                        <!-- Example Title -->
+                        <div class="block-title">
+                            <h2>{{"newaccount" | translate}}  </h2>
+                        </div>
+                        <!-- END Example Title -->
+                       <form action="page_forms_general.html" metdod="post" enctype="multipart/form-data" class="form-horizontal" onsubmit="return false;">
+                       <fieldset>
+                           <legend>{{"GENPROPS" |translate}}</legend></legend>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">{{"ACCOUNT_NAME" |translate}}</label>
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="account.account_name" class="form-control" placeholder="{{'ACCOUNT_NAME' | translate}}">
+                                            
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">{{"type" |translate}}</label>
+                                        <div class="col-md-9">
+                                            <select ng-model="account.type" class="form-control">
+						<option value="wholesaler">Wholesaler</option>
+                                            </select>
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">{{"legal_type" |translate}}</label>
+                                        <div class="col-md-9">
+                                            <select ng-model="account.legal_type" class="form-control">
+                                                <option value="company">{{"company" | translate }}</option>
+                                                <option value="individual">{{"individual" | translate}}</option>
+                                            </select>
+                                            <span class="help-block">Type of legal body (company or individual)</span>
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">{{"phone" |translate}}</label>
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="account.phone" class="form-control" placeholder="{{'phone' | translate}}">
+                                            <span class="help-block">Primary contact phone number</span>
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">{{"regid" |translate}}</label>
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="account.reg_id" class="form-control" placeholder="{{'regid' | translate}}">
+                                            <span class="help-block">Chamber of Commerce / Companies House registration number</span>
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">{{"taxid" |translate}}</label>
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="account.tax_id" class="form-control" placeholder="{{'taxid' | translate}}">
+                                            
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">Profit %</label>
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="account.profit_pct" class="form-control" placeholder="Profit % 0-100">
+                                            <span class="help-block">VAT / Tax / EIN Number</span>
+                                        </div>
+                           </div>
+                         
+                          <div class="form-group" ng-if="account.type == 'wholesaler'">
+                                    <label class="col-md-3 control-label">Permitted Api's : </label>
+                                    <div class="col-md-9">
+                                      <p class="form-control-static" ng-repeat="a in account.permitted_apis">{{a}} <small><a href="javascript:void(0)" ng-click="removePA(a)">x</a></small></p>
+                                      <p class="form-control-static"><a href="javascript:void(0);" ng-click="newPA();">Add</a></p>
+                                    </div>
+                                </div>
+			<div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">Currency</label>
+                                        <div class="col-md-9">
+                                             <select ng-model="account.currency" class="form-control">
+                                               <option ng-repeat="c in availcur" value="{{c}}">{{c}} {{currencies[c]}}</option>
+                                            </select>
+                                            <span class="help-block">Please select account's primary currency</span>
+                                        </div>
+                           </div>
+				<div class="form-group" ng-if="obj.type == 'agent'">
+                                        <label class="col-md-3 control-label">Test Mode ?</label>
+                                        <div class="col-md-9">
+                                            <div class="checkbox">
+                                                <label class="switch switch-primary">
+                                            <input type="checkbox" ng-model="account.test_mode" value="true">
+                                            <span></span>
+                                        </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                           <div class="form-group">
+                                        <label class="col-md-3 control-label">{{"isactive" | translate}}</label>
+                                        <div class="col-md-9">
+                                            <div class="checkbox">
+                                                <label class="switch switch-primary">
+                                            <input type="checkbox" ng-model="account.active" value="true" checked>
+                                            <span></span>
+                                        </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-if="profile.account_type !== 'agent'">
+                                        <label class="col-md-3 control-label">Can Edit his own ACL ?</label>
+                                        <div class="col-md-9">
+                                            <div class="checkbox">
+                                                <label class="switch switch-primary">
+                                            <input type="checkbox" ng-model="account.canEditOwnAcl" value="true" checked>
+                                            <span></span>
+                                        </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>{{"ADDRFLDST" | translate}}</legend>
+                                <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">{{"street1" |translate}}</label>
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="account.address.line1" class="form-control" placeholder="{{'street1' | translate}}">
+                                            
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">{{"street2" |translate}}</label>
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="account.address.line2" class="form-control" placeholder="{{'street2' | translate}}">
+                                            
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">{{"city" |translate}}</label>
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="account.address.city" class="form-control" placeholder="{{'city' | translate}}">
+                                            
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">{{"county" |translate}}</label>
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="account.address.county" class="form-control" placeholder="{{'county' | translate}}">
+                                            
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">{{"postcode" |translate}}</label>
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="account.address.postcode" class="form-control" placeholder="{{'postcode' | translate}}">
+                                            
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">{{"country" |translate}}</label>
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="account.address.country" class="form-control" placeholder="{{'country' | translate}}">
+                                            
+                                        </div>
+                           </div>
+                            </fieldset>
+                         
+                            <div class="form-group form-actions">
+                                        <div class="col-md-9 col-md-offset-3">
+                                            <button ng-click="newAccount();" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> {{"savechanges"|translate}}</button>
+                                            <button class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> {{"reset"|translate}}</button>
+                                        </div>
+                                    </div>
+                       </form>
+                        <!-- END Example Content -->
+                    </div>
+                        </div>
+                             
+                    </div>
+                    
+                </div>
+                <!-- END Page Content -->
+                      <footer class="clearfix">
+                    <div class="pull-left">
+                        <span id="year-copy"></span> &copy; <a href="http://www.primeairtime.com/" target="_blank">Prime Airtime Ltd</a>
+                    </div>
+                </footer>

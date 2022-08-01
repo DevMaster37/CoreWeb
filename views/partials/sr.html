@@ -1,0 +1,141 @@
+<div id="page-content" style="min-height:1036px">
+    <!-- Blank Header -->
+    <div class="content-header"  style="margin-left: 10px; margin-right: 10px;">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-brain"></i>Summary Reports<br><small>Daily overview of the systems</small>
+            </h1>
+        </div>
+
+        <div style="margin-left: 10px; margin-right: 10px;">
+
+<form class="was-validated" method="post">
+
+
+<div class="form-group">
+<select class="form-control ng-pristine ng-valid ng-empty ng-touched mb-1" ng-model="list" required>
+<option value="">Select Provider</option>
+<option value="1">Buy Power</option>
+<option value="2">Irecharge</option>
+<option value="3">Payu</option>
+<option value="4">Providus Bank</option>
+</select>
+
+
+<p class="input-group">
+<input type="text" class="form-control"  ng-click="open1()"  ng-model="date" readonly="readonly" placeholder="Select Date" uib-datepicker-popup="{{format}}"
+ng-model="filter.date_from" is-open="popup1.opened"
+datepicker-options="dateOptions" close-text="Close"
+alt-input-formats="altInputFormats" datetimepicker-neutral-timezone/>
+<span class="input-group-btn">
+<button type="button" class="btn btn-default" ng-click="open1()"><i
+class="glyphicon glyphicon-calendar"></i></button>
+</span>
+</p>
+
+</div>
+
+<div class="custom-file">
+<input type="file" class="form-control" id="validatedCustomFile"  ngf-select="SelectFile($file)" accept=".csv,.xls,.xlsx" required>
+<label class="custom-file-label" for="validatedCustomFile">Upload CSV File</label>
+</div>
+
+<button class="form-control btn btn-primary" type="submit" ng-click="Upload()">Submit form</button>
+</form>
+
+
+
+
+
+
+
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top"  style="margin-left: 10px; margin-right: 10px;">
+        <li>System</li>
+        <li>Summary Reports</li>
+    </ul>
+        <!-- Example Block -->
+<div class="block">
+<div class="block-title">
+<h2>Sales Reports</h2>
+</div>
+<div class="row" ng-if="viewSales">
+<div class="col-md-12 col-xs-12">
+<div class="table-options clearfix">
+
+
+
+
+
+
+
+
+    
+   
+    <fieldset>
+        <legend>Sales Report History</legend>
+        <div>Keys</div>
+        <div>
+            <span style="background-color: forestgreen; color: white; padding:0px 5px 0px 5px;">OK</span>
+            <span  style="background-color: brown; color: white; padding:0px 5px 0px 5px;">LOSS</span>
+            <span  style="background-color:black; color: white; padding:0px 5px 0px 5px;">overage</span></div>
+
+        <div class="table-responsive">
+            <table id="general-table" class="table table-striped table-vcenter">
+                <thead>
+                <tr>
+                    <td>Date</td>
+                    <td>BP</td>
+                    <td>IR</td>
+                    <td>PU</td>
+                    <td>FT</td>
+                    <td>BPCACHE</td>
+                    <td>PU undefined status</td>
+                    <td>Untagged Successful Electricity</td>
+                    <td>IR undefined Status</td>
+                    <td>Duplicate Electricity</td>
+                    <td>Push to watsapp</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="i in salelist">
+
+
+
+                    <td>{{i.date}}</td>
+                    <td><span style="color: black">{{i.bp.prime}}</span><br /><span style="{{displaybg(i.bp.prime,i.bp.vendor)}}">{{i.bp.vendor}}</span></td>
+                    <td><span style="color: black">{{i.ir.prime}}</span><br /><span style="{{displaybg(i.ir.prime,(i.ir.vendor -- i.ir_unttaged))}}">{{i.ir.vendor -- i.ir_unttaged }}</span></td>
+                    <td><span style="color: black">{{i.pu.prime}}</span><br /><span style="{{displaybg(i.pu.prime,i.pu.vendor)}}">{{i.pu.vendor}}</span></td>
+                    <td><span style="color: black">{{i.ft.prime}}</span><br /><span style="{{displaybg(i.ft.prime,i.ft.vendor)}}">{{i.ft.vendor}}</span></td>
+                    <td>{{i.bpcache}}</td>
+                    <td>{{i.pu_undefined}}</td>
+                    <td>{{i.ir_unttaged}}</td>
+                    <td>{{i.ir_undefined}}</td>
+                    <td>{{countjson(i.duplicate_electricity)}}</td>
+                    <td><button>PUSH</button></td>
+                </tr>
+
+                </tbody>
+
+            </table>
+        </div>
+    </fieldset>
+</div>
+
+</div>
+</div>
+
+
+</div>
+
+<footer class="clearfix">
+<div class="pull-left">
+<span id="year-copy"></span> &copy; <a href="http://www.primeairtime.com/" target="_blank">Prime Airtime Ltd</a>
+</div>
+</footer>
+
+<!-- END Example Block -->
+
+
+    

@@ -1,0 +1,47 @@
+
+                    <!-- Modal Header -->
+                    <div class="modal-header text-center">
+                        <h2 class="modal-title"><i class="fa fa-pencil"></i> New Fixed Profit Entry</h2>
+                    </div>
+                    <!-- END Modal Header -->
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <div  class="form-horizontal form-bordered">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Country</label>
+                                    <div class="col-md-8">
+                                        <select ng-init="orderByField='country'" ng-model="rec.country" class="form-control">
+                                            <option value="0">Select Country</option>
+                                            <option value="ALL">All Countries</option>
+                                            <option ng-repeat="c in AclCountries | orderBy:orderByField" value="{{c.iso}}">{{c.country}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                               <div class="form-group" ng-if="canSelectOper">
+                                    <label class="col-md-4 control-label">Operator</label>
+                                    <div class="col-md-8">
+                                        <select ng-model="rec.operator" class="form-control" >
+                                            <option value="0">Select Operator</option>
+                                            <option value="ALL">All Operators</option>
+                                           <option ng-repeat="c in AclOperators" value="{{c.operator_id}}">{{c.operator_name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="col-md-4 control-label">Profit ({{rec.currency}})</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" name="percent"  ng-model="rec.profit"></input>
+                                        <span class="help-block">Please enter amount</span>
+                                    </div>
+                                </div>
+                               
+                            <div class="form-group form-actions">
+                                <div class="col-xs-12 text-right">
+                                    <button ng-click="newUserCancel();" type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" ng-click="newFPentryOK();" class="btn btn-sm btn-primary">Save Changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END Modal Body -->

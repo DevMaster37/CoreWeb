@@ -1,0 +1,915 @@
+<div id="page-content" style="min-height:1036px">
+    <!-- Blank Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-brain"></i>Support Centre<br><small>Overview of system metrics</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>Support</li>
+        <li>Support Dashboard</li>
+    </ul>
+        <!-- Example Block -->
+<div class="block">
+<div class="block-title">
+<h2>Success Rates</h2>
+</div>
+<div class="row" >
+<div class="col-md-12 col-xs-12">
+<div class="table-options clearfix">
+
+    <fieldset>
+        <legend>Last Successful Transaction</legend>
+        <form class="form-horizontal">
+            <div class="col-md-6 col-xs-12">
+                
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Overall</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.ltx['all'] | date : 'MMM d, y HH:mm:ss' }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">MTN </label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.ltx['MTN'] | date : 'MMM d, y HH:mm:ss' }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtel</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.ltx['Airtel'] | date : 'MMM d, y HH:mm:ss' }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">9mobile</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.ltx['9mobile'] | date : 'MMM d, y HH:mm:ss' }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Globacom</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.ltx['Globacom'] | date : 'MMM d, y HH:mm:ss' }}</p>
+                    </div>
+                </div>
+               
+
+            </div>
+            
+            <div class="col-md-6 col-xs-12">
+               
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtime</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.ltx['topup'] | date : 'MMM d, y HH:mm:ss' }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">DATA</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.ltx['data'] | date : 'MMM d, y HH:mm:ss' }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">BillPay</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.ltx['billpay'] | date : 'MMM d, y HH:mm:ss' }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">FT</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.ltx['ft'] | date : 'MMM d, y HH:mm:ss' }}</p>
+                    </div>
+                </div>
+               
+            </div>
+        </form>
+    </fieldset>
+    <uib-tabset active="active">
+        <uib-tab index="0" heading="5 min">
+    <fieldset>
+        <legend>Success Rates (Last 5min)</legend>
+        <form class="form-horizontal">
+            <div class="col-md-6 col-xs-12">
+                
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Overall Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['5m']['all'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">MTN Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['5m']['MTN'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtel Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['5m']['Airtel'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">9mobile Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['5m']['9mobile'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Globacom Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['5m']['Globacom'] |number : 2}}%</p>
+                    </div>
+                </div>
+               
+
+            </div>
+            
+            <div class="col-md-6 col-xs-12">
+               
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtime Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['5m']['topup'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">DATA Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['5m']['data'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">BillPay Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['5m']['billpay'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">FT Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['5m']['ft'] |number : 2}}%</p>
+                    </div>
+                </div>
+               
+            </div>
+        </form>
+    </fieldset>
+    <fieldset>
+        <legend>Response Times (Last 5min)</legend>
+        <form class="form-horizontal">
+            <div class="col-md-6 col-xs-12">
+                
+                <div class="form-group">
+                    <label class="col-md-2 control-label">MTN Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['5m']['MTN']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtel Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['5m']['Airtel']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">9mobile Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['5m']['9mobile']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Globacom Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['5m']['Globacom']}}ms</p>
+                    </div>
+                </div>
+               
+
+            </div>
+            
+            <div class="col-md-6 col-xs-12">
+               
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtime Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['5m']['topup']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">DATA Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['5m']['data']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">BillPay Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['5m']['billpay']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">FT Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['5m']['ft']}}ms</p>
+                    </div>
+                </div>
+               
+            </div>
+        </form>
+    </fieldset>
+</uib-tab>
+<uib-tab index="1" heading="15 min">
+    <fieldset>
+        <legend>Success Rates (Last 15min)</legend>
+        <form class="form-horizontal">
+            <div class="col-md-6 col-xs-12">
+                
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Overall Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['15m']['all'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">MTN Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['15m']['MTN'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtel Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['15m']['Airtel'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">9mobile Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['15m']['9mobile'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Globacom Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['15m']['Globacom'] |number : 2}}%</p>
+                    </div>
+                </div>
+               
+
+            </div>
+            
+            <div class="col-md-6 col-xs-12">
+               
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtime Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['15m']['topup'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">DATA Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['15m']['data'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">BillPay Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['15m']['billpay'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">FT Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['15m']['ft'] |number : 2}}%</p>
+                    </div>
+                </div>
+               
+            </div>
+        </form>
+    </fieldset>
+    <fieldset>
+        <legend>Response Times (Last 15min)</legend>
+        <form class="form-horizontal">
+            <div class="col-md-6 col-xs-12">
+                
+                <div class="form-group">
+                    <label class="col-md-2 control-label">MTN Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['15m']['MTN']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtel Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['15m']['Airtel']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">9mobile Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['15m']['9mobile']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Globacom Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['15m']['Globacom']}}ms</p>
+                    </div>
+                </div>
+               
+
+            </div>
+            
+            <div class="col-md-6 col-xs-12">
+               
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtime Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['15m']['topup']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">DATA Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['15m']['data']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">BillPay Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['15m']['billpay']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">FT Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['15m']['ft']}}ms</p>
+                    </div>
+                </div>
+               
+            </div>
+        </form>
+    </fieldset>
+</uib-tab>
+<uib-tab index="2" heading="Last hour">
+    <fieldset>
+        <legend>Success Rates (Last Hour)</legend>
+        <form class="form-horizontal">
+            <div class="col-md-6 col-xs-12">
+                
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Overall Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['1h']['all'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">MTN Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['1h']['MTN'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtel Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['1h']['Airtel'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">9mobile Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['1h']['9mobile'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Globacom Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['1h']['Globacom'] |number : 2}}%</p>
+                    </div>
+                </div>
+               
+
+            </div>
+            
+            <div class="col-md-6 col-xs-12">
+               
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtime Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['1h']['topup'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">DATA Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['1h']['data'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">BillPay Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['1h']['billpay'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">FT Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['1h']['ft'] |number : 2}}%</p>
+                    </div>
+                </div>
+               
+            </div>
+        </form>
+    </fieldset>
+    <fieldset>
+        <legend>Response Times (Last Hour)</legend>
+        <form class="form-horizontal">
+            <div class="col-md-6 col-xs-12">
+                
+                <div class="form-group">
+                    <label class="col-md-2 control-label">MTN Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['1h']['MTN']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtel Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['1h']['Airtel']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">9mobile Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['1h']['9mobile']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Globacom Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['1h']['Globacom']}}ms</p>
+                    </div>
+                </div>
+               
+
+            </div>
+            
+            <div class="col-md-6 col-xs-12">
+               
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtime Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['1h']['topup']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">DATA Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['1h']['data']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">BillPay Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['1h']['billpay']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">FT Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['1h']['ft']}}ms</p>
+                    </div>
+                </div>
+               
+            </div>
+        </form>
+    </fieldset>
+</uib-tab>
+<uib-tab index="3" heading="Last 3 hours">
+    <fieldset>
+        <legend>Success Rates (Last 3h)</legend>
+        <form class="form-horizontal">
+            <div class="col-md-6 col-xs-12">
+                
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Overall Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['3h']['all'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">MTN Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['3h']['MTN'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtel Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['3h']['Airtel'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">9mobile Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['3h']['9mobile'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Globacom Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['3h']['Globacom'] |number : 2}}%</p>
+                    </div>
+                </div>
+               
+
+            </div>
+            
+            <div class="col-md-6 col-xs-12">
+               
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtime Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['3h']['topup'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">DATA Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['3h']['data'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">BillPay Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['3h']['billpay'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">FT Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['3h']['ft'] |number : 2}}%</p>
+                    </div>
+                </div>
+               
+            </div>
+        </form>
+    </fieldset>
+    <fieldset>
+        <legend>Response Times (Last 3 Hours)</legend>
+        <form class="form-horizontal">
+            <div class="col-md-6 col-xs-12">
+                
+                <div class="form-group">
+                    <label class="col-md-2 control-label">MTN Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['3h']['MTN']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtel Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['3h']['Airtel']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">9mobile Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['3h']['9mobile']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Globacom Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['3h']['Globacom']}}ms</p>
+                    </div>
+                </div>
+               
+
+            </div>
+            
+            <div class="col-md-6 col-xs-12">
+               
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtime Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['3h']['topup']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">DATA Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['3h']['data']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">BillPay Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['3h']['billpay']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">FT Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['3h']['ft']}}ms</p>
+                    </div>
+                </div>
+               
+            </div>
+        </form>
+    </fieldset>
+</uib-tab>
+<uib-tab index="4" heading="Last 12h">
+    <fieldset>
+        <legend>Success Rates (Last 12h)</legend>
+        <form class="form-horizontal">
+            <div class="col-md-6 col-xs-12">
+                
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Overall Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['12h']['all'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">MTN Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['12h']['MTN'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtel Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['12h']['Airtel'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">9mobile Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['12h']['9mobile'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Globacom Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['12h']['Globacom'] |number : 2}}%</p>
+                    </div>
+                </div>
+               
+
+            </div>
+            
+            <div class="col-md-6 col-xs-12">
+               
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtime Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['12h']['topup'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">DATA Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['12h']['data'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">BillPay Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['12h']['billpay'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">FT Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['12h']['ft'] |number : 2}}%</p>
+                    </div>
+                </div>
+               
+            </div>
+        </form>
+    </fieldset>
+    <fieldset>
+        <legend>Response Times (Last 12h)</legend>
+        <form class="form-horizontal">
+            <div class="col-md-6 col-xs-12">
+                
+                <div class="form-group">
+                    <label class="col-md-2 control-label">MTN Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['12h']['MTN']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtel Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['12h']['Airtel']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">9mobile Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['12h']['9mobile']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Globacom Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['12h']['Globacom']}}ms</p>
+                    </div>
+                </div>
+               
+
+            </div>
+            
+            <div class="col-md-6 col-xs-12">
+               
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtime Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['12h']['topup']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">DATA Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['12h']['data']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">BillPay Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['12h']['billpay']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">FT Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['12h']['ft']}}ms</p>
+                    </div>
+                </div>
+               
+            </div>
+        </form>
+    </fieldset>
+</uib-tab>
+<uib-tab index="5" heading="Last 24h">
+    <fieldset>
+        <legend>Success Rates (Last 24h)</legend>
+        <form class="form-horizontal">
+            <div class="col-md-6 col-xs-12">
+                
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Overall Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['24h']['all'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">MTN Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['24h']['MTN'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtel Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['24h']['Airtel'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">9mobile Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['24h']['9mobile'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Globacom Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['24h']['Globacom'] |number : 2}}%</p>
+                    </div>
+                </div>
+               
+
+            </div>
+            
+            <div class="col-md-6 col-xs-12">
+               
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtime Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['24h']['topup'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">DATA Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['24h']['data'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">BillPay Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['24h']['billpay'] |number : 2}}%</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">FT Success Rate</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.srate['24h']['ft'] |number : 2}}%</p>
+                    </div>
+                </div>
+               
+            </div>
+        </form>
+    </fieldset>
+    <fieldset>
+        <legend>Response Times (Last 24h)</legend>
+        <form class="form-horizontal">
+            <div class="col-md-6 col-xs-12">
+                
+                <div class="form-group">
+                    <label class="col-md-2 control-label">MTN Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['24h']['MTN']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtel Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['24h']['Airtel']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">9mobile Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['24h']['9mobile']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Globacom Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['24h']['Globacom']}}ms</p>
+                    </div>
+                </div>
+               
+
+            </div>
+            
+            <div class="col-md-6 col-xs-12">
+               
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Airtime Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['24h']['topup']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">DATA Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['24h']['data']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">BillPay Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['24h']['billpay']}}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">FT Response Time Avg.</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{stats.rtimes['24h']['ft']}}ms</p>
+                    </div>
+                </div>
+               
+            </div>
+        </form>
+    </fieldset>
+    </uib-tab>
+    </uib-tabset>
+</div>
+
+</div>
+</div>
+
+
+</div>
+
+<footer class="clearfix">
+<div class="pull-left">
+<span id="year-copy"></span> &copy; <a href="http://www.primeairtime.com/" target="_blank">Prime Airtime Ltd</a>
+</div>
+</footer>
+
+<!-- END Example Block -->
+
+
+    

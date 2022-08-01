@@ -1,0 +1,61 @@
+<div id="page-content" style="min-height:1036px">
+    <!-- Blank Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="gi gi-transfer"></i>Providers<br>
+                <small>Here you can check your API providers</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li><a ui-sref="accountView({id : profile.main_account})">My Account</a></li>
+        <li>Providers</li>
+    </ul>
+    <!-- END Blank Header -->
+
+    <!-- Example Block -->
+    <div class="block">
+        <div class="block-title">
+            <h2>Providers</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <div class="table-options clearfix">
+                    <br/>
+                </div>
+                <div class="table-responsive">
+                    <table id="general-table" class="table table-striped table-vcenter">
+                        <thead>
+                        <tr>
+                            <td>Provider Name</td>
+                            <td>Provider Code</td>
+                            <td>Active ?</td>
+                            <td>Balance</td>
+                            <td>Priority</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="r in providers">
+                            <td>{{r.provider_name}}</td>
+                            <td>{{r.provider_code}}</td>
+                            <td>{{r.active}}</td>
+                            <td>{{r.balance | currency : '' : 2}} {{r.currency}}</td>
+                            <td>{{r.priority}}</td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- END Example Block -->
+</div>
+<!-- END Page Content -->
+<footer class="clearfix">
+    <div class="pull-left">
+        <span id="year-copy"></span> &copy; <a href="http://www.primeairtime.com/" target="_blank">Prime Airtime Ltd</a>
+    </div>
+</footer>

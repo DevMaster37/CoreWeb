@@ -1,0 +1,78 @@
+
+                    <!-- Modal Header -->
+                    <div class="modal-header text-center">
+                        <h2 class="modal-title"><i class="fa fa-pencil"></i> Review Withdrawal</h2>
+                    </div>
+                    <!-- END Modal Header -->
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <form  class="form-horizontal form-bordered" onsubmit="return false;">
+                            <div class="form-group">
+                                    <label class="col-md-4 control-label">Requested by</label>
+                                    <div class="col-md-8">
+                                        <p class="form-control-static">{{account_names[rec.account]}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Requested on</label>
+                                    <div class="col-md-8">
+                                        <p class="form-control-static">{{rec.time | date : 'MMM d, y HH:mm:ss' }}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Amount</label>
+                                    <div class="col-md-8">
+                                        <p class="form-control-static">{{rec.amount}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Currency</label>
+                                    <div class="col-md-8">
+                                        <p class="form-control-static">{{rec.currency}}</p>
+                                    </div>
+                                </div>
+                                  <div class="form-group">
+                                    <label class="col-md-4 control-label">Description</label>
+                                    <div class="col-md-8">
+                                        <p class="form-control-static">{{rec.description}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Your decision</label>
+                                    <div class="col-md-8">
+                                        <select ng-model="rec.decision" class="form-control">
+                                            <option value="accept">Accept</option>
+                                            <option value="decline">Decline</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                 <div class="form-group" ng-if="rec.decision == 'accept'">
+                                    <label class="col-md-4 control-label" >Change State to</label>
+                                    <div class="col-md-8">
+                                        <select class="form-control" ng-model="rec.newstate">
+                                            <option value="processing">Processing</option>
+                                            <option value="satisfied">Satisfied (no further edits allowed)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                                                 <div class="form-group">
+                                    <label class="col-md-4 control-label">Internal Note</label>
+                                    <div class="col-md-8">
+                                        <textarea ng-model="rec.note" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                
+                                
+                                
+                            
+                            
+                            <div class="form-group form-actions">
+                                <div class="col-xs-12 text-right">
+                                    <button ng-click="cancel();" type="button" class="btn btn-sm btn-default" data-dismiss="modal">{{"cancel"|translate}}</button>
+                                    <button type="button" ng-click="weditOK();" class="btn btn-sm btn-primary">{{"savechanges"|translate}}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END Modal Body -->

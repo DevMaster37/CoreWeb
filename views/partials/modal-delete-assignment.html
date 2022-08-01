@@ -1,0 +1,24 @@
+
+                    <!-- Modal Header -->
+                    <div class="modal-header text-center">
+                        <h2 class="modal-title"><i class="fa fa-times"></i> {{"deleteassignment" | translate}}</h2>
+                    </div>
+                    <!-- END Modal Header -->
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <form  class="form-horizontal form-bordered" onsubmit="return false;">
+                            <fieldset>
+                                 <h4 class="col-md-10 col-md-offset-1 form-control-static">{{"deleteassignmentmsg" | translate}} ?</h4>
+                                 
+                            </fieldset>
+                           
+                            <div class="form-group form-actions">
+                                <div class="col-xs-12 text-right">
+                                    <button ng-click="newUserCancel();" type="button" class="btn btn-sm btn-default" data-dismiss="modal">{{"false"|translate}}</button>
+                                    <button type="button" ng-click="deleteAssignmentOK();"  class="btn btn-sm btn-danger">{{"true"|translate}}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END Modal Body -->

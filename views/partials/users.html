@@ -1,0 +1,77 @@
+<div id="page-content" style="min-height:1036px">
+    <!-- Blank Header -->
+
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-users"></i>Users<br>
+                <small>Her you can manage platform's users</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>Accounts</li>
+        <li>User List</li>
+    </ul>
+    <!-- END Blank Header -->
+
+    <!-- Example Block -->
+    <div class="block">
+        <!-- Example Title -->
+        <div class="block-title">
+            <h2>User List</h2>
+        </div>
+        <!-- END Example Title -->
+        <div class="table-options clearfix">
+            <input class="form-control" ng-model="namefilter" type="text" placeholder="{{'FILTER' |translate}}">
+            <br/>
+        </div>
+        <!-- Example Content -->
+        <div class="table-responsive">
+            <table id="general-table" class="table table-striped table-vcenter">
+                <thead>
+
+                <tr>
+                    <td>Account</td>
+                    <td>{{"USERNAME"|translate}}</td>
+                    <td>{{"FIRSTNAME"|translate}}</td>
+                    <td>{{"LASTNAME"|translate}}</td>
+                    <!--  <td>{{"ACCESS"|translate}}</td> -->
+                    <td>{{"isactive"|translate}}</td>
+                    <td>POS Lockdown</td>
+                    <td>{{"ACTIONS"|translate}}</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="u in users |filter : namefilter | filter : typefilter : true | filter: searchKeyword">
+                    <td>{{account_names[u.main_account]}}</td>
+                    <td>{{u.username}}</td>
+                    <td>{{u.first_name}}</td>
+                    <td>{{u.last_name}}</td>
+                    <!-- <td>{{u.access | translate}}</td> -->
+                    <td>{{u.active | translate}}</td>
+                    <td>{{u.limited_pos | translate}}</td>
+                    <td>
+                        <div class="btn-group btn-group-xs">
+                            <a ng-click="editUser(u.main_account, u._id)" class="btn btn-default"
+                               data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                            <a ng-click="deleteUser(u.main_account, u._id)" class="btn btn-danger"
+                               data-original-title="Delete"><i class="fa fa-times"></i></a>
+                        </div>
+                    </td>
+                </tr>
+
+                </tbody>
+
+            </table>
+        </div>
+        <!-- END Example Content -->
+    </div>
+    <!-- END Example Block -->
+</div>
+<!-- END Page Content -->
+<footer class="clearfix">
+    <div class="pull-left">
+        <span id="year-copy"></span> &copy; <a href="http://www.primeairtime.com/" target="_blank">Prime Airtime Ltd</a>
+    </div>
+</footer>

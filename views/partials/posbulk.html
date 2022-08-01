@@ -1,0 +1,164 @@
+ <div id="page-content" style="min-height:1036px">
+                    <!-- Blank Header -->
+                    <div class="content-header">
+                        <div class="header-section">
+                            <h1>
+                                <i class="gi gi-barcode"></i>POS Terminal<br><small>Issue Top-up</small>
+                            </h1>
+                        </div>
+                    </div>
+                    <ul class="breadcrumb breadcrumb-top">
+                        <li>Home</li>
+                        <li>POS</li>
+                    </ul>
+                    <!-- END Blank Header -->
+
+                    <!-- Example Block -->
+             
+
+                    <div class="block">
+                        <!-- Example Title -->
+                        <div class="block-title">
+                            <h2>Airtime Recharge Wizard (BULK)</h2>
+                            
+                        </div>
+                        <!-- END Example Title -->
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 col-xs-12">
+                                
+                                <form name="posForm" class="form-horizontal">
+                                    
+                                    <div class="form-group" ng-if="err">
+                            <div class="alert alert-danger">Error: {{emsg}}</div>
+                        </div>
+                                    <fieldset ng-if="step == 1">
+                                        
+                                   <legend>Step 1 : Input Phone Number <span class=" pull-right"><a href="javascript:void(0)" ng-click="resetProduct();">Start Over</a></span></legend>
+                                   <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">Phone Numbers, one per line</label>
+                                        <div class="col-md-9">
+                                            <textarea class="form-control" ng-model="m.msarr" style="width: 100%; height:200px;"></textarea>
+                                            
+                                        </div>
+                           </div>
+                           <br/>
+                              <div class="form-group form-actions">
+                                        <div class="col-md-9 col-md-offset-3">
+                                            <button ng-click="getProducts();" ng-disabled="posForm.$invalid" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Continue</button>
+                                        </div>
+                                    </div>
+                               </fieldset>
+                               <fieldset ng-if="step == 2">
+                                   <legend>Step 2 : Review Information and Select Denomination for Each number <span class=" pull-right"><a href="javascript:void(0)" ng-click="resetProduct();">Start Over</a></span></legend>
+                                      
+                           <!-- 
+                               <div class="form-group">
+                                        <label class="col-md-3 control-label">Inline Radios</label>
+                                        <div class="col-md-9">
+                                            <label class="radio-inline" for="example-inline-radio1">
+                                                <input type="radio" id="example-inline-radio1" name="example-inline-radios" value="option1"> One
+                                            </label>
+                                            <label class="radio-inline" for="example-inline-radio2">
+                                                <input type="radio" id="example-inline-radio2" name="example-inline-radios" value="option2"> Two
+                                            </label>
+                                            <label class="radio-inline" for="example-inline-radio3">
+                                                <input type="radio" id="example-inline-radio3" name="example-inline-radios" value="option3"> Three
+                                            </label>
+                                        </div>
+                                    </div>
+                                    -->
+                          <div class="row" ng-repeat="obj in response">
+                                <div class="block">
+                                    <div class="block-title">
+                                        <h2>MSISDN : {{obj.opts.msisdn}} / Country : {{obj.opts.country}} / Operator : {{obj.opts.operator}}</h2>
+                                    </div>
+                                    <div class="form-group" ng-if="obj.products.length > 2">
+                                        <label class="col-md-3 control-label">Fixed Denominations</label>
+                                        <div class="col-xs-9">
+                                    <div ng-repeat="z in obj.products">
+                                        <div ng-if="!z.openRange">
+                                        <label class="radio-inline" for="example-inline-radio1">
+                                                <input type="radio" id="example-inline-radio1" name="fixed_products" ng-model="obj.fixed_product" value="{{z.product_id}}"> {{z.denomination}} {{z.topup_currency}} (price {{z.price}} {{z.currency}})
+                                        </label>
+                                                </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                        
+                                        <div ng-repeat="p in obj.products" ng-init="pi = $index">
+                                            <div class="col-md-12" ng-if="p.openRange">
+                                                <hr/>
+                                        <legend>Dynamic Range <span class=" pull-right"><a href="javascript:void(0)" ng-click="resetProduct();">Start Over</a></span></legend>
+                                         <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">Min</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">{{p.openRangeMin}} {{p.topup_currency}}</p>
+                                            
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">Max</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">{{p.openRangeMax}} {{p.topup_currency}}</p>
+                                            
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">Exchange Rate</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">{{p.rate}} {{p.topup_currency}} = 1.00 {{p.currency}}</p>
+                                            
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">Top-up amount</label>
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="obj.denomination" pattern="[0-9]+" class="form-control" placeholder="100 {{p.topup_currency}}">
+                                            <div style="display:none;" ng-model="obj.product_id" ng-value="p.product_id" value="{{p.product_id}}">{{obj.product_id = p.product_id}}</div>
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">You will pay</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static" ng-model="obj.price">{{obj.denomination / p.rate | currency : '' : 2}} {{p.currency}}</p>
+                                            
+                                        </div>
+                           </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+                                </div>
+                          </div>
+                          
+                          <div class="row">
+                              <div class="form-group form-actions">
+                                        <div class="col-md-9 col-md-offset-3">
+                                            <button  ng-click="startProcessing()"  class="btn btn-xlarge btn-success"><i class="fa fa-angle-right"></i> Start Processing</button>
+                                        </div>
+                                    </div>
+                          </div>
+                               </fieldset>  
+                                   
+                                  
+                                
+                                </form>
+
+                               
+                            </div>
+                        </div>
+                        
+                        <!-- END Example Content -->
+                    </div>
+                    <!-- END Example Block -->
+                </div>
+                <!-- END Page Content -->
+                      <footer class="clearfix">
+
+                    </div>
+                    <div class="pull-left">
+                        <span id="year-copy"></span> &copy; <a href="http://www.primeairtime.com/" target="_blank">Prime Airtime Ltd</a>
+                    </div>
+                </footer>

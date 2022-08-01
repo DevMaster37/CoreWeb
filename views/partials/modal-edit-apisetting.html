@@ -1,0 +1,56 @@
+
+                    <!-- Modal Header -->
+                    <div class="modal-header text-center">
+                        <h2 class="modal-title"><i class="fa fa-pencil"></i> Edit ApiSetting</h2>
+                    </div>
+                    <!-- END Modal Header -->
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <form  class="form-horizontal form-bordered" onsubmit="return false;">
+                            <fieldset>
+                                <legend>Mapping</legend>
+                                 <div class="form-group">
+                                    <label class="col-md-4 control-label">API Code</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.apicode" class="form-control" readonly>
+                                    </div>
+                                </div>
+			                    <div class="form-group">
+                                    <label class="col-md-4 control-label">Name</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.name" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="col-md-4 control-label">Category</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.category" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="col-md-4 control-label">Provider</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.provider" class="form-control">
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="col-md-4 control-label">Status</label>
+                                    <div class="col-md-8">
+                                        <label class="switch switch-primary">
+                                            <input type="checkbox" ng-model="rec.status">
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            
+                            <div class="form-group form-actions">
+                                <div class="col-xs-12 text-right">
+                                    <button ng-click="cancel();" type="button" class="btn btn-sm btn-default" data-dismiss="modal">{{"cancel"|translate}}</button>
+                                    <button type="button" ng-click="editApiSettingOK();" class="btn btn-sm btn-primary">{{"savechanges"|translate}}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END Modal Body -->

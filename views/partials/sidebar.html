@@ -1,0 +1,111 @@
+<!--<div id="sidebar" style="min-height:1230px">-->
+<div id="sidebar">        
+<!-- Wrapper for scrolling functionality -->
+<!--<div class="sidebar-scroll">-->
+    <!-- Sidebar Content -->
+    <div class="sidebar-content">
+        <!-- Brand -->
+        <a href="#/" class="sidebar-brand" style="height:64px;" class="text-center">
+            <p class="text-center"><img style="margin-left: -50px;" src="images/pax_text.png" height="60px" class="text-center"></p>
+        </a>
+        <!-- END Brand -->
+
+        <!-- User Info -->
+        <div class="sidebar-section sidebar-user clearfix">
+            <div class="sidebar-user-avatar">
+                    <img ng-src="{{avatarUrl}}" alt="avatar">
+            </div>
+            <div class="sidebar-user-name">{{profile.first_name}} {{profile.last_name}}</div>
+            <div class="sidebar-user-links">
+                <a ng-click="editProfile()" data-toggle="tooltip" data-placement="bottom" title="Profile"><i class="gi gi-user"></i></a>
+                <a ui-sref="logout" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="gi gi-exit"></i></a>
+            </div>
+        </div>
+        <!-- END User Info -->
+
+        <!-- Theme Colors -->
+        
+
+        <!-- Sidebar Navigation -->
+        <ul class="sidebar-nav">
+            <li>
+                <a id="home" href="javascript:void(0);" class="sidebar-nav-menu" ui-sref-active="open"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-home sidebar-nav-icon"></i>Home</a>
+                <ul>
+                    <li>
+                <a id="appdash" ng-if="(profile.access_level=='master') || (profile.access_level=='partner')" ui-sref="app" ui-sref-active="active"><i class="gi gi-pie_chart sidebar-nav-icon"></i>Dashboard</a>
+                        </li>
+                </ul>
+            </li>
+            <li>
+                <a id="account" ng-if="profile.access_level=='master'" href="javascript:void(0);" class="sidebar-nav-menu" ui-sref-active="open"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-server sidebar-nav-icon"></i>Accounts</a>
+                <ul>
+                    <li>
+                        <a id="myacc" ng-if="profile.access_level=='master'" ui-sref="accountView({id : profile.main_account})" ui-sref-active="active" ><i class="fa fa-user sidebar-nav-icon"></i>My Account</a>
+                    </li>
+                    <li>
+                        <a id="acclist" ng-if="profile.access_level=='master'" ui-sref="accountList" ui-sref-active="active"><i class="fa fa-users sidebar-nav-icon"></i></i>Account List</a>
+                    </li>
+                    <li>
+                        <a id="userlist" ng-if="profile.access_level=='master'" ui-sref="userList" ui-sref-active="active"><i class="fa fa-user sidebar-nav-icon"></i></i>User List</a>
+                        </li>
+                </ul>
+            </li>
+            <li>
+                <a id="pins" ng-if="profile.access_level=='master'" href="javascript:void(0);" class="sidebar-nav-menu" ui-sref-active="open"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-home sidebar-nav-icon"></i>Pins</a>
+                <ul>
+                    <li>
+                    <a id="pblist"  ng-if="profile.access_level=='master'" ui-sref="pinBatchList" ui-sref-active="active"><i class="gi gi-coins sidebar-nav-icon"></i></i>PIN Batches</a>
+                    <a id="ps"  ng-if="profile.access_level=='master'" ui-sref="pinSearch" ui-sref-active="active"><i class="gi gi-coins sidebar-nav-icon"></i></i>IVR Table</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a id="pinHead" href="javascript:void(0)" class="sidebar-nav-menu" ui-sref-active="open"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-home sidebar-nav-icon"></i>System</a>
+                <ul>
+                    <li>
+                        <a id="ralist" ng-if="profile.access_level=='master'" ui-sref="rateList()" ui-sref-active="active"><i class="gi gi-coins sidebar-nav-icon"></i></i>Rates</a>
+                        <a id="ptables" ng-if="profile.access_level=='master'" ui-sref="pTab()" ui-sref-active="active"><i class="gi gi-coins sidebar-nav-icon"></i></i>Price Tables</a>
+                        <a id="pmaps"  ng-if="profile.access_level=='master'" ui-sref="provMaps()" ui-sref-active="active"><i class="gi gi-coins sidebar-nav-icon"></i></i>Provider Mappings</a>
+                        <a id="clinks" ng-if="profile.access_level=='master'" ui-sref="commLinks()" ui-sref-active="active"><i class="gi gi-coins sidebar-nav-icon"></i></i>Comm Links</a>
+                        <a id="apools" ng-if="profile.access_level=='master'" ui-sref="apool()" ui-sref-active="active"><i class="gi gi-coins sidebar-nav-icon"></i></i>Account Pool</a>
+                        <a id="ccontrol" ng-if="profile.access_level=='master'"  ui-sref="ccontrol()" ui-sref-active="active"><i class="gi gi-coins sidebar-nav-icon"></i></i>Porting Cache</a>
+                        <a id="dfrules"  ng-if="profile.access_level=='master'" ui-sref="dfr()" ui-sref-active="active"><i class="gi gi-coins sidebar-nav-icon"></i></i>Global DR/FR Rules</a>
+                        <a id="sc" ng-if="profile.access_level=='master'" ui-sref="sc()" ui-sref-active="active"><i class="fa fa-cog sidebar-nav-icon"></i></i>Summary Reports</a>
+                            <a id="sr" ng-if="profile.access_level=='master'" ui-sref="sr()" ui-sref-active="active"><i class="fa fa-cog sidebar-nav-icon"></i></i>Sales Reports</a>
+                        <a id="tlist"  ui-sref="tList()" ui-sref-active="active"><i class="gi gi-coins sidebar-nav-icon"></i></i>TopUp Log</a>
+                        <a id="ftlist"  ui-sref="ftList()" ng-if="profile.access_level=='master'" ui-sref-active="active"><i class="gi gi-coins sidebar-nav-icon"></i></i>FT Console</a>
+                        <a id="trlist"ng-if="profile.access_level=='master'"  ui-sref="transactionList()" ui-sref-active="active"><i class="hi hi-phone_alt sidebar-nav-icon"></i></i>Transactions</a>
+                        <a id="lglist" ng-if="profile.access_level=='master'" ui-sref="loginList()" ui-sref-active="active"><i class="hi hi-phone_alt sidebar-nav-icon"></i></i>Login Logs</a>
+                    </li>
+                    <li>
+                        <a id="prlist" ng-if="profile.access_level=='master'" ui-sref="providerList()" ui-sref-active="active"><i class="gi gi-transfer sidebar-nav-icon"></i></i>Providers</a>
+                    </li>
+                    <li>
+                        <a id="prlist" ng-if="profile.access_level=='master'" ui-sref="credsList()" ui-sref-active="active"><i class="gi gi-transfer sidebar-nav-icon"></i></i>Credentials</a>
+                    </li>
+                    <li>
+                        <a id="prlist" ng-if="profile.access_level=='master'" ui-sref="settingList()" ui-sref-active="active"><i class="fa fa-cog sidebar-nav-icon"></i></i>Settings</a>
+                    </li>
+                    <li>
+                        <a id="prlist" ng-if="profile.access_level=='master'" ui-sref="apiSettingList()" ui-sref-active="active"><i class="fa fa-cog sidebar-nav-icon"></i></i>Api Settings</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a id="subAA" ng-if="profile.access_level=='master'" href="javascript:void(0);" class="sidebar-nav-menu" ui-sref-active="open"><i class="fa fa-angle-left sidebar-nav-indicator"></i><i class="gi gi-certificate sidebar-nav-icon"></i>Support</a>
+                <ul>
+                    <li>
+                        <a ng-if="profile.access_level=='master'" href="javascript:void(0)" id="supportDash" ui-sref="supportDash()" ui-sref-active="active"><i class="gi gi-barcode sidebar-nav-icon"></i>Support Dashboard</a>
+                    </li>
+                </ul>
+            </li> 
+        </ul>
+        <div class="sidebar-header sidebar-nav-mini-hide">
+        </div>
+        <!-- END Sidebar Navigation -->
+    <!--<div style="margin-bottom:0px;position:absolute;bottom:0px;">-->
+    </div>
+    <!-- END Sidebar Content -->
+    <!--</div>-->
+    <!-- END Wrapper for scrolling functionality -->
+</div>

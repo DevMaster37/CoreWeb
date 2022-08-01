@@ -1,0 +1,140 @@
+
+                    <!-- Modal Header -->
+                    <div class="modal-header text-center">
+                        <h2 class="modal-title"><i class="fa fa-pencil"></i> TopupLog with Reference : {{rec.operator_reference}}</h2>
+                    </div>
+                    <!-- END Modal Header -->
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <form  class="form-horizontal form-bordered" onsubmit="return false;">
+                            <div class="form-group">
+                                    <label class="col-md-4 control-label">Requested by</label>
+                                    <div class="col-md-8">
+                                        <p class="form-control-static">{{account_names[rec.account]}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Requested on</label>
+                                    <div class="col-md-8">
+                                        <p class="form-control-static">{{rec.time | date : 'MMM d, y HH:mm:ss' }}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Operator Transaction ID</label>
+                                    <div class="col-md-8">
+                                        <p class="form-control-static">{{rec.api_transactionid}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Processed on node</label>
+                                    <div class="col-md-8">
+                                        <p class="form-control-static">{{rec.app_host}}</p>
+                                    </div>
+                                </div>
+				<div class="form-group">
+                                    <label class="col-md-4 control-label">Universal Key</label>
+                                    <div class="col-md-8">
+                                        <p class="form-control-static">{{rec.txkey}}</p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Requested for</label>
+                                    <div class="col-md-8">
+                                        <p class="form-control-static">{{rec.target}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Local Amount</label>
+                                    <div class="col-md-8">
+                                        <p class="form-control-static">{{rec.topup_amount}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Local Currency</label>
+                                    <div class="col-md-8">
+                                        <p class="form-control-static">{{rec.topup_currency}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Paid Amount</label>
+                                    <div class="col-md-8">
+                                        <p class="form-control-static">{{rec.paid_amount}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Paid Currency</label>
+                                    <div class="col-md-8">
+                                        <p class="form-control-static">{{rec.paid_currency}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Successful ?</label>
+                                    <div class="col-md-8">
+                                        <p class="form-control-static">{{rec.success | translate}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Completed In </label>
+                                    <div class="col-md-8">
+                                        <p class="form-control-static">{{ (rec.completed_in || 0) / 1000}}s</p>
+                                    </div>
+                                </div>
+				<div class="form-group">
+                                    <label class="col-md-4 control-label">Completed From </label>
+                                    <div class="col-md-8">
+                                        <p class="form-control-static">{{rec.exec_ip}}</p>
+                                    </div>
+                                </div>
+				<div class="form-group">
+                                    <label class="col-md-4 control-label">Agent information </label>
+                                    <div class="col-md-8">
+                                        <p class="form-control-static">{{rec.exec_agent}}</p>
+                                    </div>
+                                </div>
+				<div class="form-group">
+                                    <label class="col-md-4 control-label">User ID </label>
+                                    <div class="col-md-8">
+                                        <p class="form-control-static">{{ rec.exec_by}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Operator API Request</label>
+                                    <div class="col-md-8">
+                                        <textarea class="form-control">{{rec.request_debug}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Operator API Response</label>
+                                    <div class="col-md-8">
+                                        <textarea class="form-control">{{rec.response_debug}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Customer API Request</label>
+                                    <div class="col-md-8">
+                                        <textarea class="form-control">{{rec.client_apireqbody}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Customer API Response</label>
+                                    <div class="col-md-8">
+                                        <textarea class="form-control">{{rec.client_apiresponse}}</textarea>
+                                    </div>
+                                </div>
+                                  
+                                
+                                
+                                
+                            
+                            
+                            <div class="form-group form-actions">
+                                <div class="col-xs-12 text-right">
+                                    <button ng-click="accountsCancel();" type="button" class="btn btn-sm btn-default" data-dismiss="modal">{{"cancel"|translate}}</button>
+                                    <button type="button" ng-click="refundTx();" class="btn btn-sm btn-danger">Refund Transaction</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END Modal Body -->

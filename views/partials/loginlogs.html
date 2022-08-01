@@ -1,0 +1,72 @@
+<div id="page-content" style="min-height:1036px">
+    <!-- Blank Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="gi gi-transfer"></i>Login Logs<br><small>Here you can check logins made in the system</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li><a ui-sref="accountView({id : profile.main_account})">My Account</a></li>
+        <li>Login Logs</li>
+    </ul>
+    <!-- END Blank Header -->
+
+    <!-- Example Block -->
+    <div class="block" ng-if="account.type !== 'user'">
+                            <div class="block-title">
+                                <h2>Login Logs</h2>
+                            </div>
+                            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="table-options clearfix">
+                         <input class="form-control" ng-model="namefilter" type="text" placeholder="{{'FILTER' |translate}}">
+            <br/>
+ <!--   <a href="/api/transactions.csv?token={{profile.token}}" class="btn btn-primary">Download CSV</a> -->
+            <br/>
+        </div>
+        <div class="table-responsive">
+                    <table id="general-table" class="table table-striped table-vcenter">
+                           <thead>
+                                <tr>
+                                    <td>Record ID</td>
+                                    <td>Wholesaler</td>
+                                    <td>Account</td>
+                                    <td>Username</td>
+                                    <td>Time</td>
+                                    <td>Successful ?</td>
+                                    <td>App Host</td>
+                                    <td>Token Expiration</td>
+                                </tr>
+                                </thead>
+                                    <tbody>
+                                        <tr ng-repeat="i in data |filter : namefilter">
+                                            <td>{{i._id}}</td>
+                                            <td>{{account_names[i.reseller_id]}}</td>
+                                            <td>{{i.account_name}}</td>
+                                            <td>{{i.username}}</td>
+                                            <td>{{i.time | date : 'MMM d, y HH:mm:ss' }}</td>
+                                            <td>{{i.success | translate}}</td>
+                                            <td>{{i.app_host}}</td>
+                                            <td>{{i.tok_expires | date : 'MMM d, y HH:mm:ss' }}</td>
+                                        </tr>
+                                    </tbody>
+                                
+                        </table>
+                        </div>
+                         <div class="table-options clearfix">
+                <ul uib-pagination total-items="count" items-per-page="limit" ng-model="page" ng-change="changePage(page)" max-size="10" class="pagination-sm" boundary-link-numbers="true" next-text="{{'nextPage'|translate}}" previous-text="{{'prevPage'|translate}}"></ul>
+            </div>
+                </div>
+            </div>
+                            
+                    </div>
+    <!-- END Example Block -->
+</div>
+<!-- END Page Content -->
+      <footer class="clearfix">
+    <div class="pull-left">
+        <span id="year-copy"></span> &copy; <a href="http://www.primeairtime.com/" target="_blank">Prime Airtime Ltd</a>
+    </div>
+</footer>

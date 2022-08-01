@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <title>Prime Airtime - Core</title>
+
+        <meta name="description" content="Prime Airtime Core UI">
+        <meta name="author" content="">
+        <meta name="robots" content="noindex, nofollow">
+
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
+
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="bower_components/angular-bootstrap-colorpicker/css/colorpicker.min.css" />
+        <link rel="stylesheet" href="bower_components/ngprogress/ngProgress.css" />
+        <link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css" />
+        <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.min.css">
+        
+        <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic,700,700italic' />
+
+        <link rel="stylesheet" href="dist/styles/main.css" />
+        <link rel="shortcut icon" href="/images/pax_icon.png" type="image/x-icon" />
+    </head>
+    <body ng-app="billinguiApp">
+        <!--[if lte IE 8]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div ui-view="login"></div>
+        <div id="page-container" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+        <div ui-view="sidebar"></div>
+
+        <div id="main-container">
+            <div ui-view="header"></div>
+            <div ui-view="content"></div>
+            <div ui-view="footer"></div>
+        </div>
+
+        
+        </div>
+        <div ui-view="modals"></div>
+        <script src="dist/scripts/vendor.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.0.0/lodash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.0/moment-timezone-with-data.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jstimezonedetect/1.0.6/jstz.min.js"></script>
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/xlsx.full.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/jszip.js"></script>  
+
+        <script src="dist/scripts/local.js"></script>
+        <script src="dist/scripts/scripts.js"></script>
+    </body>
+</html>

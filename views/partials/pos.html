@@ -1,0 +1,301 @@
+ <div id="page-content" style="min-height:1036px">
+                    <!-- Blank Header -->
+                    <div class="content-header">
+                        <div class="header-section">
+                            <h1>
+                                <i class="gi gi-barcode"></i>POS Terminal<br><small>Issue Top-up</small>
+                            </h1>
+                        </div>
+                    </div>
+                    <ul class="breadcrumb breadcrumb-top">
+                        <li>Home</li>
+                        <li>POS</li>
+                    </ul>
+                    <!-- END Blank Header -->
+
+                    <!-- Example Block -->
+             
+
+                    <div class="block">
+                        <!-- Example Title -->
+                        <div class="block-title">
+                            <h2>Airtime Recharge Wizard</h2>
+                        </div>
+                        <!-- END Example Title -->
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 col-xs-12">
+                                
+                                <form name="posForm" class="form-horizontal">
+                                    
+                                    <div class="form-group" ng-if="err">
+                            <div class="alert alert-danger">Error: {{emsg}}</div>
+                        </div>
+                                    <fieldset ng-if="step == 1">
+                                        
+                                   <legend>Step 1 : Input Phone Number <span class=" pull-right"><a href="javascript:void(0)" ng-click="resetProduct();">Start Over</a></span></legend>
+                                   <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">Phone Number</label>
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="obj.msisdn" pattern="[0-9]+" class="form-control" placeholder="2348137898903">
+                                            
+                                        </div>
+                           </div>
+                           <br/>
+                              <div class="form-group form-actions">
+                                        <div class="col-md-9 col-md-offset-3">
+                                            <button ng-click="getProducts();" ng-disabled="posForm.$invalid" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Continue</button>
+                                        </div>
+                                    </div>
+                               </fieldset>
+                               <fieldset ng-if="step == 2">
+                                   <legend>Step 2 : Review Information and Select Denomination <span class=" pull-right"><a href="javascript:void(0)" ng-click="resetProduct();">Start Over</a></span></legend>
+                                      <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">Country</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">{{data.opts.country}}</p>
+                                            
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">Operator</label>
+                                        <div class="col-md-9">
+                                            <p ng-if="override == false" class="form-control-static">{{data.opts.operator}} {{data.opts.operatorName}} <a href="javascript:void(0)" ng-click="doOverride()" ng-if="data.opts.canOverride == true">Override</a></p>
+                                            <select ng-if="override == true" class="form-control" ng-model="obj.override_operator" >
+                                                <option ng-repeat="op in operators" value="{{op.operator_id}}">{{op.operator_name}}</option>
+                                            </select>
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">MSISDN</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">+{{data.opts.msisdn}}</p>
+                                            
+                                        </div>
+                           </div>
+                           <div class="form-group" >
+                                        <label class="col-md-3 control-label">Send SMS ?</label>
+                                        <div class="col-md-9">
+                                            <div class="checkbox">
+                                                <label class="switch switch-primary">
+                                            <input type="checkbox" ng-model="obj.send_sms" value="true">
+                                            <span></span>
+                                        </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-if="obj.send_sms == true">
+                                    <label class="col-md-3 control-label">SMS Text</label>
+                                    <div class="col-md-9">
+                                        <textarea ng-model="obj.sms_text" class="form-control" style="width: 100%; height:200px;"></textarea>
+                                        <p><span class="small pull-right">{{obj.sms_text.length}} / 140</span></p>
+                                    </div>
+                                </div>
+                                   <hr>
+                                   <div class="row">
+                                       <legend>Fixed Denominations</legend>
+                                       <div ng-repeat="p in data.products">
+                                           <div class="col-md-4 col-xs-12" ng-if="!p.openRange">
+                                       <button  style="z-index: 0;" class="btn btn-xlarge btn-primary"  ng-mobile-click="$parent.buyProducts(p.product_id);">{{p.denomination}} {{p.topup_currency}}<br><span class="small">(price {{p.price}} {{p.currency}})</span></button>
+                                       <!--
+					<label class="radio-inline"><input name="den" type="radio" class="form-control" ng-model="obj.fixprice" value="{{p.product_id}}"> {{p.denomination}} {{p.currency}} <br> (price {{p.price}} {{account.currency}} )
+					</label> -->
+                                   </div>
+                                    <div class="col-md-12" ng-if="p.openRange">
+					<!--<br>
+					<div class="col-md-9 col-md-offset-3">
+					<button ng-disabled="obj.fixprice == 0" ng-click="buyProducts(obj.fixprice);" class="btn btn-xlarge btn-success"><i class="fa fa-angle-right"></i> Purchase  top-up </button>
+                                        </div> -->
+					<hr/>
+                                        <legend>Dynamic Range <span class=" pull-right"><a href="javascript:void(0)" ng-click="resetProduct();">Start Over</a></span></legend>
+                                        <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">Min</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">{{p.openRangeMin}} {{p.topup_currency}}</p>
+                                            
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">Max</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">{{p.openRangeMax}} {{p.topup_currency}}</p>
+                                            
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">Exchange Rate</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">{{p.rate}} {{p.topup_currency}} = 1.00 {{p.currency}}</p>
+                                            
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">Top-up amount</label>
+                                        <div class="col-md-9">
+                                            <input type="text" ng-model="obj.denomination" pattern="[0-9]+" class="form-control" placeholder="100 {{p.topup_currency}}">
+                                            
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">You will pay</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static" ng-model="obj.price">{{obj.denomination / p.rate | currency : '' : 2}} {{p.currency}}</p>
+                                            
+                                        </div>
+                           </div>
+                           <div class="form-group form-actions">
+                                        <div class="col-md-9 col-md-offset-3">
+                                            <button ng-disabled="obj.denomination == 0" ng-click="buyProducts(p.product_id);" ng-disabled="posForm.$invalid" class="btn btn-xlarge btn-success"><i class="fa fa-angle-right"></i> Purchase {{obj.denomination}} {{p.topup_currency}} top-up for {{obj.denomination / p.rate | currency : '' : 2}} {{p.currency}}</button>
+                                        </div>
+                                    </div>
+                           
+                           
+                                       
+                                    </div>
+                                       </div>
+                                   </div>
+                                  
+
+                               </fieldset>
+                                <fieldset ng-if="step == 3">
+                                     <legend>Transaction Summary <span class=" pull-right"><a href="javascript:void(0)" ng-click="resetProduct();">Start Over</a></span></legend>
+                                      <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">Country</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">{{data.opts.country}}</p>
+                                            
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">Operator</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">{{data.opts.operator}} {{data.opts.operatorName}}</p>
+                                            
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">MSISDN</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">+{{data.opts.msisdn}}</p>
+                                            
+                                        </div>
+                           </div>
+                           <div class="form-group" >
+                                        <label class="col-md-3 control-label">Send SMS ?</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">{{obj.send_sms|translate}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-if="obj.send_sms == true">
+                                    <label class="col-md-3 control-label">SMS Text</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static">{{obj.sms_text}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group" >
+                                        <label class="col-md-3 control-label">Successful ?</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">Yes</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" >
+                                        <label class="col-md-3 control-label">Reference</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">{{res.reference}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" >
+                                        <label class="col-md-3 control-label">Server Response</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">{{res.message}}</p>
+                                        </div>
+                                    </div>
+                                <div ng-if="res.pin_based == true">
+                                    <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">Pin Based Topup?</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">{{res.pin_based | translate}}</p>
+                                            
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">PIN Option 1</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">{{res.pin_option1}}</p>
+                                            
+                                        </div>
+                           </div>
+                              <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">PIN Option 2</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">{{res.pin_option2}}</p>
+                                            
+                                        </div>
+                           </div>
+                              <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">PIN Option 3</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">{{res.pin_option3}}</p>
+                                            
+                                        </div>
+                           </div>
+                              <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">PIN IVR</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">{{res.pin_ivr}}</p>
+                                            
+                                        </div>
+                           </div>
+                              <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">PIN Code</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">{{res.pin_code}}</p>
+                                            
+                                        </div>
+                           </div>
+                              <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">PIN Serial</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">{{res.pin_serial}}</p>
+                                            
+                                        </div>
+                           </div>
+                              <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">PIN Value</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">{{res.pin_value}}</p>
+                                            
+                                        </div>
+                           </div>
+                              <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">PIN Validity</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">{{res.pin_validity}}</p>
+                                            
+                                        </div>
+                           </div>
+                           </div>
+                            <div class="form-group form-actions">
+                                        <div class="col-md-9 col-md-offset-3">
+                                            <button ng-click="resetProduct();" class="btn btn-xlarge btn-primary"><i class="fa fa-angle-right"></i> Start Over</button>
+                                        </div>
+                                    </div>
+                                
+                                </fieldset>
+                                </form>
+
+                               
+                            </div>
+                        </div>
+                        
+                        <!-- END Example Content -->
+                    </div>
+                    <!-- END Example Block -->
+                </div>
+                <!-- END Page Content -->
+                      <footer class="clearfix">
+
+                    </div>
+                    <div class="pull-left">
+                        <span id="year-copy"></span> &copy; <a href="http://www.primeairtime.com/" target="_blank">Prime Airtime Ltd</a>
+                    </div>
+                </footer>

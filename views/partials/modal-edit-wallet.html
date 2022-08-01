@@ -1,0 +1,42 @@
+
+                    <!-- Modal Header -->
+                    <div class="modal-header text-center">
+                        <h2 class="modal-title"><i class="fa fa-pencil"></i> Edit Wallet</h2>
+                    </div>
+                    <!-- END Modal Header -->
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <form  class="form-horizontal form-bordered" onsubmit="return false;">
+                            <div class="form-group">
+                                    <label class="col-md-4 control-label">Wallet Name</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.wallet_name" class="form-control">
+                                    </div>
+                                </div>
+                               <div class="form-group">
+                                   <label class="col-md-4 control-label">Wallet Currncy</label>
+                                    <div class="col-md-8">
+                                        <p class="form-control-static">{{rec.currency}} - {{currencies[rec.currency]}}</p>
+                                    </div>
+                               </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="user-settings-notifications">Primary ?</label>
+                                    <div class="col-md-8">
+                                        <label class="switch switch-primary">
+                                            <input type="checkbox" ng-model="rec.primary">
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                           
+                            
+                            <div class="form-group form-actions">
+                                <div class="col-xs-12 text-right">
+                                    <button ng-click="newUserCancel();" type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" ng-click="editWalletOK();" class="btn btn-sm btn-primary">Save Changes</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END Modal Body -->

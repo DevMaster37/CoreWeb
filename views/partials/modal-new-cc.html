@@ -1,0 +1,31 @@
+
+                    <!-- Modal Header -->
+                    <div class="modal-header text-center">
+                        <h2 class="modal-title"><i class="fa fa-plus"></i> New PermitApi entry</h2>
+                    </div>
+                    <!-- END Modal Header -->
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <form  class="form-horizontal form-bordered" onsubmit="return false;">
+                            <fieldset>
+                                 
+                                 <div class="form-group">
+                                     <div class="col-md-12">
+                                    <label class="col-md-6 control-label" >API ID</label>
+                                    <div class="col-md-6">
+                                        <input type="text" ng-model="baa.apid" class="form-control">
+                                    </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                           
+                            <div class="form-group form-actions">
+                                <div class="col-xs-12 text-right">
+                                    <button ng-click="newUserCancel();" type="button" class="btn btn-sm btn-default" data-dismiss="modal">{{"cancel"|translate}}</button>
+                                    <button type="button" ng-click="newCCOK();" class="btn btn-sm btn-primary">Add</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END Modal Body -->

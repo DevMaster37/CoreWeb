@@ -1,0 +1,78 @@
+<div id="page-content" style="min-height:1036px">
+    <!-- Blank Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="gi gi-random"></i>{{"RATECARDS_TITLE" | translate}}<br>
+                <small>{{"RATECARDS_SUBTITLE" | translate}}</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>{{"HOME" | translate}}</li>
+        <li><a ui-sref="accountList">{{"RATECARD_LIST" | translate}}</a></li>
+    </ul>
+    <!-- END Blank Header -->
+
+    <div class="block">
+        <!-- Example Title -->
+        <div class="block-title">
+            <h2>{{"RATECARD" | translate}} : {{ratecard.ratecard_name}}</h2>
+        </div>
+        <!-- END Example Title -->
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-xs-12">
+                <div class="table-options clearfix">
+                    <br/>
+                    <button ng-click="rateImport()" class="btn btn-primary btn-sm">{{"ratesin" |translate}}</button>
+                    <button ng-csv="getRateCsv()" filename="export.csv" lazy-load="true" class="btn btn-primary btn-sm">
+                        {{"ratesout" |translate}}
+                    </button>
+                    <br/><br/>
+                    <input class="form-control" ng-model="namefilter" type="text" placeholder="{{'FILTER' |translate}}">
+                </div>
+                <!-- Example Content -->
+                <table id="general-table" class="table table-striped table-vcenter">
+                    <thead>
+
+                    <tr>
+                        <td>{{"prefix"|translate}}</td>
+                        <td>{{"country"|translate}}</td>
+                        <td>{{"name"|translate}}</td>
+                        <td>{{"permin"|translate}}</td>
+                        <td>{{"conn"|translate}}</td>
+                        <td>{{"initPulse"|translate}}</td>
+                        <td>{{"incrPulse"|translate}}</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="r in ratecard.rates |filter : namefilter">
+                        <td>{{r.prefix}}</td>
+                        <td>{{r.country}}</td>
+                        <td>{{r.name}}</td>
+                        <td>{{r.permin}}</td>
+                        <td>{{r.conn}}</td>
+                        <td>{{r.init_pulse}}</td>
+                        <td>{{r.incr_pulse}}</td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+        <!-- END Example Content -->
+    </div>
+
+    <!-- Example Block -->
+
+    <!-- END Example Block -->
+</div>
+<!-- END Page Content -->
+<footer class="clearfix">
+    <div class="pull-left">
+        <span id="year-copy"></span> &copy; <a href="http://www.aineo.com/" target="_blank">AiNEO Corporation</a>
+    </div>
+</footer>

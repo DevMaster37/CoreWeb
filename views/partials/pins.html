@@ -1,0 +1,70 @@
+ <div id="page-content" style="min-height:1036px">
+                    <!-- Blank Header -->
+                    <div class="content-header">
+                        <div class="header-section">
+                            <h1>
+                                <i class="gi gi-transfer"></i>PIN Management<br><small>Here you can manage and generate system PIN's</small>
+                            </h1>
+                        </div>
+                    </div>
+                    <ul class="breadcrumb breadcrumb-top">
+                        <li><a ui-sref="accountView({id : profile.main_account})">Accounts</a></li>
+                        <li>PIN Management</li>
+                    </ul>
+                    <!-- END Blank Header -->
+                        <div class="block">
+                        <div class="block-title">
+                            <h2>Batch Information</h2>
+                        </div>
+                        <div class="well">
+                            <p class="form-control-static">
+                                Batch ID : {{batch._id}}
+                                <br>
+                                Denomination : {{batch.value}} {{batch.currency}}
+                                <br>
+                                PIN Count : {{batch.count}}
+                                <br>
+                                Valid ? : {{batch.valid}}
+                                <br>
+                                Issued : {{batch.issued | date : 'MMM d, y HH:mm:ss'}}
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Example Block -->
+                    <div class="block" ng-if="account.type !== 'user'">
+                                            <div class="block-title">
+                                                <h2>Pins</h2>
+                                            </div>
+                                            <div class="row">
+                                <div class="col-md-12 col-xs-12">
+                                    
+                               
+                                <div class="col-md-3 col-xs-12" ng-repeat="p in pins">
+                                    <div class="well">
+                                        <p class="form-control-static">
+                                            Serial : {{p.serial}}
+                                            <br>
+                                            PIN : {{p.code}}
+                                            <br>
+                                            Valid : {{p.valid}}
+                                            <br>
+                                            Used : {{p.used}}
+                                            <br>
+                                            <a href="javascript:void(0)" ng-if="p.valid === true" ng-click="invalidatePin(p.batch, p._id)">Invalidate</a>
+                                        </p>
+                                       
+                                        </div>
+                                </div>
+                                </div>
+                            </div>
+                                            
+                                    </div>
+                    <!-- END Example Block -->
+                </div>
+                <!-- END Page Content -->
+                      <footer class="clearfix">
+
+                    <div class="pull-left">
+                        <span id="year-copy"></span> &copy; <a href="http://www.primeairtime.com/" target="_blank">Prime Airtime Ltd</a>
+                    </div>
+                </footer>

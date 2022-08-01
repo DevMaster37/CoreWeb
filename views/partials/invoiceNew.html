@@ -1,0 +1,182 @@
+<div id="page-content" style="min-height:1036px">
+                    <!-- Invoice Header -->
+                    <div class="content-header">
+                        <div class="header-section">
+                            <h1>
+                                <i class="gi gi-usd"></i>{{"INVOICE_TITLE" |translate}}<br><small>{{"INVOICE_SUBTITLE" |translate}}</small>
+                            </h1>
+                        </div>
+                    </div>
+                    <ul class="breadcrumb breadcrumb-top">
+                        <li>{{"MY_ACCOUNT" |translate}}</li>
+                        <li>{{"invoice" |translate}}</li>
+                    </ul>
+                    <!-- END Invoice Header -->
+
+                    <!-- Invoice Block -->
+                    <div class="block full">
+                        <!-- Invoice Title -->
+                        <div class="block-title">
+                            <h2><strong>{{"invoice" |translate}}</strong> #<input type="text" class="form-control" style="display:inline;width:60%;" ng-model="invoice.invoice_id"> </h2>
+                        </div>
+                        <!-- END Invoice Title -->
+
+                        <!-- Invoice Content -->
+                        <!-- 2 Column grid -->
+                        <div class="row block-section">
+                            <!-- Company Info -->
+                            <div class="col-sm-6">
+                                <img src="/img/{{parent.invoice_logo}}" alt="photo">
+                                <hr>
+                                <h2><strong>{{parent.account_name}}</strong></h2>
+                                <address>
+                                    {{parent.address.line1}}<br>
+                                    {{parent.address.line2}}<br>
+                                    {{parent.address.city}}, {{parent.address.county}}<br>
+                                    {{parent.address.postcode}}, {{parent.address.country}}<br><br>
+                                    <i class="fa fa-phone"></i>  {{parent.phone}}<br>
+                                    <i class="fa fa-envelope-o"></i> <a href="mailto:{{parent.email}}">{{parent.email}}</a>
+                                </address>
+                                
+                                        
+                            </div>
+                            <!-- END Company Info -->
+
+                            <!-- Client Info -->
+                            <div class="col-sm-6 text-right">
+                                <hr>
+                                <h2><strong>{{account.account_name}}</strong></h2>
+                                <address>
+                                    {{account.address.line1}}<br>
+                                    {{account.address.line2}}<br>
+                                    {{account.address.city}}, {{account.address.county}}<br>
+                                    {{account.address.postcode}}, {{account.address.country}}<br><br>
+                                    {{account.phone}}<i class="fa fa-phone"></i><br>
+                                    <a href="mailto:{{account.email}}">{{account.email}}</a> <i class="fa fa-envelope-o"></i>
+                                </address>
+                            </div>
+                            <!-- END Client Info -->
+                        </div>
+                        <!-- END 2 Column grid -->
+
+                        <hr>
+
+                        <!-- Table -->
+                        <div class="table-responsive">
+                            <table class="table table-vcenter">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th class="text-center" style="width: 45%;">{{"linedescr" |translate}}</th>
+                                        <th class="text-center">{{"quantity" |translate}}</th>
+                                        <th class="text-center">{{"unitprice" |translate}}</th>
+                                        <th class="text-center">{{"linedisc" |translate}}</th>
+                                        <th class="text-right">{{"amount" |translate}}</th>
+                                        <th class="text-right">{{"ACTIONS" |translate}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="inv in invoice.invoice_lines">
+                                        <td class="text-center">{{inv.line_number}}</td>
+                                        <td>
+                                            <h4>{{inv.line_description}}</h4>
+                                        </td>
+                                        <td class="text-center"><strong>x <span class="badge">{{inv.line_quantity}}</span></strong></td>
+                                        <td class="text-center"><strong>¥ {{inv.line_price}}</strong></td>
+                                        <td class="text-center">{{inv.line_disc_txt}}</td>
+                                        <td class="text-right"><span class="label label-primary">¥ {{inv.line_subtotal}}</span></td>
+                                        <td class="text-right"><div class="btn-group btn-group-xs">
+                                                <a ng-click="editLine(inv.line_number)" class="btn btn-default" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                                <a ng-click="deleteLine(inv.line_number)" class="btn btn-danger" data-original-title="Delete"><i class="fa fa-times"></i></a>
+                                            </div></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td style="width: 6%"><select ng-model="invN.line_mode" class="form-control"><option value="brief">{{"brief" |translate}}</option><option value="detailed" selected>{{"detailed" |translate}}</option></select></td>
+                                        <td><input style="width:100%" class="form-control text-center" type="text" ng-model="invN.line_description"></td>
+                                        <td><input ng-if="invN.line_mode == 'detailed'" type="number" ng-model="invN.line_quantity" class="form-control"></td>
+                                        <td><input type="number" ng-model="invN.line_price" class="form-control"></td>
+                                        <td><input type="number" ng-model="invN.line_discount" class="form-control" style="float:left;width:60%"><select class="form-control" style="width:35%;float:right;display:inline" ng-model="invN.disc_mode"><option value="pct" selected>%</option><option value="amt">&yen;</option></select></td>
+                                        <td></td>
+                                     <td ng-if="!editing"><button class="btn btn-sm btn-primary" ng-click="addLine();">{{"addline" |translate}}</button></td>
+                                        <td ng-if="editing"><button class="btn btn-xs btn-primary" ng-click="editLineAct(invN.line_number);">{{"editline" |translate}}</button><button class="btn btn-xs btn-default" ng-click="editCancel();">Cancel</button></td>
+
+                                    </tr>
+                                    <tr class="active">
+                                        <td colspan="5" class="text-right"><span class="h4">{{"subtotal" |translate}}</span></td>
+                                        <td colspan="2" class="text-right"><span class="h4">¥ {{intmp.subtotal |number:0}}</span></td>
+                                    </tr>
+                                     <tr class="active">
+                                        <td colspan="5" class="text-right"><span class="h4">{{"subdisc" |translate}}</span></td>
+                                        <td colspan="2" class="text-right"><span class="h4">¥ -{{intmp.discount |number:0}}</span></td>
+                                    </tr>
+                                    <tr class="active">
+                                        <td colspan="5" class="text-right"><span class="h4">{{"taxrate" |translate}}</span></td>
+                                        <td colspan="2" class="text-right"><span class="h4">{{intmp.tax_rate}}%</span></td>
+                                    </tr>
+                                    <tr class="active">
+                                        <td colspan="5" class="text-right"><span class="h4">{{"taxamt" |translate}}</span></td>
+                                        <td colspan="2" class="text-right"><span class="h4">¥ {{(intmp.subtotal - intmp.discount) * intmp.tax_int |number:0}}</span></td>
+                                    </tr>
+                                    <tr class="active">
+                                        <td colspan="5" class="text-right"><span class="h3"><strong>{{"totaldue" |translate}}</strong></span></td>
+                                        <td colspan="2" class="text-right"><span class="h3"><strong>¥ {{((intmp.subtotal - intmp.discount) * intmp.tax_int) + (intmp.subtotal - intmp.discount ) |number:0}}</strong></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- END Table -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                            <div class="col-md-4">
+                                        <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">{{"invoiceDate" |translate}}</label>
+                                        <div class="col-md-9">
+                                            <p class="input-group">
+          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="invoice.invoice_date" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+                                            
+                                        </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">{{"invoiceDue" |translate}}</label>
+                                        <div class="col-md-9">
+                                            <p class="input-group">
+          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="invoice.invoice_due" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                               <label class="col-md-3 control-label" for="example-text-input">{{"invoiceState" |translate}}</label>
+                                        <div class="col-md-9">
+                                                <select ng-model="invoice.draft" class="form-control">
+                                                    <option value="draft">Draft</option>
+                                                    <option value="new">New</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                           </div>
+                                        </div>
+                        </div>
+                        <div class="clearfix">
+                            <div class="btn-group pull-right">
+                                <button ng-disabled="invoice.invoice_id.length==0" ng-click="newInvoice();" class="btn btn-default"><i class="fa fa-print"></i>  {{"save" |translate}}</button>
+                                <button ng-disabled="invoice.draft" class="btn btn-primary"><i class="fa fa-angle-right"></i> {{"finalizainvoice" |translate}}</button>
+                            </div>
+                        </div>
+                        <!-- END Invoice Content -->
+                    </div>
+                    <!-- END Invoice Block -->
+                </div>
+                      <footer class="clearfix">
+
+                    <div class="pull-left">
+                        <span id="year-copy"></span> &copy; <a href="http://www.aineo.com/" target="_blank">AiNEO Corporation</a>
+                    </div>
+                </footer>

@@ -1,0 +1,64 @@
+ <div id="page-content" style="min-height:1036px">
+                    <!-- Blank Header -->
+                    <div class="content-header">
+                        <div class="header-section">
+                            <h1>
+                                <i class="gi gi-coins"></i>{{"INVOICES_TITLE" | translate}}<br><small>{{"INVOICES_SUBTITLE" | translate}}</small>
+                            </h1>
+                        </div>
+                    </div>
+                    <ul class="breadcrumb breadcrumb-top">
+                        <li>{{"ACCOUNT" | translate}}</li>
+                        <li>{{"invoices"|translate}}</li>
+                    </ul>
+                    <!-- END Blank Header -->
+
+                    <!-- Example Block -->
+
+                                    <div class="block" >
+                                        <div class="block-title">
+                                            <h2>{{"invoices"|translate}}</h2>
+                                        </div>
+                                  
+                                        <div class="table-options clearfix">
+                            <br/>
+                            <input class="form-control" ng-model="invoicefilter" type="text" placeholder="{{'FILTER' |translate}}">
+                        </div>
+                                        <table id="general-table" class="table table-striped table-vcenter">
+                                           <thead>
+                                                <tr>
+                                                    <td>{{"invoice_id"|translate}}</td>
+                                                    <td>{{"ACCOUNT_NAME"|translate}}</td>
+                                                    <td>{{"invoice_date"|translate}}</td>
+                                                    <td>{{"invoice_due"|translate}}</td>
+                                                    <td>{{"invoice_total_amount"|translate}}</td>
+                                                    <td>{{"invoice_status"|translate}}</td>
+                                                    <td>{{"ACTIONS"|translate}}</td>
+                                                </tr>
+                                                </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="i in invoices |filter : invoicefilter">
+                                                            <td><a ui-sref="invoiceView({id : i._id, account : i.account})">{{i.invoice_id}}</a></td>
+                                                            <td>{{account_names[i.account]}}</td>
+                                                            <td>{{i.invoice_date | date : short}}</td>
+                                                            <td>{{i.invoice_due | date : short}}</td>
+                                                            <td>{{i.invoice_total_amount | currency : '&yen;' : 0}}</td>
+                                                            <td>{{i.invoice_status |translate}}</td>
+                                                            <td><div class="btn-group btn-group-xs">
+                                                                <a href="/v1/invoices/{{i._id}}.pdf" class="btn btn-default" data-original-title="PDF"><i class="fa fa-file"></i></a>
+                                                <a ng-if="i.document_state == 'draft'" ui-sref="invoiceEdit({account : i.account, id : i._id})" class="btn btn-default" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+
+                                            </div></td>
+                                                        </tr>
+                                                    </tbody>
+                                                
+                                        </table>
+                                    </div>
+                    <!-- END Example Block -->
+                </div>
+                <!-- END Page Content -->
+                      <footer class="clearfix">
+                    <div class="pull-left">
+                        <span id="year-copy"></span> &copy; <a href="http://www.aineo.com/" target="_blank">AiNEO Corporation</a>
+                    </div>
+                </footer>

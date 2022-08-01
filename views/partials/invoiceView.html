@@ -1,0 +1,140 @@
+<div id="page-content" style="min-height:1036px">
+                    <!-- Invoice Header -->
+                   <div class="content-header">
+                        <div class="header-section">
+                            <h1>
+                                <i class="gi gi-usd"></i>{{"INVOICE_TITLE" |translate}}<br><small>{{"INVOICE_SUBTITLE" |translate}}</small>
+                            </h1>
+                        </div>
+                    </div>
+                    <ul class="breadcrumb breadcrumb-top">
+                        <li>{{"MY_ACCOUNT" |translate}}</li>
+                        <li>{{"invoice" |translate}}</li>
+                    </ul>
+                    <!-- END Invoice Header -->
+
+                    <!-- Invoice Block -->
+                    <div class="block full">
+                        <!-- Invoice Title -->
+                        <div class="block-title">
+                            <div class="block-options pull-right">
+                                <span ng-if="invoice.document_state == 'draft'" class="label label-primary">{{"draft" | translate | uppercase}}</span>
+                            </div>
+                            <h2><strong>Invoice</strong> #{{invoice.invoice_id}}</h2>
+                        </div>
+                        <!-- END Invoice Title -->
+
+                        <!-- Invoice Content -->
+                        <!-- 2 Column grid -->
+                        <div class="row block-section">
+                            <!-- Company Info -->
+                            <div class="col-sm-6">
+                             <img src="/img/{{parent.invoice_logo}}" alt="photo" height="52px">
+                                <hr>
+                                <h2><strong>{{parent.account_name}}</strong></h2>
+                                <address>
+                                    {{parent.address.line1}}<br>
+                                    {{parent.address.line2}}<br>
+                                    {{parent.address.city}}, {{parent.address.county}}<br>
+                                    {{parent.address.postcode}}, {{parent.address.country}}<br><br>
+                                    <i class="fa fa-phone"></i>  {{parent.phone}}<br>
+                                    <i class="fa fa-envelope-o"></i> <a href="mailto:{{parent.email}}">{{parent.email}}</a>
+                                </address>
+                                INVOICE DATE : {{invoice.invoice_date | date : short}}<br>
+                                INVOICE DUE : {{invoice.invoice_due | date : short}}<br>
+                                SENT ? : {{invoice.invoice_sent | translate}}
+                            </div>
+                            <!-- END Company Info -->
+
+                            <!-- Client Info -->
+                            <div class="col-sm-6 text-right">
+                                <h2><b><span class="text-{{invcolor}}">{{invoice.invoice_status | translate | uppercase}}</span></b></h2>
+                                <hr>
+                                <h2><strong>{{account.account_name}}</strong></h2>
+                                <address>
+                                    {{account.address.line1}}<br>
+                                    {{account.address.line2}}<br>
+                                    {{account.address.city}}, {{account.address.county}}<br>
+                                    {{account.address.postcode}}, {{account.address.country}}<br><br>
+                                    {{account.phone}}<i class="fa fa-phone"></i><br>
+                                    <a href="mailto:{{account.email}}">{{account.email}}</a> <i class="fa fa-envelope-o"></i>
+                                </address>
+                            </div>
+                            <!-- END Client Info -->
+                        </div>
+                        <!-- END 2 Column grid -->
+
+                        <hr>
+
+                        <!-- Table -->
+                        <div class="table-responsive">
+                            <table class="table table-vcenter table-bordered">
+                                <thead>
+                                   <tr>
+                                        <th></th>
+                                        <th class="text-center" style="width: 45%;">{{"linedescr" |translate}}</th>
+                                        <th class="text-center">{{"quantity" |translate}}</th>
+                                        <th class="text-center">{{"unitprice" |translate}}</th>
+                                        <th class="text-center">{{"linedisc" |translate}}</th>
+                                        <th class="text-right">{{"amount" |translate}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="inv in invoice.invoice_lines">
+                                        <td class="text-center">{{inv.line_number}}</td>
+                                        <td>
+                                            <h4>{{inv.line_description}}</h4>
+                                        </td>
+                                        <td class="text-center"><strong>x <span class="badge">{{inv.line_quantity}}</span></strong></td>
+                                        <td class="text-center"><strong>¥ {{inv.line_price}}</strong></td>
+                                        <td class="text-center">{{inv.line_disc_txt}}</td>
+                                        <td class="text-right"><span class="label label-primary">¥ {{inv.line_subtotal}}</span></td>
+                                        
+                                    </tr>
+                                    
+
+                                    <tr class="active">
+                                         <td colspan="5" class="text-right"><span class="h4">{{"subtotal" |translate}}</span></td>
+                                        <td colspan="2" class="text-right"><span class="h4">¥ {{invoice.invoice_amount |number:0}}</span></td>
+                                    </tr>
+                                     <tr class="active">
+                                       <td colspan="5" class="text-right"><span class="h4">{{"subdisc" |translate}}</span></td>
+                                        <td colspan="2" class="text-right"><span class="h4">¥ -{{invoice.invoice_disc_amount |number:0}}</span></td>
+                                    </tr>
+                                    <tr class="active">
+                                         <td colspan="5" class="text-right"><span class="h4">{{"taxrate" |translate}}</span></td>
+                                        <td colspan="2" class="text-right"><span class="h4">{{invoice.invoice_tax_pct}}%</span></td>
+                                    </tr>
+                                    <tr class="active">
+                                       <td colspan="5" class="text-right"><span class="h4">{{"taxamt" |translate}}</span></td>
+                                        <td colspan="2" class="text-right"><span class="h4">¥ {{invoice.invoice_tax_amount |number:0}}</span></td>
+                                    </tr>
+                                    <tr class="active">
+                                        <td colspan="5" class="text-right"><span class="h3"><strong>{{"totaldue" |translate}}</strong></span></td>
+                                        <td colspan="2" class="text-right"><span class="h3"><strong>¥ {{invoice.invoice_total_amount |number:0}}</strong></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- END Table -->
+
+                        <div ng-if="(profile.account_type !== 'user') && (profile.main_account !== invoice.account)" class="clearfix">
+                            <div class="btn-group pull-right">
+                                <button ng-if="invoice.document_state == 'draft'" ui-sref="invoiceEdit({account : account._id, id : invoice._id})" class="btn btn-default"><i class="fa fa-print"></i> {{"edit" |translate}}</button>
+                                
+                                    <button ng-click="markInvoice('paid');" ng-if="(invoice.document_state !== 'draft') && (invoice.invoice_status == 'unpaid')" class="btn btn-success">{{"markaspaid" |translate}}</button>
+                                    <button ng-click="markInvoice('unpaid');" ng-if="(invoice.document_state !== 'draft') && (invoice.invoice_status == 'paid')" class="btn btn-warning">{{"markasunpaid" |translate}}</button>
+                               
+                                <button ng-click="markInvoice('void');" class="btn btn-danger"><i class="fa fa-times"></i> {{"void" |translate}}</button>
+                            </div>
+                        </div>
+                        <!-- END Invoice Content -->
+                    </div>
+                    <!-- END Invoice Block -->
+                </div>
+                      <footer class="clearfix">
+
+                    <div class="pull-left">
+                        <span id="year-copy"></span> &copy; <a href="http://www.aineo.com/" target="_blank">AiNEO Corporation</a>
+                    </div>
+                </footer>

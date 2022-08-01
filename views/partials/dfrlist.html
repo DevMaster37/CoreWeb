@@ -1,0 +1,105 @@
+<div id="page-content" style="min-height:1036px">
+    <!-- Blank Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="gi gi-transfer"></i>Global DR/FR rules<br><small>Here you can configure routing globally</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>System</li>
+        <li>Global DR/FR rules</li>
+    </ul>
+    <!-- END Blank Header -->
+
+    <!-- Example Block -->
+    <div class="block" >
+                            <div class="block-title">
+                                <h2>DR Rules</h2>
+                            </div>
+                            <button ng-click="newDRule()" class="btn btn-primary btn-sm" type="button">New Rule</button>
+                            <div class="row">
+                <div class="col-md-12 col-xs-12">
+                    <div class="table-options clearfix">
+            <br/>
+        </div>
+                <div class="table-responsive">
+                    <table id="general-table" class="table table-striped table-vcenter">
+                                <thead>
+                                    <tr>
+                                        <td>Name</td>
+                                        <td>API Code</td>
+                                        <td>Active ?</td>
+                                        <td class="text-center">{{"ACTIONS"|translate}}</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        <tr ng-repeat="r in drules">
+                                            <td>{{r.rule_name}}</td>
+                                            <td>{{r.apicode}}</td>
+                                            <td>{{r.active | translate}}</td>
+                                            <td class="text-center">
+                            <div class="btn-group btn-group-xs">
+                                <a ng-click="drEdit(r._id)" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                <a ng-click="drDelete(r._id)" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="Edit"><i class="fa fa-times"></i></a>
+                            </div>
+                        </td>
+                                        </tr>
+                                </tbody>
+                                
+                            </table>
+                         </div>   
+                </div>
+            </div>
+                            
+                    </div>
+                    <div class="block" >
+                        <div class="block-title">
+                            <h2>FR Rules</h2>
+                        </div>
+                        <button ng-click="newFRule()" class="btn btn-primary btn-sm" type="button">New Rule</button>
+                        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <div class="table-options clearfix">
+        <br/>
+    </div>
+            <div class="table-responsive">
+                <table id="general-table" class="table table-striped table-vcenter">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>API Code</td>
+                                    <td>Active ?</td>
+                                    <td class="text-center">{{"ACTIONS"|translate}}</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr ng-repeat="r in frules">
+                                        <td>{{r.rule_name}}</td>
+                                        <td>{{r.apicode}}</td>
+                                        <td>{{r.active | translate}}</td>
+                                        <td class="text-center">
+                        <div class="btn-group btn-group-xs">
+                            <a ng-click="frEdit(r._id)" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                            <a ng-click="frDelete(r._id)" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="Edit"><i class="fa fa-times"></i></a>
+                        </div>
+                    </td>
+                                    </tr>
+                            </tbody>
+                            
+                        </table>
+                     </div>   
+            </div>
+        </div>
+                        
+                </div>
+    <!-- END Example Block -->
+</div>
+<!-- END Page Content -->
+      <footer class="clearfix">
+
+    <div class="pull-left">
+        <span id="year-copy"></span> &copy; <a href="http://www.primeairtime.com/" target="_blank">Prime Airtime Ltd</a>
+    </div>
+</footer>

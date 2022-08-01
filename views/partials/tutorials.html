@@ -1,0 +1,47 @@
+<div id="page-content" style="min-height:1036px">
+    <!-- Blank Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-film"></i>Help and Tutorials<br>
+                <small></small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>Support</li>
+        <li>Tutorials</li>
+    </ul>
+    <!-- END Blank Header -->
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="block">
+                <!-- Example Title -->
+                <div class="block-title">
+                    <h2>Portal Overview </h2>
+                </div>
+                <!-- END Example Title -->
+
+                <video id="my-video" controls preload="auto" data-setup="{}"
+                       style="width : 100%; max-width: 800px; margin: auto;">
+                    <source src="/images/PrimeAirtimeAgent.mp4" ng-if="profile.account_type == 'agent'"
+                            type='video/mp4'>
+                    <source src="/images/PrimeAirtimeWholesaler.mp4" ng-if="profile.account_type !== 'agent'"
+                            type='video/mp4'>
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a web browser that
+                        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                    </p>
+                </video>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- END Page Content -->
+<footer class="clearfix">
+    <div class="pull-left">
+        <span id="year-copy"></span> &copy; <a href="http://www.primeairtime.com/" target="_blank">Prime Airtime Ltd</a>
+    </div>
+</footer>

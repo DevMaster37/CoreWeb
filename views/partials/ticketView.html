@@ -1,0 +1,316 @@
+  <div id="page-content" style="min-height:1036px">
+                    <!-- Inbox Header -->
+                    <div class="content-header">
+                        <div class="header-section">
+                            <h1><i class="gi gi-envelope"></i> Ticket<br><small>Your Support Center</small></h1>
+                        </div>
+                    </div>
+                    <ul class="breadcrumb breadcrumb-top">
+                        <li>Support</li>
+                        <li>Support Center</li>
+                        <li><a ui-sref="ticketList()">Tickets</a></li>
+                        <li>Ticket #{{ticket.data.ticket_id}} : {{ticket.data.subject}}</li>
+                    </ul>
+                    <!-- END Inbox Header -->
+
+                    <!-- Inbox Content -->
+                    <div class="row">
+                        <!-- Inbox Menu -->
+                        <div class="col-sm-4 col-lg-3">
+                            <!-- Menu Block -->
+                            <div class="block" ng-if="profile.account_type !== 'agent'">
+                                <!-- Account Status Title -->
+                                <div class="block-title">
+                                   
+                                    <h2><i class="fa fa-user"></i> Account <strong>Stats</strong></h2>
+                                </div>
+                                <!-- END Account Status Title -->
+
+                                <!-- Account Stats Content -->
+                               
+                                <table class="table table-borderless table-striped table-vcenter">
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-right" style="width: 50%;"><strong>Account Name</strong></td>
+                                            <td>{{account.account_name}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right"><strong>Account Type</strong></td>
+                                            <td>{{account.type |translate}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-right"><strong>Primary Wallet Balance</strong></td>
+                                            <td><div class="currency-flag currency-flag-sm currency-flag-{{account.priwal.currency|lowercase}}"></div> {{account.priwal.balance | currency : '' : 2}} {{account.priwal.currency}} </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- END Account Status Content -->
+                            </div>
+                          <div class="block" ng-if="profile.account_type !== 'agent'">
+                                <!-- Account Status Title -->
+                                <div class="block-title">
+                                   
+                                    <h2><i class="fa fa-user"></i> Last 10 <strong>Topups</strong></h2>
+                                </div>
+                                <!-- END Account Status Title -->
+
+                                <!-- Account Stats Content -->
+                               
+                                <table class="table table-borderless table-striped table-vcenter">
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Number</strong></td>
+                                            <td><strong>Amount</strong></td>
+                                            <td><strong>Country</strong></td>
+                                            <td><strong>Operator</strong></td>
+                                            <td><strong>Success ?</strong></td>
+                                        </tr>
+                                        <tr class="success" ng-repeat="t in tl | limitTo:10" ng-if="t.success === true">
+                                            <td><small>{{t.target}}</small></td>
+                                            <td><small>{{t.topup_amount | currency : '' : 2}} {{t.topup_currency}}</small></td>
+                                            <td><small>{{t.country}}</small></td>
+                                            <td><small>{{t.operator_name}}</small></td>
+                                            <td><small>{{t.success | translate}}</small></td>
+                                        </tr>
+                                         <tr class="danger" ng-repeat="t in tl | limitTo:10" ng-if="t.success === false">
+                                            <td><small>{{t.target}}</small></td>
+                                            <td><small>{{t.topup_amount | currency : '' : 2}} {{t.topup_currency}}</small></td>
+                                            <td><small>{{t.country}}</small></td>
+                                            <td><small>{{t.operator_name}}</small></td>
+                                            <td><small>{{t.success | translate</small></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- END Account Status Content -->
+                            </div>
+                            <div class="block" ng-if="profile.account_type !== 'agent'">
+                                <!-- Account Status Title -->
+                                <div class="block-title">
+                                   
+                                    <h2><i class="fa fa-user"></i> Last 10 <strong>Transactions</strong></h2>
+                                </div>
+                                <!-- END Account Status Title -->
+
+                                <!-- Account Stats Content -->
+                               
+                                <table class="table table-borderless table-striped table-vcenter">
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Time</strong></td>
+                                            <td><strong>Type</strong></td>
+                                            <td><strong>Amount</strong></td>
+                                            <td><strong>Description</strong></td>
+                                        </tr>
+                                        <tr ng-repeat="t in tx |limitTo:-10">
+                                            <td><small>{{t.time | date : 'MMM d, y HH:mm:ss'}}</small></td>
+                                            <td><small>{{t.type|uppercase}}</small></td>
+                                            <td ng-if="t.type=='deb'"><small><span class="text-danger">-{{t.amount |currency : '' : 2}} {{t.currency}} <div class="currency-flag currency-flag-sm currency-flag-{{t.currency|lowercase}}"></div> </span></small></td>
+                                            <td ng-if="t.type=='crd'"><small><span class="text-success">+{{t.amount|currency : '' : 2}} {{t.currency}} <div class="currency-flag currency-flag-sm currency-flag-{{t.currency|lowercase}}"></div> </span></small></td>
+                                            <td><small>{{t.description}}</small></td>
+                                        </tr>
+                                      
+                                    </tbody>
+                                </table>
+                                <!-- END Account Status Content -->
+                            </div>
+
+                           
+
+                           
+
+                         
+                        </div>
+                        <!-- END Inbox Menu -->
+
+                    
+                        <!-- Viewer goes here -->
+                        <div class="col-sm-8 col-lg-9">
+                            <!-- View Message Block -->
+                            <div class="block full">
+                                <!-- View Message Title -->
+                                <div class="block-title">
+                                    <div class="block-options pull-right">
+                                    </div>
+                                    <h2>Ticket <strong>#{{ticket.data.ticket_id}} : {{ticket.data.subject}}</strong></h2>
+                                </div>
+                                <!-- END View Message Title -->
+
+                                <!-- Message Meta -->
+                                <table class="table table-borderless table-vcenter remove-margin">
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center" style="width: 80px;">
+                                            </td>
+                                            <td class="hidden-xs text-left" ng-if="profile.account_type == 'agent'">
+                                                <form class="form-horizontal">
+                                                    <div class="form-group">
+                                    <label class="col-md-4 control-label">Ticket Status</label>
+                                    <div class="col-md-8">
+                                       <p class="form-control-static">{{ticket.data.status | translate}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Ticket Created</label>
+                                    <div class="col-md-8">
+                                       <p class="form-control-static">{{ticket.data.createdAt | date : 'MMM d, y HH:mm:ss'}}</p>
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="col-md-4 control-label">Ticket Updated</label>
+                                    <div class="col-md-8">
+                                       <p class="form-control-static">{{ticket.data.updatedAt | date : 'MMM d, y HH:mm:ss'}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Ticket Priority</label>
+                                    <div class="col-md-8">
+                                       <p class="form-control-static">{{ticket.data.priority |translate}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Cc (Requesters) : </label>
+                                    <div class="col-md-8">
+                                      <p class="form-control-static" ng-repeat="a in ticket.data.requester_cc">{{a}} <small><a href="javascript:void(0)" ng-click="removeCC('requester', a)">x</a></small></p>
+                                      <p class="form-control-static"><a href="javascript:void(0);" ng-click="addNewCC('requester');">Add</a></p>
+                                    </div>
+                                </div>
+                                
+                                                </form>
+
+                                            
+                                            </td>
+                                            <td class="hidden-xs" ng-if="profile.account_type !== 'agent'">
+                                                <form class="form-horizontal">
+                                                    <div class="form-group">
+                                    <label class="col-md-4 control-label">Ticket Status</label>
+                                    <div class="col-md-8">
+                                       <select ng-model="ticket.data.status" class="form-control">
+                                                <option value="new" selected>New</option>
+                                                <option value="open">Open</option>
+                                                <option value="resolved">Resolved</option>
+                                                <option value="closed">Closed</option>
+                                            </select>
+                                    </div>
+                                </div>
+                                     <div class="form-group">
+                                    <label class="col-md-4 control-label">Ticket Created</label>
+                                    <div class="col-md-8">
+                                       <p class="form-control-static">{{ticket.data.createdAt | date : 'MMM d, y HH:mm:ss'}}</p>
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="col-md-4 control-label">Ticket Updated</label>
+                                    <div class="col-md-8">
+                                       <p class="form-control-static">{{ticket.data.updatedAt | date : 'MMM d, y HH:mm:ss'}}</p>
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="col-md-4 control-label">Ticket Priority</label>
+                                    <div class="col-md-8">
+                                       <select ng-model="ticket.data.priority" class="form-control">
+                                                <option value="low" selected>Low</option>
+                                                <option value="medium">Medium</option>
+                                                <option value="high">High</option>
+                                                <option value="urgent">Urgent</option>
+                                            </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Cc (Requesters) : </label>
+                                    <div class="col-md-8">
+                                      <p class="form-control-static" ng-repeat="a in ticket.data.requester_cc">{{a}} <small><a href="javascript:void(0)" ng-click="removeCC('requester', a)">x</a></small></p>
+                                      <p class="form-control-static"><a href="javascript:void(0);" ng-click="newCC('requester');">Add</a></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Cc (Support Agents) : </label>
+                                    <div class="col-md-8">
+                                      <p class="form-control-static" ng-repeat="a in ticket.data.agent_cc">{{a}} <small><a href="javascript:void(0)" ng-click="removeCC('agent', a)">x</a></small></p>
+                                      <p class="form-control-static"><a href="javascript:void(0);" ng-click="newCC('agent');">Add</a></p>
+                                    </div>
+                                </div>
+
+                                                </form>
+                                            
+                                            </td>
+                                            <td class="text-right"></td>
+                                        </tr>
+                                </tbody></table>
+                                <hr>
+                                <!-- END Message Meta -->
+                                <!-- ticket table -->
+                                <div class="row">
+                                    <table class="table table-bordered table-striped">
+                                    
+                                    <tbody>
+                                        
+                                        <tr ng-repeat="msg in ticket.messages">
+                                            <td class="text-center" style="width: 20%;">
+                                                <div class="push-bit">
+                                                    <small>{{msg.author_name}}</small>
+                                                   <small>via {{msg.source |translate}}</small>
+                                                   
+                                                </div>
+                                                <small ng-if="msg.source == 'email'">{{msg.email_from}}</small>
+                                            </td>
+                                            <td>
+                                                <p>{{msg.message}}</p>
+                                                <em>On {{msg.created | date : 'MMM d, y HH:mm:ss'}} - <small ng-if="msg.author_type == 'agent'">Support Agent</small><small ng-if="msg.author_type == 'requester'">Requester</small></em>
+                                            </td>
+                                        </tr>
+                                      
+                                       <hr>
+                                        <tr>
+                                            <td class="text-center"><strong>You</strong></td>
+                                            <td><em>Now</em></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">
+                                            </td>
+                                            <td>
+                                                <form action="#" method="post" class="form-horizontal" onsubmit="return false;">
+                                                    <div class="form-group">
+                                                      
+                                                    </div>
+                                                    <div class="form-group" ng-if="profile.main_account == ticket.data.support_account">
+                                                        <div class="col-md-12">
+                                                             <textarea id="message-quick-reply" ng-model="ticket.data.message" name="message-quick-reply" rows="5" class="form-control push-bit" style="resize:none;" placeholder="Your message.."></textarea>
+                                                            <button type="button" ng-click="updateTicket()" class="btn btn-sm btn-primary"><i class="fa fa-reply"></i> Reply</button><div class="checkbox" ng-if="profile.account_type !== 'agent'">
+                                                <label for="example-checkbox1">
+                                                    <input type="checkbox" id="example-checkbox1" name="example-checkbox1" ng-model="ticket.data.closeonreply" value="true"> Close on Reply
+                                                </label>
+                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                                <!-- ticket table --> 
+                               
+                                <hr>
+                                <!-- END Message Body -->
+
+                                
+
+                                <!-- Quick Reply Form -->
+                              
+                                <!-- END Quick Reply Form -->
+                            </div>
+                            <!-- END View Message Block -->
+                        </div>
+                        <!-- Viewer goes here -->
+                    </div>
+                    <!-- END Inbox Content -->
+                </div>
+                <!-- END Page Content -->
+
+
+                <!-- END Page Content -->
+                      <footer class="clearfix">
+                    <div class="pull-left">
+                        <span id="year-copy"></span> &copy; <a href="http://www.primeairtime.com/" target="_blank">Prime Airtime Ltd</a>
+                    </div>
+                </footer>

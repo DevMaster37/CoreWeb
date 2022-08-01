@@ -1,0 +1,31 @@
+
+                    <!-- Modal Header -->
+                    <div class="modal-header text-center">
+                        <h2 class="modal-title"><i class="fa fa-pencil"></i> ePIN Transfer</h2>
+                    </div>
+                    <!-- END Modal Header -->
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <form  class="form-horizontal form-bordered" onsubmit="return false;">
+                            
+                               
+                            <fieldset>
+                                <legend>Amount information</legend>
+                                <div class="form-group" >
+                                    <label class="col-md-4 control-label">Amount </label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.amount" class="form-control">
+                                    </div>
+                                </div>
+                               
+                            </fieldset>
+                            <div class="form-group form-actions">
+                                <div class="col-xs-12 text-right">
+                                    <button ng-click="newUserCancel();" type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" ng-click="xtkTransferOK();" class="btn btn-sm btn-primary">Save Changes</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END Modal Body -->

@@ -1,0 +1,319 @@
+<style>
+    .angular-ui-tree-handle {
+        background: #f8faff;
+        border: 1px solid #dae2ea;
+        color: #7c9eb2;
+        padding: 10px 10px;
+    }
+
+    .angular-ui-tree-handle:hover {
+        color: #438eb9;
+        background: #f4f6f7;
+        border-color: #dce2e8;
+    }
+
+    .angular-ui-tree-placeholder {
+        background: #f0f9ff;
+        border: 2px dashed #bed2db;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    tr.angular-ui-tree-empty {
+        height:100px
+    }
+
+    .group-title {
+        background-color: #687074 !important;
+        color: #FFF !important;
+    }
+
+
+    /* --- Tree --- */
+    .tree-node {
+        border: 1px solid #dae2ea;
+        background: #f8faff;
+        color: #7c9eb2;
+    }
+
+    .nodrop {
+        background-color: #f2dede;
+    }
+
+    .tree-node-content {
+        margin: 10px;
+    }
+    .tree-handle {
+        padding: 10px;
+        background: #428bca;
+        color: #FFF;
+        margin-right: 10px;
+    }
+
+    .angular-ui-tree-handle:hover {
+    }
+
+    .angular-ui-tree-placeholder {
+        background: #f0f9ff;
+        border: 2px dashed #bed2db;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+</style>
+<div id="page-content" style="min-height:1036px">
+    <!-- Blank Header -->
+
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-users"></i>{{"ACCOUNTS_TITLE" | translate}}<br>
+                <small>{{"ACCOUNTS_SUBTITLE" | translate}}</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li><a ui-sref="accountView({id : profile.main_account})">{{"MY_ACCOUNT" | translate}}</a></li>
+        <li><a ui-sref="accountList">{{"ACCOUNT_LIST" | translate}}</a></li>
+    </ul>
+    <!-- END Blank Header -->
+
+    <!-- Example Block -->
+    <div class="block">
+        <!-- Example Title -->
+        <div class="block-title">
+            <h2>{{"ACCOUNT_LIST" | translate}}</h2>
+        </div>
+        <!-- END Example Title -->
+        <div class="table-options clearfix">
+            <input class="form-control" ng-keypress="doSearch($event)" ng-model="query" type="text" placeholder="Search">
+            <br/>
+            <button ui-sref="newAccount" class="btn btn-primary btn-sm">{{"newaccount"|translate}}</button>
+            &nbsp;&nbsp;
+            <button ng-csv="getAccountList()"
+                    csv-header="['Account Number', 'Account Name', 'Legal Type', 'Parent', 'Type']"
+                    filename="export.csv" lazy-load="true" class="btn btn-primary btn-sm">Download List
+            </button>
+            &nbsp;&nbsp;
+            <button ng-click="clearFilter();" ng-if="typefilter" class="btn btn-default btn-sm">Clear Filter</button>
+            &nbsp;&nbsp;
+            <button ng-if="!typefilter" ng-click="setFilter('wholesaler')" class="btn btn-default btn-sm">Show Only
+                Wholesalers
+            </button>
+            &nbsp;&nbsp;
+            <button ng-if="!typefilter" ng-click="setFilter('reseller')" class="btn btn-default btn-sm">Show Only
+                Resellers
+            </button>
+            &nbsp;&nbsp;
+            <button ng-if="!typefilter" ng-click="setFilter('agent')" class="btn btn-default btn-sm">Show Only Agents
+            </button>
+            &nbsp;&nbsp;
+            <button ng-if="!typefilter" ng-click="setFilter('user')" class="btn btn-default btn-sm">Show Only Users
+            </button>
+            &nbsp;&nbsp;
+            <button class="btn btn-sm" ng-class="{'btn-primary': showHierarchy, 'btn-default': !showHierarchy}" ng-click="toggleHierarchy()">
+                {{ showHierarchy ? 'Hierarchy' : 'Table'}}
+            </button>
+        </div>
+        <div class="table-responsive" style="max-width: 100%; overflow-x: auto" ng-show="showHierarchy">
+            <!-- Example Content -->
+            <table id="general-table" class="table table-striped table-vcenter" ng-show="!userview">
+                <thead>
+
+                <tr>
+                    <td>
+                        Created at
+                        <a href="" ng-init="reverseSort=false;_flag=false;"
+                           ng-click="orderByField='createdAt'; reverseSort = !reverseSort; _flag = !_flag">
+                            <i class="fa fa-sort-desc" ng-show="_flag"></i>
+                            <i class="fa fa-sort-asc" ng-show="!_flag"></i>
+                        </a>
+                    </td>
+                    <!--<td>-->
+                        <!--Account Number-->
+                        <!--<a href="" ng-init="orderByField='numeric_id'; reverseSort=false;flag=false;"-->
+                           <!--ng-click="orderByField='numeric_id'; reverseSort = !reverseSort; flag = !flag">-->
+                            <!--<i class="fa fa-sort-desc" ng-show="flag"></i>-->
+                            <!--<i class="fa fa-sort-asc" ng-show="!flag"></i>-->
+                        <!--</a>-->
+                    <!--</td>-->
+                    <td>
+                        {{"ACCOUNT_NAME"|translate}}
+                        <a href="" ng-init="orderByField='account_name'; reverseSort=false; flag1 = false; "
+                           ng-click="orderByField='account_name'; reverseSort = !reverseSort; flag1 = !flag1">
+                            <i class="fa fa-sort-desc" ng-show="flag1"></i>
+                            <i class="fa fa-sort-asc" ng-show="!flag1"></i>
+                        </a>
+                    </td>
+                    <!--<td>-->
+                        <!--{{"legal_type"|translate}}-->
+                        <!--<a href="" ng-init="reverseSort = false ; flag2 = false; "-->
+                           <!--ng-click="orderByField='legal_type'; reverseSort = !reverseSort; flag2 = !flag2">-->
+                            <!--<i class="fa fa-sort-desc" ng-show="flag2"></i>-->
+                            <!--<i class="fa fa-sort-asc" ng-show="!flag2"></i>-->
+                        <!--</a>-->
+                    <!--</td>-->
+                    <td>
+                        Parent
+                        <a href="" ng-init="reverseSort = false ; flag3 = false; "
+                           ng-click="orderByField='parent'; reverseSort = !reverseSort; flag3 = !flag3">
+                            <i class="fa fa-sort-desc" ng-show="flag3"></i>
+                            <i class="fa fa-sort-asc" ng-show="!flag3"></i>
+                        </a>
+                    </td>
+                    <td>
+                        {{"type"|translate}}
+                        <a href="" ng-init="reverseSort = false ; flag4 = false; "
+                           ng-click="orderByField='type'; reverseSort = !reverseSort; flag4 = !flag4">
+                            <i class="fa fa-sort-desc" ng-show="flag4"></i>
+                            <i class="fa fa-sort-asc" ng-show="!flag4"></i>
+                        </a>
+                    </td>
+                    <td>
+                        {{"isactive"|translate}}
+                        <a href="" ng-init="reverseSort = false ; flag5 = false; "
+                           ng-click="orderByField='active'; reverseSort = !reverseSort; flag5 = !flag5">
+                            <i class="fa fa-sort-desc" ng-show="flag5"></i>
+                            <i class="fa fa-sort-asc" ng-show="!flag5"></i>
+                        </a>
+                    </td>
+                    <td>
+                        Test Mode?
+                        <a href="" ng-init="reverseSort = false ; flag6 = false; "
+                           ng-click="orderByField='test_mode'; reverseSort = !reverseSort; flag6 = !flag6">
+                            <i class="fa fa-sort-desc" ng-show="flag6"></i>
+                            <i class="fa fa-sort-asc" ng-show="!flag6"></i>
+                        </a>
+                    </td>
+                    <td>
+                        Balance
+                        <a href="" ng-init="reverseSort = false ; flag7 = false; "
+                           ng-click="orderByField='wallets[0].balance'; reverseSort = !reverseSort; flag7 = !flag7">
+                            <i class="fa fa-sort-desc" ng-show="flag7"></i>
+                            <i class="fa fa-sort-asc" ng-show="!flag7"></i>
+                        </a>
+                    </td>
+                    <td>Pricelist</td>
+                    <td class="text-center">{{"ACTIONS"|translate}}</td>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr ng-repeat="acc in accounts | filter : namefilter | filter : typefilter : true | orderBy:orderByField:reverseSort">
+                    <td>{{ acc.createdAt | date : 'MMM d, y HH:mm:ss' }}</td>
+                    <!--<td><a ui-sref="accountView({id : acc._id})"> {{acc.numeric_id}}</a></td>-->
+                    <td><a ui-sref="accountView({id : acc._id})"> {{acc.account_name}}</a></td>
+                    <!--<td>{{acc.legal_type | translate}}</td>-->
+                    <td>{{account_names[acc.parent]}}</td>
+                    <td>{{acc.type | translate}}</td>
+                    <td>{{acc.active|translate}}</td>
+                    <td>{{acc.test_mode|translate}}</td>
+                    <td>
+                        <div ng-repeat="w in acc.wallets" class="small">
+                            <div ng-if="w.primary === true">
+                                <div class="currency-flag currency-flag-sm currency-flag-{{w.currency | lowercase}}"></div>
+                                <strong>{{w.balance | currency : '' : 2}} {{w.currency}} - Primary</strong>
+                            </div>
+                            <div ng-if="w.primary === false">
+                                <div class="currency-flag currency-flag-sm currency-flag-{{w.currency | lowercase}}"></div>
+                                {{w.balance | currency : '' : 2}} {{w.currency}}
+                            </div>
+                        </div>
+                    </td>
+                    <!-- <td ng-if="profile.account_type !== 'agent'">{{acc.profit_pct}}</td> -->
+                    <td><a href="/api/accounts/{{acc._id}}/pricelist.csv?token={{profile.token}}">Pricelist</a>
+                    </td>
+                    <td class="text-center">
+                        <div class="btn-group btn-group-xs">
+                            <a href="javascript:void(0)" ng-click="transferFunds(acc._id)" class="btn btn-success"><i
+                                    class="fa fa-usd"></i></a>
+                            <a ui-sref="accountView({id : acc._id})" data-toggle="tooltip" title=""
+                               class="btn btn-default" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                            <a ng-click="deleteAccount(acc)" data-toggle="tooltip" title="" class="btn btn-danger"
+                               data-original-title="Delete"><i class="fa fa-times"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+            
+            <table id="general-table-user" class="table table-striped table-vcenter" ng-show="userview">
+                <thead>
+    
+                <tr>
+                    <td>Account</td>
+                    <td>{{"USERNAME"|translate}}</td>
+                    <td>{{"FIRSTNAME"|translate}}</td>
+                    <td>{{"LASTNAME"|translate}}</td>
+                    <!--  <td>{{"ACCESS"|translate}}</td> -->
+                    <td>{{"isactive"|translate}}</td>
+                    <td>POS Lockdown</td>
+                    <td>{{"ACTIONS"|translate}}</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="u in users |filter : namefilter | filter: searchKeyword">
+                    <td>{{accountnames[u.main_account]}}</td>
+                    <td>{{u.username}}</td>
+                    <td>{{u.first_name}}</td>
+                    <td>{{u.last_name}}</td>
+                    <!-- <td>{{u.access | translate}}</td> -->
+                    <td>{{u.active | translate}}</td>
+                    <td>{{u.limited_pos | translate}}</td>
+                    <td>
+                        <div class="btn-group btn-group-xs">
+                            <a ng-click="editUser(u.main_account, u._id)" class="btn btn-default"
+                               data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                            <a ng-click="deleteUser(u.main_account, u._id)" class="btn btn-danger"
+                               data-original-title="Delete"><i class="fa fa-times"></i></a>
+                        </div>
+                    </td>
+                </tr>
+    
+                </tbody>
+    
+            </table>
+            <div class="table-options clearfix">
+                <ul class="pagination-sm" ng-change="changePage(page)" ng-model="page" uib-pagination total-items="count" items-per-page="limit" max-size="10" boundary-link-numbers="true" next-text="{{'nextPage'|translate}}" previous-text="{{'prevPage'|translate}}"></ul>
+            </div>
+        </div>
+
+        <div class="hierarchy" ng-show="!showHierarchy">
+            <script type="text/ng-template" id="nodes_renderer.html">
+                <div ui-tree-handle class="tree-node tree-node-content">
+                    <a class="btn btn-success btn-xs" ng-if="node.child && node.child.length > 0" data-nodrag ng-click="toggle(this)">
+                        <span class="glyphicon" ng-class="{ 'glyphicon-plus': collapsed, 'glyphicon-minus': !collapsed }"></span>
+                    </a>
+                    <a ui-sref="accountView({id : node._id})">
+                        {{account_names[node._id]}}
+                    </a>
+                </div>
+                <ul ui-tree-nodes="" ng-model="node.child" ng-class="{hidden: collapsed}" data-nodrag>
+                    <li ng-repeat="node in node.child" ui-tree-node ng-include="'nodes_renderer.html'">
+                    </li>
+                </ul>
+            </script>
+
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div ui-tree id="tree-root">
+                        <ul ui-tree-nodes ng-model="data">
+                            <li ng-repeat="node in data" ui-tree-node data-nodrag ng-include="'nodes_renderer.html'"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Example Content -->
+    </div>
+    <!-- END Example Block -->
+</div>
+<!-- END Page Content -->
+<footer class="clearfix">
+    <div class="pull-left">
+        <span id="year-copy"></span> &copy; <a href="http://www.primeairtime.com/" target="_blank">Prime Airtime Ltd</a>
+    </div>
+</footer>

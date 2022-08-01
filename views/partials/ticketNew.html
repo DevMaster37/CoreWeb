@@ -1,0 +1,143 @@
+  <div id="page-content" style="min-height:1036px">
+                    <!-- Inbox Header -->
+                    <div class="content-header">
+                        <div class="header-section">
+                            <h1><i class="gi gi-envelope"></i> Ticket<br><small>Your Support Center</small></h1>
+                        </div>
+                    </div>
+                    <ul class="breadcrumb breadcrumb-top">
+                        <li>Support</li>
+                        <li>Support Center</li>
+                        <li><a ui-sref="ticketList()">Tickets</a></li>
+                        <li>New Ticket</li>
+                    </ul>
+                    <!-- END Inbox Header -->
+
+                    <!-- Inbox Content -->
+                    <div class="row">
+                        <!-- Inbox Menu -->
+                        <div class="col-sm-4 col-lg-3">
+                            <!-- Menu Block -->
+                        
+                         
+                           
+
+                           
+
+                         
+                        </div>
+                        <!-- END Inbox Menu -->
+
+                    
+                        <!-- Viewer goes here -->
+                        <div class="col-sm-8 col-lg-9">
+                            <!-- View Message Block -->
+                            <div class="block full">
+                                <!-- View Message Title -->
+                                <div class="block-title">
+                                    <div class="block-options pull-right">
+                                    </div>
+                                    <h2>New Ticket</strong></h2>
+                                </div>
+                                <!-- END View Message Title -->
+
+                                <!-- Message Meta -->
+                                <table class="table table-borderless table-vcenter remove-margin">
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center" style="width: 80px;">
+                                            </td>
+                                            <td class="hidden-xs text-left">
+                                                <form class="form-horizontal">
+                                                    <div class="form-group">
+                                    <label class="col-md-4 control-label">Subject</label>
+                                    <div class="col-md-8">
+                                       <input class="form-control" ng-model="obj.subject" type="text">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Ticket Priority</label>
+                                    <div class="col-md-8">
+                                       <select ng-model="obj.priority" class="form-control">
+                                                <option value="low" selected>Low</option>
+                                                <option value="medium">Medium</option>
+                                                <option value="high">High</option>
+                                                <option value="urgent">Urgent</option>
+                                            </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Cc (Requesters) : </label>
+                                    <div class="col-md-8">
+                                      <p class="form-control-static" ng-repeat="a in ticket.data.requester_cc">{{a}} <small><a href="javascript:void(0)" ng-click="removeCC('requester', a)">x</a></small></p>
+                                      <p class="form-control-static"><a href="javascript:void(0);" ng-click="newCC('requester');">Add</a></p>
+                                    </div>
+                                </div>
+                                
+                                                </form>
+
+                                            
+                                            </td>
+                                            <td class="text-right"></td>
+                                        </tr>
+                                </tbody></table>
+                                <hr>
+                                <!-- END Message Meta -->
+                                <!-- ticket table -->
+                                <div class="row">
+                                    <table class="table table-bordered table-striped">
+                                    
+                                    <tbody>
+                                        
+                                       
+                                        <tr>
+                                            <td class="text-center"><strong>You</strong></td>
+                                            <td><em>Now</em></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">
+                                            </td>
+                                            <td>
+                                                <form action="#" method="post" class="form-horizontal" onsubmit="return false;">
+                                                    <div class="form-group">
+                                                      
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                             <textarea id="message-quick-reply" ng-model="obj.message" name="message-quick-reply" rows="5" class="form-control push-bit" style="resize:none;" placeholder="Your message.."></textarea>
+                                                            <button type="button" ng-click="createTicket()" class="btn btn-sm btn-primary"><i class="fa fa-reply"></i> Send</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                                <!-- ticket table --> 
+                               
+                                <hr>
+                                <!-- END Message Body -->
+
+                                
+
+                                <!-- Quick Reply Form -->
+                              
+                                <!-- END Quick Reply Form -->
+                            </div>
+                            <!-- END View Message Block -->
+                        </div>
+                        <!-- Viewer goes here -->
+                    </div>
+                    <!-- END Inbox Content -->
+                </div>
+                <!-- END Page Content -->
+
+
+                <!-- END Page Content -->
+                      <footer class="clearfix">
+                    <div class="pull-left">
+                        <span id="year-copy"></span> &copy; <a href="http://www.primeairtime.com/" target="_blank">Prime Airtime Ltd</a>
+                    </div>
+                </footer>

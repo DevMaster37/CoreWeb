@@ -1,0 +1,204 @@
+
+                    <!-- Modal Header -->
+                    <div class="modal-header text-center">
+                        <h2 class="modal-title"><i class="fa fa-pencil"></i> {{"edituser" | translate}}</h2>
+                    </div>
+                    <!-- END Modal Header -->
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <form  class="form-horizontal form-bordered" onsubmit="return false;">
+                            <fieldset>
+                                <legend>{{"basicinfo"|translate}}</legend>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">{{"USERNAME"|translate}}</label>
+                                    <div class="col-md-8">
+                                            <input type="text" ng-model="user.username" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="user-settings-password">{{"password"|translate}}</label>
+                                    <div class="col-md-8">
+                                        <input type="password"  ng-model="user.password" class="form-control" placeholder="{{'passwordplaceholder'|translate}}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="user-settings-password">{{"passwordconfirm"|translate}}</label>
+                                    <div class="col-md-8">
+                                        <input type="password" ng-model="user.passwordconfirm" class="form-control" placeholder="{{'passwordplaceholder'|translate}}">
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="col-md-4 control-label" for="user-settings-notifications">{{"isactive"|translate}}</label>
+                                    <div class="col-md-8">
+                                        <label class="switch switch-primary">
+                                            <input type="checkbox" ng-model="user.active">
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="user-settings-notifications">{{"emailnotify"|translate}}</label>
+                                    <div class="col-md-8">
+                                        <label class="switch switch-primary">
+                                            <input type="checkbox" ng-model="user.send_notifications">
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>{{"additionalinfo"|translate}}</legend>
+                                <div class="form-group">
+                                        <label class="col-md-3 control-label" for="example-file-input">{{"avatar"|translate}}</label>
+                                        <div class="col-md-9">
+                                            <button class="btn btn-primary" type="file" ng-model="user.avatar" name="example-file-input" ngf-select="uploadAvatar($file, $invalidFiles)"
+          accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">Upload</button><br/><br/>
+                        <div ng-show="f.progress >= 0" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{f.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{f.progress}}%">{{f.progress}}%</div>
+                                        </div>
+                                    </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">{{"FIRSTNAME"|translate}}</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="user.first_name" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">{{"LASTNAME"|translate}}</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="user.last_name" class="form-control">
+                                    </div>
+                                </div>
+                                   <div class="form-group">
+                                    <label class="col-md-4 control-label">Balance Alert Threshold</label>
+                                    <div class="col-md-8">
+                                        <input type="number" ng-model="user.alert_level" class="form-control">
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="col-md-4 control-label">{{"skypename"|translate}}</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="user.skype" class="form-control">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Access Control</legend>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="user-settings-notifications">Dashboard Access</label>
+                                    <div class="col-md-8">
+                                        <label class="switch switch-primary">
+                                            <input type="checkbox" ng-model="user.dashboard_enabled">
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="user-settings-notifications">POS Access</label>
+                                    <div class="col-md-8">
+                                        <label class="switch switch-primary">
+                                            <input type="checkbox" ng-model="user.pos_access">
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="user-settings-notifications">SMS Access</label>
+                                    <div class="col-md-8">
+                                        <label class="switch switch-primary">
+                                            <input type="checkbox" ng-model="user.sms_access">
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="user-settings-notifications">Account Access</label>
+                                    <div class="col-md-8">
+                                        <label class="switch switch-primary">
+                                            <input type="checkbox" ng-model="user.account_access">
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="user-settings-notifications">Transactions Access</label>
+                                    <div class="col-md-8">
+                                        <label class="switch switch-primary">
+                                            <input type="checkbox" ng-model="user.transactions_access">
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="user-settings-notifications">Pins Access</label>
+                                    <div class="col-md-8">
+                                        <label class="switch switch-primary">
+                                            <input type="checkbox" ng-model="user.pins_access">
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="user-settings-notifications">ePins Access</label>
+                                    <div class="col-md-8">
+                                        <label class="switch switch-primary">
+                                            <input type="checkbox" ng-model="user.epins_access">
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="user-settings-notifications">Background Job Access</label>
+                                    <div class="col-md-8">
+                                        <label class="switch switch-primary">
+                                            <input type="checkbox" ng-model="user.jobs_access">
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="user-settings-notifications">Pricelist Access</label>
+                                    <div class="col-md-8">
+                                        <label class="switch switch-primary">
+                                            <input type="checkbox" ng-model="user.price_access">
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="user-settings-notifications">TopupLog Access</label>
+                                    <div class="col-md-8">
+                                        <label class="switch switch-primary">
+                                            <input type="checkbox" ng-model="user.topuplog_access">
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="user-settings-notifications">Support Access</label>
+                                    <div class="col-md-8">
+                                        <label class="switch switch-primary">
+                                            <input type="checkbox" ng-model="user.support_access">
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="user-settings-notifications">Balance Access</label>
+                                    <div class="col-md-8">
+                                        <label class="switch switch-primary">
+                                            <input type="checkbox" ng-model="user.balance_access">
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="form-group form-actions">
+                                <div class="col-xs-12 text-right">
+                                    <button ng-click="newUserCancel();" type="button" class="btn btn-sm btn-default" data-dismiss="modal">{{"close"|translate}}</button>
+                                    <button type="button" ng-click="editUserOK();" class="btn btn-sm btn-primary">{{"savechanges"|translate}}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END Modal Body -->

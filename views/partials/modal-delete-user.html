@@ -1,0 +1,29 @@
+
+                    <!-- Modal Header -->
+                    <div class="modal-header text-center">
+                        <h2 class="modal-title"><i class="fa fa-times"></i> {{"deleteuser" | translate}}</h2>
+                    </div>
+                    <!-- END Modal Header -->
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <form  class="form-horizontal form-bordered" onsubmit="return false;">
+                            <fieldset>
+                                 <h4 class="col-md-10 col-md-offset-1 form-control-static">{{"deletemsg" | translate}} {{user.username}} ?</h4>
+                                 <div class="form-group">
+                                    <label class="col-md-6 control-label" >{{"deleteconfirm"|translate}}</label>
+                                    <div class="col-md-6">
+                                        <input type="text" ng-model="uconfirm" class="form-control">
+                                    </div>
+                                </div>
+                            </fieldset>
+                           
+                            <div class="form-group form-actions">
+                                <div class="col-xs-12 text-right">
+                                    <button ng-click="newUserCancel();" type="button" class="btn btn-sm btn-default" data-dismiss="modal">{{"cancel"|translate}}</button>
+                                    <button type="button" ng-click="deleteUserOK();" ng-disabled="uconfirm !== user.username" class="btn btn-sm btn-danger">{{"deleteuser"|translate}}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END Modal Body -->

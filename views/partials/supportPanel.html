@@ -1,0 +1,358 @@
+<div id="page-content" style="min-height:1036px">
+    <!-- Blank Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-brain"></i>Support Panel (BETA!!!!)<br><small>Topuplog Detail View</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>System</li>
+        <li>Support Panel</li>
+        <li>Transaction #{{log.tlog.txkey}}</li>
+    </ul>
+        <!-- Example Block -->
+<div class="block">
+<div class="block-title">
+<h2>Detailed Log view <button type="button" ng-click="refundTx();" class="btn btn-sm btn-danger">Refund Transaction</button>    |   <button style="float:right" type="button"  ng-click="back()" class="btn btn-sm btn-info">BACK</button></h2>
+</div>
+<div class="row" >
+<div class="col-md-12 col-xs-12">
+<div class="table-options clearfix">
+    
+    <fieldset>
+        <legend>Information</legend>
+        <form class="form-horizontal">
+            <div class="col-md-6 col-xs-12">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Exec IP</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.exec_ip }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Exec Agent</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.exec_agent}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Exec By</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.exec_by}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Time/Date</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.time | date : 'MMM d, y HH:mm:ss' }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Completed In</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.completed_in }}ms</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Operator Name</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.operator_name }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Type</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.type |translate }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Paid Amount</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.paid_amount }} {{log.tlog.paid_currency}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Universal Key</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.txkey }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">App Host</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.app_host }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Operator Reference</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.api_transactionid }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Product ID</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.product_id }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Wholesaler Commission</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.wh_com }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Reseller Commission</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.re_com }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Agent Commission</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.ag_com }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">System Reference</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.operator_reference }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Client Reference</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.client_reference.toString().split('#')[1] }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="col-md-6 col-xs-12">
+               
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Successful ?</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.success | translate}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">State</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.state | translate}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Response Code</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.code | translate}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">API Request from Client</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.client_apireqbody }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">API Response to Client</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.client_apiresponse }}</p>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-md-2 control-label">Operator Name</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.operator_name }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Operator Country</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.country }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Channel</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.channel | translate }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Topup Amount</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.topup_amount }} {{log.tlog.topup_currency}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Target</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.target }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Tag</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.tag }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Route Tag</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.route_tag }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Source SIM/Account</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.vnd_sim }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Account</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{account_names[log.tlog.account] }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Wholesaler</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{account_names[log.tlog.wholesaler]}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Custom Details</label>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{log.tlog.custom_details }}</p>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </fieldset>
+    <fieldset>
+        <legend>Related Transactions</legend>
+        <div class="table-responsive">
+            <div class="table-responsive">
+                <table id="general-table" class="table table-striped table-vcenter">
+                    <thead>
+                    <tr>
+                        <td>Transaction ID</td>
+                        <td>Account</td>
+                        <td>Time</td>
+                        <td>Type</td>
+                        <td>Amount</td>
+                        <td>Currency</td>
+                        <td>Balance After TX</td>
+                        <td>Wallet ID</td>
+                        <td>Source</td>
+                        <td>Description</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="i in log.related_transactions">
+                        <td>{{i._id}}</td>
+                        <td>{{account_names[i.account]}}</td>
+                        <td>{{i.time | date : 'MMM d, y HH:mm:ss' }}</td>
+                        <td ng-if="i.type=='deb'"><span class="text-danger">{{i.type | uppercase}}</span></td>
+                        <td ng-if="i.type=='deb'"><span
+                                class="text-danger">-{{i.amount | currency : '' : 2}} </span></td>
+                        <td ng-if="i.type=='crd'"><span class="text-success">{{i.type | uppercase}}</span></td>
+                        <td ng-if="i.type=='crd'"><span
+                                class="text-success">+{{i.amount | currency : '' : 2}} </span></td>
+                        <td>
+                            <div class="currency-flag currency-flag-sm currency-flag-{{i.currency|lowercase}}"></div>
+                            {{i.currency}}
+                        </td>
+
+                        <td>{{i.balance_after | currency : '' : 2}}</td>
+                        <td>{{i.wallet_id}}</td>
+                        <td>{{i.source}}</td>
+                        <td ng-if="i.type=='deb'">{{i.description}} paid with {{i.amount | currency : '' : 2}} {{i.currency}}</td>
+                        <td ng-if="i.type=='crd'">{{i.description}}</td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>RAW XML Information</legend>
+        <div class="table-responsive">
+            <div class="table-responsive">
+                <table id="general-table" class="table table-striped table-vcenter">
+                    <thead>
+                    <tr>
+                        <td>Time</td>
+                        <td>Host</td>
+                        <td>APID</td>
+                        <td>Type</td>
+                        <td>Target</td>
+                        <td>XML</td>
+                      
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="i in log.xml">
+                        <td>{{i.date | date : 'MMM d, y HH:mm:ss' }}</td>
+                        <td>{{i.host}}</td>
+                        <td>{{i.apid}}</td>
+                        <td>{{i.type |translate}}</td>
+                        <td>{{i.target}}</td>
+                        <td>{{i.xml}}</td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Events</legend>
+        <div class="table-responsive">
+            <div class="table-responsive">
+                <table id="general-table" class="table table-striped table-vcenter">
+                    <thead>
+                    <tr>
+                        <td>Type</td>
+                        <td>Time</td>
+                        <td>Host</td>
+                        <td>Universal Key</td>
+                        <td>Message</td>
+                      
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="i in log.logs">
+                        <td>{{i.level |translate}}</td>
+                        <td>{{i.date | date : 'MMM d, y HH:mm:ss' }}</td>
+                        <td>{{i.host}}</td>
+                        <td>{{i.txkey}}</td>
+                        <td>{{i.msg}}</td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </fieldset>
+</div>
+
+</div>
+</div>
+
+
+</div>
+
+<footer class="clearfix">
+<div class="pull-left">
+<span id="year-copy"></span> &copy; <a href="http://www.primeairtime.com/" target="_blank">Prime Airtime Ltd</a>
+</div>
+</footer>
+
+<!-- END Example Block -->
+
+
+    

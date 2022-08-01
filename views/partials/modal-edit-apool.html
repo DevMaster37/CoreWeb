@@ -1,0 +1,172 @@
+
+                    <!-- Modal Header -->
+                    <div class="modal-header text-center">
+                        <h2 class="modal-title"><i class="fa fa-pencil"></i> New Account Pool</h2>
+                    </div>
+                    <!-- END Modal Header -->
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <form  class="form-horizontal form-bordered" onsubmit="return false;">
+                            <fieldset>
+                                <legend>Details</legend>
+                                
+                                 <div class="form-group">
+                                    <label class="col-md-4 control-label">API Code</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.apicode" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Tag</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.tag" class="form-control">
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="col-md-4 control-label">Link (App Part)</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.link" class="form-control">
+                                    </div>
+                                </div>
+				<div class="form-group">
+                                    <label class="col-md-4 control-label">Tibco Link (App Part)</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.urlpath" class="form-control">
+                                    </div>
+                                </div>
+				<div class="form-group">
+                                    <label class="col-md-4 control-label">Tibco Key (Base64)</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.tibco_key" class="form-control">
+                                    </div>
+                                </div>
+				<div class="form-group">
+                                    <label class="col-md-4 control-label">Tibco Certificate (Base64)</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.tibco_certificate" class="form-control">
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="col-md-4 control-label">Username</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.username" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Password</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.password" class="form-control">
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="col-md-4 control-label">ExtNWCode (Airtel)</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.extnwcode" class="form-control">
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="col-md-4 control-label">PIN</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.pin" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Connection Mode</label>
+                                    <div class="col-md-8">
+                                    	<select ng-model="rec.connectionMode" class="form-control">
+					<option value="direct">Direct</option>
+					<option value="mfin">via Panamax</option>
+                    <option value="awake">via Awake</option>
+					</select>
+					</div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Communication Protocol (9mobile)</label>
+                                    <div class="col-md-8">
+                                    	<select ng-model="rec.connectionProtocol" class="form-control">
+					<option value="evc">EVC</option>
+					<option value="tibco">Tibco</option>
+					</select>
+					</div>
+                                </div>
+                                <div class="form-group" ng-if="rec.connectionProtocol == 'tibco'">
+                                    <label class="col-md-4 control-label">Tibco Certificate</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.tibco_certificate" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-if="rec.connectionProtocol == 'tibco'">
+                                    <label class="col-md-4 control-label">Tibco Key</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.tibco_key" class="form-control">
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="col-md-4 control-label">ReqGWCode (Airtel)</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.reqgwcode" class="form-control">
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="col-md-4 control-label">ReqGwType (Airtel)</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.reqgwtype" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">SvcPort (Airtel)</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.svcport" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">SvcType (Airtel)</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.svctype" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">SourceID (9mobile)</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.sourceID" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">ProcessTypeID (9mobile)</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.processTypeID" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">ChannelID (9mobile)</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.channelID" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Source Numbers</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.srcNum" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="user-settings-notifications">Active ?</label>
+                                    <div class="col-md-8">
+                                        <label class="switch switch-primary">
+                                            <input type="checkbox" ng-model="rec.active">
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            
+                            <div class="form-group form-actions">
+                                <div class="col-xs-12 text-right">
+                                    <button ng-click="newUserCancel();" type="button" class="btn btn-sm btn-default" data-dismiss="modal">{{"cancel"|translate}}</button>
+                                    <button type="button" ng-click="editLinkOK();" class="btn btn-sm btn-primary">{{"savechanges"|translate}}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END Modal Body -->

@@ -1,0 +1,49 @@
+
+                    <!-- Modal Header -->
+                    <div class="modal-header text-center">
+                        <h2 class="modal-title"><i class="fa fa-pencil"></i> Virtual Funds Transfer</h2>
+                    </div>
+                    <!-- END Modal Header -->
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <form  class="form-horizontal form-bordered" onsubmit="return false;">
+                                <fieldset>
+                                <legend>Destination</legend>
+                               
+                               <div class="form-group">
+                                    <label class="col-md-4 control-label">Destination Wallet</label>
+                                    <div class="col-md-8">
+                                        <select ng-model="tdata.destination" class="form-control">
+                                            <option ng-repeat="c in tdata.destWallets" value="{{c.wallet_id}}"> [{{c.type}}] {{c.wallet_name}} - {{c.currency}} - {{c.wallet_id}} ({{c.balance | currency : '' : 2}} {{c.currency}})</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                </fieldset>
+                            <fieldset>
+                                <legend>Amount and Rate information</legend>
+                                <div class="form-group" >
+                                    <label class="col-md-4 control-label">Amount </label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.amount" class="form-control">
+                                        <span class="help-block">Enter amount</span>
+                                    </div>
+                                </div>
+                                <div class="form-group" >
+                                    <label class="col-md-4 control-label">Description/ Reference </label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rec.description" class="form-control">
+                                        <span class="help-block">Please enter description / reference (will be shown in transaction)</span>
+                                    </div>
+                                </div>
+                                
+                            </fieldset>
+                            <div class="form-group form-actions">
+                                <div class="col-xs-12 text-right">
+                                    <button ng-click="$dismiss();" type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" ng-click="transferVFundsOK();" class="btn btn-sm btn-primary">Save Changes</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END Modal Body -->

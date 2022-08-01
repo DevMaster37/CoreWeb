@@ -1,0 +1,77 @@
+
+                    <!-- Modal Header -->
+                    <div class="modal-header text-center">
+                        <h2 class="modal-title"><i class="fa fa-pencil"></i> New Link</h2>
+                    </div>
+                    <!-- END Modal Header -->
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <form  class="form-horizontal form-bordered" onsubmit="return false;">
+                            <div class="form-group">
+                                    <label class="col-md-4 control-label">API Code</label>
+                                    <div class="col-md-8">
+                                        <select class="form-control" ng-model="rate.apicode">
+                                            <option value="NGAT">NGAT - Nigeria Airtel</option>
+                                            <option value="NGET">NGET - Nigeria 9mobile</option>
+                                            <option value="NGGL">NGGL - Nigeria GLO</option>
+                                            <option value="NGMT">NGMT - Nigeria MTN</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Tag</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rate.tag" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Host</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rate.host" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Port</label>
+                                    <div class="col-md-8">
+                                        <input type="text" ng-model="rate.port" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Protocol</label>
+                                    <div class="col-md-8">
+                                        <select class="form-control" ng-model="rate.protocol">
+                                            <option value="http">HTTP</option>
+                                            <option value="https">HTTPS</option>
+                                        </select>
+                                    </div>
+                                </div>
+				<div class="form-group">
+                                    <label class="col-md-4 control-label">Host Type</label>
+                                    <div class="col-md-8">
+                                        <select class="form-control" ng-model="rate.hostType">
+                                            <option value="tibco">TIBCO</option>
+                                            <option value="evc">EVC</option>
+						<option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="user-settings-notifications">Active ?</label>
+                                    <div class="col-md-8">
+                                        <label class="switch switch-primary">
+                                            <input type="checkbox" ng-model="rate.active">
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            
+                            <div class="form-group form-actions">
+                                <div class="col-xs-12 text-right">
+                                    <button ng-click="newUserCancel();" type="button" class="btn btn-sm btn-default" data-dismiss="modal">{{"cancel"|translate}}</button>
+                                    <button type="button" ng-click="createLinkOK();" class="btn btn-sm btn-primary">{{"savechanges"|translate}}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END Modal Body -->
