@@ -60,7 +60,6 @@
     "deleteconfirm" : "Confirm by entering username:",
     "childWarningMsg" : "This account has child accounts. If you delete this account,all child accounts would be deleted .",
     "deleteaccount" : "Confirm by entering master user's email:",
-    "deleteuser" : "Delete User",
     "cancel" : "Cancel",
     "close" : "Close",
     "savechanges" : "Save Changes",

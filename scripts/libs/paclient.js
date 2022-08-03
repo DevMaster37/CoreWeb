@@ -1153,9 +1153,9 @@ angular.module('paclient', [])
             });
         }
         
-        self.getApiSettings = function () {
+        self.getApiSettings = function (page, category) {
             return $q(function (resolve, reject) {
-                self.get('/apisettings/')
+                self.get('/apisettings?page=' + page + '&category=' + category)
                     .then(function (resp) {
                         resolve(resp.data);
                     })

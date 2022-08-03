@@ -8,13 +8,21 @@
  * Controller of the billinguiApp
  */
 angular.module('billinguiApp')
-  .controller('ApiSettingsController', ['$scope', 'api','$location', '$stateParams', '$uibModal', '$timeout', 'ngProgressFactory', function ($scope, api, $location, $stateParams, $uibModal, $timeout, ngProgressFactory) {
+  .controller('ApiSettingsController', ['$scope', 'SweetAlert', 'api','$location', '$stateParams', '$uibModal', '$timeout', 'ngProgressFactory', 
+  function ($scope, SweetAlert, api, $location, $stateParams, $uibModal, $timeout, ngProgressFactory) {
       if (api.isAuthed()) {
 
         $scope.progressbar = ngProgressFactory.createInstance();
-        console.log($scope.progressbar);
         $scope.progressbar.start();
-            var resizePageContent = function() {
+        console.log($scope.progressbar);
+
+        $scope.curTab = "electricity";
+        $scope.query = '';
+        $scope.page = 1;
+        $scope.limit = 10;
+        $scope.count = 0;
+        
+        var resizePageContent = function() {
             page            = $('#page-container');
             pageContent     = $('#page-content');
             header          = $('header');
@@ -61,11 +69,13 @@ angular.module('billinguiApp')
             api.getProfile()
                 .then(function (prof) {
                     $scope.profile = prof;
-
-                    return api.getApiSettings();
+                    return api.getApiSettings($scope.page, $scope.curTab);
                 })
                 .then(function (pr) {
                     $scope.apisettings = pr.apisettings;
+                    $scope.count = pr.count;
+                    $scope.page = pr.page;
+                    $scope.limit = pr.limit;
                     $scope.load();
                 })
         }
@@ -100,10 +110,36 @@ angular.module('billinguiApp')
             api.updateApiSetting($scope.rec._id, $scope.rec)
                 .then(function (bc) {
                     $scope.modal.close();
+                    SweetAlert.swal({
+                        title: "Update Success!",
+                        text: "Api Setting has been updated!",
+                        type: "success",
+                        closeOnConfirm: true
+                    }, function (ok) {
+                        if (ok) {
+                        }
+                    });
                 })
                 .catch(function (err) {
                     $scope.modal.dismiss(err);
                 })
+        }
+
+        $scope.changePage = function (page) {
+            $scope.page = page;
+            if ($scope.query == '') {
+                updateApiSettingView();
+            } else {
+
+            }
+        }
+
+        $scope.selectTab = function (category) {
+            if ($scope.curTab == category)
+                return;
+            $scope.count = 0;
+            $scope.curTab = category;
+            $scope.changePage(1);
         }
 
         updateApiSettingView();

@@ -19,39 +19,51 @@
             <h2>Api Settings</h2>
         </div>
         <div class="row">
-            <div class="col-md-12 col-xs-12">
-                <div class="table-options clearfix">
-                <br/>
+            <uib-tabset active="active">
+                <uib-tab index="0" heading="{{'electricity'|translate}}" select="selectTab('electricity');"></uib-tab>
+                <uib-tab index="1" heading="{{'lottery'|translate}}" select="selectTab('lottery');"></uib-tab>
+                <uib-tab index="2" heading="{{'tv'|translate}}" select="selectTab('tv');"></uib-tab>
+                <uib-tab index="3" heading="{{'airtime'|translate}}" select="selectTab('airtime');"></uib-tab>
+                <uib-tab index="4" heading="{{'data'|translate}}" select="selectTab('data');"></uib-tab>
+                <uib-tab index="5" heading="{{'others'|translate}}" select="selectTab('others');"></uib-tab>
+                <uib-tab index="6" heading="{{'fundtransfer'|translate}}" select="selectTab('fundtransfer');"></uib-tab>
+                <uib-tab index="7" heading="{{'fees'|translate}}" select="selectTab('fees');"></uib-tab>
+                <div class="col-md-12 col-xs-12 block">
+                    <div class="table-options clearfix">
+                        <input class="form-control" ng-model="namefilter" type="text" placeholder="{{'FILTER' |translate}}">
+                        <br/>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="general-table" class="table table-striped table-vcenter">
+                            <thead>
+                                <tr>
+                                    <td>API Code</td>
+                                    <td>Name</td>
+                                    <td>Status</td>
+                                    <td>Category</td>
+                                    <td>Provider</td>
+                                    <td class="text-center">{{"ACTIONS"|translate}}</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="r in apisettings | filter : namefilter">
+                                    <td>{{r.apicode}}</td>
+                                    <td>{{r.name}}</td>
+                                    <td>{{r.status == "1" ? "Active" : "Disabled"}}</td>
+                                    <td>{{r.category}}</td>
+                                    <td>{{r.provider}}</td>
+                                    <td class="text-center">
+                                        <div class="btn-group btn-group-xs">
+                                            <a ng-click="apiSettingEdit(r._id)" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <ul uib-pagination total-items="count" items-per-page="limit" ng-model="page" ng-change="changePage(page)" max-size="10" class="pagination-sm" boundary-link-numbers="true" next-text="{{'nextPage'|translate}}" previous-text="{{'prevPage'|translate}}"></ul>
+                    </div>
                 </div>
-                <div class="table-responsive">
-                    <table id="general-table" class="table table-striped table-vcenter">
-                        <thead>
-                            <tr>
-                                <td>API Code</td>
-                                <td>Name</td>
-                                <td>Status</td>
-                                <td>Category</td>
-                                <td>Provider</td>
-                                <td class="text-center">{{"ACTIONS"|translate}}</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="r in apisettings">
-                                <td>{{r.apicode}}</td>
-                                <td>{{r.name}}</td>
-                                <td>{{r.status == "1" ? "Active" : "Disabled"}}</td>
-                                <td>{{r.category}}</td>
-                                <td>{{r.provider}}</td>
-                                <td class="text-center">
-                                    <div class="btn-group btn-group-xs">
-                                        <a ng-click="apiSettingEdit(r._id)" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>   
-            </div>
+            </uib-tabset>
         </div>
                             
     </div>

@@ -1753,16 +1753,21 @@ function ($scope, api, $location, ngProgressFactory,$interval,$uibModal,SweetAle
             console.log("aaaaaaa");
             if (timer_flag) {
                 timer_flag = false;
-                api.getAccountsWallet($scope.accountIdList)
-                .then(function(accs){
-                    for(var i =0;i<accs.length;i++){
-                        $scope.accountWallets[accs[i]['account_name']] = accs[i]['wallets'];
-                    }
-                    timer_flag = true;
-                })
+                api.getCoreDashboardByCustomTime($scope.mode,$scope.selectedDate)
+                .then(function(d){
+                    $scope.accountIdList = d.map(function (account) { return account._id });
+                    api.getAccountsWallet($scope.accountIdList)
+                    .then(function(accs){
+                        for(var i =0;i<accs.length;i++){
+                            $scope.accountWallets[accs[i]['account_name']] = accs[i]['wallets'];
+                        }
+                        timer_flag = true;
+                    })
+                });
             }
         }, 300000);
     }
+
     $scope.$on('$destroy', function() {
         if($scope.modeObj) {
             $scope.modeObj.destroy();

@@ -214,7 +214,8 @@ angular.module('billinguiApp')
                 var pdate = $scope.date;
                 var total_amount = 0;
 
-                for(let val of excelRows) {
+                for (var i = 0; i < excelRows.length; i ++) {
+                    var val = excelRows[i];
                     var crun = 0;
                     if (ptype == "1" && val.vendStatus.trim() == "SUCCESS") {//BP*
                             if (val.vendStatus == "") {

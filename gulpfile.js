@@ -11,6 +11,12 @@ gulp.task('copy-style-assets', function () {
     return stream;
 });
 
+gulp.task('copy-image-assets', function () {
+    var stream =  gulp.src('./images/**') // stream source
+        .pipe(gulp.dest('./dist/images/')); // copy to dist/views
+    return stream;
+});
+
 gulp.task('css-files', function () {
     var stream = gulp.src('./main.html')
         .pipe(useref()) //take a streem from index.html comment
@@ -36,6 +42,7 @@ var runSequence = require('gulp4-run-sequence');/* some other plugins go here */
 gulp.task('build', function (callback) {
     runSequence(
         'copy-style-assets',
+        'copy-image-assets',
         'css-files',
         'bower-files',
         /* other tasks maybe */
