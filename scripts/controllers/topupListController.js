@@ -12,8 +12,6 @@ angular.module('billinguiApp')
     function ($scope, $interval, api, $location, $stateParams, $uibModal, ngProgressFactory, $rootScope, $window, SweetAlert, localStorageService) {
         if (api.isAuthed()) {
 
-            
-
             var resizePageContent = function () {
                 page = $('#page-container');
                 pageContent = $('#page-content');

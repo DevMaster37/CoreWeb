@@ -873,6 +873,17 @@ angular.module('paclient', [])
                     });
             });
         }
+        self.getLogs = function (txkey) {
+            return $q(function (resolve, reject) {
+                self.get('/logs/' + txkey)
+                    .then(function (resp) {
+                        resolve(resp.data);
+                    })
+                    .catch(function (err) {
+                        reject(err);
+                    });
+            });
+        }
         self.getMappings = function (page) {
             return $q(function (resolve, reject) {
                 self.get('/provmap/' + page)
