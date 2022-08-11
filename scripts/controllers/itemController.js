@@ -8,7 +8,7 @@
  * Controller of the billinguiApp
  */
 angular.module('billinguiApp')
-.controller('ItemsController', ['$scope', 'api','$location', '$stateParams', '$uibModal', '$timeout', function ($scope, api, $location, $stateParams, $uibModal, $timeout) {
+.controller('ItemsController', ['$scope', 'api','$location', '$stateParams', '$uibModal', 'SweetAlert', '$timeout', function ($scope, api, $location, $stateParams, $uibModal, SweetAlert, $timeout) {
     if (api.isAuthed()) {
         var resizePageContent = function() {
             page            = $('#page-container');
@@ -68,13 +68,44 @@ angular.module('billinguiApp')
             api.getLogs($scope.txKey)
             .then(function (data) {
                 $scope.log = data;
-                $scope.load();
             })
             .catch(function (err) {
                 console.log(err);
             })
         }
             
+        $scope.refundTx = function () {
+            api._get('/topuplog/item/' + $scope.log.tlog._id + '/refund')
+                .then(function (t) {
+                    $scope.tx = t;
+                    SweetAlert.swal({
+                        title: "Good Job!",
+                        text: "TopupLog has been refunded!",
+                        type: "success",
+                        closeOnConfirm: true
+                    }, function (ok) {
+                        if (ok) {
+                        }
+
+                    });
+                })
+                $scope.modal = $uibModal.open({
+                    animation: true,
+                    ariaLabelledBy: 'modal-title',
+                    ariaDescribedBy: 'modal-body',
+                    templateUrl: 'views/partials/modal-view-log.html',
+                    controller: 'AccountsModalController',
+                    scope: $scope
+                });
+
+                $scope.modal.result.then(function (selectedItem) {
+                    
+
+                }, function () {
+                    console.log('but i waz dizmizeddd')
+                });
+        }
+
         $scope.newItem = function () {
             $scope.modal = $uibModal.open({
                 animation: true,
