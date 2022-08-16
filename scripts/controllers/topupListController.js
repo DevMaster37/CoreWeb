@@ -290,8 +290,6 @@ angular.module('billinguiApp')
                             console.log(err);
                         })
                 }
-
-
             }
             $scope.popup1 = {
                 opened: false

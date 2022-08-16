@@ -197,7 +197,6 @@ function ($scope, api, $location, ngProgressFactory,$interval,$uibModal,SweetAle
             // Logout`
             $location.path('/logout');
         }
-
         return providers;
     })
     .then(function (prov) {
@@ -240,7 +239,7 @@ function ($scope, api, $location, ngProgressFactory,$interval,$uibModal,SweetAle
             var that = this;
             this.updateListeners = [];
             this.prepare($scope).then(function() {
-                if(that.isCustom){                    
+                if(that.isCustom){        
                     $scope.calculateDashboardCoreByCustomTime();
                 } else {
                     $scope.calculateDashboardCore();
@@ -933,18 +932,18 @@ function ($scope, api, $location, ngProgressFactory,$interval,$uibModal,SweetAle
                 accountIDs = accounts.slice(0, 10).map(function(account) {return account._id});
                 filterObj = new AccountPaidTransFilter(showflag, accountIDs);
             } else {
-                filterObj = new CountryPaidTransFilter(showflag);
+                filterObj = new CountryPaidTransFilter(showflag, undefined, $scope.profile);
             }
         } else if(showflag === 'country'){            
-            filterObj = new CountryPaidTransFilter(showflag, $scope.countryStr);
+            filterObj = new CountryPaidTransFilter(showflag, $scope.countryStr, $scope.profile);
         } else if(showflag === 'destination'){
-            filterObj = new CountryPaidTransFilter(showflag, $scope.destStr);
+            filterObj = new CountryPaidTransFilter(showflag, $scope.destStr, $scope.profile);
         } else if(showflag === 'agent') {
             filterObj = new AccountPaidTransFilter(showflag, $scope.agentID);
         } else if(showflag === 'provider') {
-            filterObj = new CountryPaidTransFilter(showflag, $scope.providerStr);
+            filterObj = new CountryPaidTransFilter(showflag, $scope.providerStr, $scope.profile);
         } else if(showflag === 'producttype') {
-            filterObj = new CountryPaidTransFilter(showflag, $scope.productType);
+            filterObj = new CountryPaidTransFilter(showflag, $scope.productType, $scope.profile);
         }
         
         $scope.tcpItems = [];
@@ -1069,18 +1068,18 @@ function ($scope, api, $location, ngProgressFactory,$interval,$uibModal,SweetAle
                 accountIDs = accounts.slice(0, 10).map(function(account) {return account._id});
                 filterObj = new AccountPaidTransFilter(showflag, accountIDs);
             } else {
-                filterObj = new CountryPaidTransFilter(showflag);
+                filterObj = new CountryPaidTransFilter(showflag, undefined, $scope.profile);
             }
         } else if(showflag === 'country'){            
-            filterObj = new CountryPaidTransFilter(showflag, $scope.countryStr);
+            filterObj = new CountryPaidTransFilter(showflag, $scope.countryStr, $scope.profile);
         } else if(showflag === 'destination'){
-            filterObj = new CountryPaidTransFilter(showflag, $scope.destStr);
+            filterObj = new CountryPaidTransFilter(showflag, $scope.destStr, $scope.profile);
         } else if(showflag === 'agent') {
             filterObj = new AccountPaidTransFilter(showflag, $scope.agentID);
         } else if(showflag === 'provider') {
-            filterObj = new CountryPaidTransFilter(showflag, $scope.providerStr);
+            filterObj = new CountryPaidTransFilter(showflag, $scope.providerStr, $scope.profile);
         } else if(showflag === 'producttype') {
-            filterObj = new CountryPaidTransFilter(showflag, $scope.productType);
+            filterObj = new CountryPaidTransFilter(showflag, $scope.productType, $scope.profile);
         }
         
 
@@ -1503,18 +1502,18 @@ function ($scope, api, $location, ngProgressFactory,$interval,$uibModal,SweetAle
                 accountIDs = accounts.slice(0, 10).map(function(account) {return account._id});
                 filterObj = new AccountPaidTransFilter(showflag, accountIDs);
             } else {
-                filterObj = new CountryPaidTransFilter(showflag);
+                filterObj = new CountryPaidTransFilter(showflag, undefined, $scope.profile);
             }
         } else if(showflag === 'country'){            
-            filterObj = new CountryPaidTransFilter(showflag, $scope.countryStr);
+            filterObj = new CountryPaidTransFilter(showflag, $scope.countryStr, $scope.profile);
         } else if(showflag === 'destination'){
-            filterObj = new CountryPaidTransFilter(showflag, $scope.destStr);
+            filterObj = new CountryPaidTransFilter(showflag, $scope.destStr, $scope.profile);
         } else if(showflag === 'agent') {
             filterObj = new AccountPaidTransFilter(showflag, $scope.agentID);
         } else if(showflag === 'provider') {
-            filterObj = new CountryPaidTransFilter(showflag, $scope.providerStr);
+            filterObj = new CountryPaidTransFilter(showflag, $scope.providerStr, $scope.profile);
         } else if(showflag === 'producttype') {
-            filterObj = new CountryPaidTransFilter(showflag, $scope.productType);
+            filterObj = new CountryPaidTransFilter(showflag, $scope.productType, $scope.profile);
         }
 
         d.stats.forEach(function (entry){
@@ -1552,18 +1551,18 @@ function ($scope, api, $location, ngProgressFactory,$interval,$uibModal,SweetAle
                 accountIDs = accounts.slice(0, 10).map(function(account) {return account._id});
                 filterObj = new AccountPaidTransFilter(showflag, accountIDs);
             } else {
-                filterObj = new CountryPaidTransFilter(showflag);
+                filterObj = new CountryPaidTransFilter(showflag, undefined, $scope.profile);
             }
         } else if(showflag === 'country'){            
-            filterObj = new CountryPaidTransFilter(showflag, $scope.countryStr);
+            filterObj = new CountryPaidTransFilter(showflag, $scope.countryStr, $scope.profile);
         } else if(showflag === 'destination'){
-            filterObj = new CountryPaidTransFilter(showflag, $scope.destStr);
+            filterObj = new CountryPaidTransFilter(showflag, $scope.destStr, $scope.profile);
         } else if(showflag === 'agent') {
-            filterObj = new AccountPaidTransFilter(showflag, $scope.agentID);
+            filterObj = new AccountPaidTransFilter(showflag, $scope.agentID, $scope.profile);
         } else if(showflag === 'provider') {
-            filterObj = new CountryPaidTransFilter(showflag, $scope.providerStr);
+            filterObj = new CountryPaidTransFilter(showflag, $scope.providerStr, $scope.profile);
         } else if(showflag === 'producttype') {
-            filterObj = new CountryPaidTransFilter(showflag, $scope.productType);
+            filterObj = new CountryPaidTransFilter(showflag, $scope.productType, $scope.profile);
         }
 
         d.stats.forEach(function (stat) {
@@ -1624,18 +1623,18 @@ function ($scope, api, $location, ngProgressFactory,$interval,$uibModal,SweetAle
                 accountIDs = accounts.slice(0, 10).map(function(account) {return account._id});
                 filterObj = new AccountPaidTransFilter(showflag, accountIDs);
             } else {
-                filterObj = new CountryPaidTransFilter(showflag);
+                filterObj = new CountryPaidTransFilter(showflag, undefined, $scope.profile);
             }
         } else if(showflag === 'country'){            
-            filterObj = new CountryPaidTransFilter(showflag, $scope.countryStr);
+            filterObj = new CountryPaidTransFilter(showflag, $scope.countryStr, $scope.profile);
         } else if(showflag === 'destination'){
-            filterObj = new CountryPaidTransFilter(showflag, $scope.destStr);
+            filterObj = new CountryPaidTransFilter(showflag, $scope.destStr, $scope.profile);
         } else if(showflag === 'agent') {
             filterObj = new AccountPaidTransFilter(showflag, $scope.agentID);
         } else if(showflag === 'provider') {
-            filterObj = new CountryPaidTransFilter(showflag, $scope.providerStr);
+            filterObj = new CountryPaidTransFilter(showflag, $scope.providerStr, $scope.profile);
         } else if(showflag === 'producttype') {
-            filterObj = new CountryPaidTransFilter(showflag, $scope.productType);
+            filterObj = new CountryPaidTransFilter(showflag, $scope.productType, $scope.profile);
         } else {
             return;
         }

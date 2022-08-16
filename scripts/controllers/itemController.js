@@ -73,11 +73,11 @@ angular.module('billinguiApp')
                 console.log(err);
             })
         }
-            
+        
         $scope.refundTx = function () {
             api._get('/topuplog/item/' + $scope.log.tlog._id + '/refund')
                 .then(function (t) {
-                    $scope.tx = t;
+                    $scope.rec = t;
                     SweetAlert.swal({
                         title: "Good Job!",
                         text: "TopupLog has been refunded!",
@@ -85,22 +85,13 @@ angular.module('billinguiApp')
                         closeOnConfirm: true
                     }, function (ok) {
                         if (ok) {
+                            $uibModalInstance.dismiss();
+                            location.reload();
                         }
 
                     });
                 })
-                $scope.modal = $uibModal.open({
-                    animation: true,
-                    ariaLabelledBy: 'modal-title',
-                    ariaDescribedBy: 'modal-body',
-                    templateUrl: 'views/partials/modal-view-log.html',
-                    controller: 'AccountsModalController',
-                    scope: $scope
-                });
-
                 $scope.modal.result.then(function (selectedItem) {
-                    
-
                 }, function () {
                     console.log('but i waz dizmizeddd')
                 });

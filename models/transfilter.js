@@ -50,23 +50,25 @@ AccountTopupTransFilter.prototype.filter = function (statEntry) {
     }
 }
 
-function CountryPaidTransFilter(transFlag, criteria) {
+function CountryPaidTransFilter(transFlag, criteria, profile) {
     this.transFlag = transFlag;
     this.criteria = criteria;
+    this.profile = profile;
 }
 CountryPaidTransFilter.prototype.filter = function(statEntry) {
     var that = this;
-    
+    if (statEntry.top10_countries_paid.length > 0)
+        console.log("venus" + JSON.stringify(statEntry.top10_countries_paid[0]));
     if(this.transFlag == 'country') {
-        return statEntry.top10_countries_paid.filter(function (e) {return e.country === that.criteria});
+        return statEntry.top10_countries_paid.filter(function (e) {return e.country === that.criteria && (that.profile.access_level == "partner" ? (e.tag == that.profile.partner_tag) : true)});
     } else if(this.transFlag == 'destination') {
-        return statEntry.top10_countries_paid.filter(function (e) {return (e.country + '-' + e.operator_name) === that.criteria});
+        return statEntry.top10_countries_paid.filter(function (e) {return (e.country + '-' + e.operator_name) === that.criteria && (that.profile.access_level == "partner" ? (e.tag == that.profile.partner_tag) : true)});
     } else if(this.transFlag == 'provider') {
-        return statEntry.top10_countries_paid.filter(function (e) {return e.tag === that.criteria});
+        return statEntry.top10_countries_paid.filter(function (e) {return e.tag === that.criteria && (that.profile.access_level == "partner" ? (e.tag == that.profile.partner_tag) : true)});
     } else if(this.transFlag == 'producttype') {
-        return statEntry.top10_countries_paid.filter(function (e) {return e.type === that.criteria});
+        return statEntry.top10_countries_paid.filter(function (e) {return e.type === that.criteria && (that.profile.access_level == "partner" ? (e.tag == that.profile.partner_tag) : true)});
     } else {
-        return statEntry.top10_countries_paid;
+        return statEntry.top10_countries_paid.filter(function (e) {return that.profile.access_level == "partner" ? (e.tag == that.profile.partner_tag) : true});
     }
 }
 
